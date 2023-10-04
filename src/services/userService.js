@@ -19,7 +19,7 @@ let handlePhong = (key) => {
           where: {id:key},
         });
       }
-      resolve(phong);
+      resolve(phong);     
     } catch(e){
       reject(e);
     }
