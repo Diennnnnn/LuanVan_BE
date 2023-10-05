@@ -19,6 +19,8 @@ const initWebRoutes = (app) => {
   router.get("/api/Dsthietbi",userController.handleDsthietbi);
   router.get("/api/DanhmucCSVC",userController.handleDanhmucCSVC);
   router.get("/api/Vitri",userController.handleVitri);
+  router.get("/api/Khachhang",userController.handleKhachhang);
+
   return app.use("/", router);
 };
 

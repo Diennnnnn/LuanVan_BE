@@ -130,6 +130,26 @@ let handleVitri = (key) => {
     }
   });
 };
+let handleKhachhang = (key) => {
+  return new Promise(async (resolve, reject) =>{
+    try{
+      let khachhang = "";
+      if (key === "ALL") {
+        khachhang = await db.khachhangs.findAll({
+
+        });
+      }
+      if (key && key !== "ALL") {
+        khachhang = await db.khachhangs.findAll({
+          where: {SDT:key},
+        });
+      }
+      resolve(khachhang);     
+    } catch(e){
+      reject(e);
+    }
+  });
+};
 module.exports = {
   handlePhong: handlePhong,
   handleLoaiphong: handleLoaiphong,
@@ -137,6 +157,7 @@ module.exports = {
   handleDsthietbi:handleDsthietbi,
   handleDanhmucCSVC: handleDanhmucCSVC,
   handleVitri: handleVitri,
+  handleKhachhang: handleKhachhang,
 };
 
 // const salt = bcrypt.genSaltSync(10);

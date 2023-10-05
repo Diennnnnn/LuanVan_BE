@@ -189,6 +189,21 @@ let handleVitri = async (req, res) => {
     vt,
   });
 };
+let handleKhachhang = async (req, res) => {
+  let key = req.query.keyword;
+  if (!key) {
+    return res.status(200).json ({
+      errCode: 1,
+      errMessage: "missing require parameters",
+      khachhangs: {},
+    });
+  }
+  let khachhang = await userService.handleKhachhang(key);
+
+  return res.status(200).json({
+    khachhang,
+  });
+};
 module.exports = {
   handlePhong: handlePhong,
   handleLoaiphong: handleLoaiphong,
@@ -196,4 +211,5 @@ module.exports = {
   handleDsthietbi: handleDsthietbi,
   handleDanhmucCSVC: handleDanhmucCSVC,
   handleVitri: handleVitri,
+  handleKhachhang: handleKhachhang,
 };
