@@ -204,6 +204,20 @@ let handleKhachhang = async (req, res) => {
     khachhang,
   });
 };
+
+let handleDatphong = async (req, res) =>{
+  try {
+    let infor = await userService.handleDatphong(req.body);
+    return res.status(200).json(infor);
+  } catch (e) {
+    console.log(e);
+    return res.status(200).json({
+      errCode: -1,
+      errMessage:"Error from the server",
+    });
+  }
+};
+
 module.exports = {
   handlePhong: handlePhong,
   handleLoaiphong: handleLoaiphong,
@@ -212,4 +226,5 @@ module.exports = {
   handleDanhmucCSVC: handleDanhmucCSVC,
   handleVitri: handleVitri,
   handleKhachhang: handleKhachhang,
+  handleDatphong: handleDatphong,
 };

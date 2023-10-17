@@ -20,6 +20,7 @@ const initWebRoutes = (app) => {
   router.get("/api/DanhmucCSVC",userController.handleDanhmucCSVC);
   router.get("/api/Vitri",userController.handleVitri);
   router.get("/api/Khachhang",userController.handleKhachhang);
+  router.post("/api/Datphong",userController.handleDatphong);
 
   return app.use("/", router);
 };

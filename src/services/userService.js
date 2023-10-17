@@ -150,6 +150,43 @@ let handleKhachhang = (key) => {
     }
   });
 };
+
+let handleDatphong = (data) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      if(
+        // !data.truyền từ FE qua
+        !data.id_KH ||
+        !data.id_phong ||
+        !data.ngaydat ||
+        !data.check_in ||
+        !data.check_out ||
+        !data.songuoi 
+      ) {
+        resolve({
+          errCode: 110,
+          errMessage: "Missing parameter",
+        });
+      } else{
+        await db.phieudats.create({
+          id_KH: data.id_KH,
+          id_Phong: data.id_phong,
+          ngaydat: data.ngaydat,
+          check_in: data.check_in,
+          check_out: data.check_out,
+          songuoi: data.songuoi,
+
+        });
+        resolve({
+          errCode:0,
+          errMessage: "Đặt phòng thành công",
+        });
+      }
+    } catch(e) {
+      reject(e);
+    }
+  })
+}
 module.exports = {
   handlePhong: handlePhong,
   handleLoaiphong: handleLoaiphong,
@@ -158,6 +195,7 @@ module.exports = {
   handleDanhmucCSVC: handleDanhmucCSVC,
   handleVitri: handleVitri,
   handleKhachhang: handleKhachhang,
+  handleDatphong: handleDatphong,
 };
 
 // const salt = bcrypt.genSaltSync(10);
@@ -291,7 +329,7 @@ module.exports = {
 //           errMessage: "Missing parameter",
 //         });
 //       } else {    
-
+ 
 //           await db.ves.create({
 //             // id_KH: 5,
 //             Hten_KH: data.hten_KH,
