@@ -14,13 +14,17 @@ const initWebRoutes = (app) => {
   // router.post("/api/Dangnhap", userController.handleDangnhap);
   // router.get("/api/TTGhe", userController.handleTTGhe);
   router.get("/api/Phong",userController.handlePhong);
+  router.get("/api/Phong_tenphong",userController.handlePhong_tenphong);
   router.get("/api/Loaiphong",userController.handleLoaiphong);
   router.get("/api/Noiquy",userController.handleNoiquy);
   router.get("/api/Dsthietbi",userController.handleDsthietbi);
   router.get("/api/DanhmucCSVC",userController.handleDanhmucCSVC);
   router.get("/api/Vitri",userController.handleVitri);
   router.get("/api/Khachhang",userController.handleKhachhang);
+  
   router.post("/api/Datphong",userController.handleDatphong);
+  router.post("/api/NoiquyQL",userController.handleNoiquyQL);
+
 
   return app.use("/", router);
 };

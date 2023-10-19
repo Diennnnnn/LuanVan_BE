@@ -26,6 +26,27 @@ let handlePhong = (key) => {
   });
 };
 
+let handlePhong_tenphong = (key) => {
+  return new Promise(async (resolve, reject) =>{
+    try{
+      let phong = "";
+      if (key === "ALL") {
+        phong = await db.phongs.findAll({
+
+        });
+      }
+      if (key && key !== "ALL") {
+        phong = await db.phongs.findAll({
+          where: {tenphong:key},
+        });
+      }
+      resolve(phong);     
+    } catch(e){
+      reject(e);
+    }
+  });
+};
+
 let handleLoaiphong = (key) => {
   return new Promise(async (resolve, reject) =>{
     try{
@@ -187,6 +208,35 @@ let handleDatphong = (data) => {
     }
   })
 }
+
+let handleNoiquyQL = (data) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      if(
+        // !data.truyền từ FE qua
+        !data.mota ||
+        !data.motaEN
+      ) {
+        resolve({
+          errCode: 110,
+          errMessage: "Missing parameter",
+        });
+      } else{
+        await db.noiquys.create({
+          mota: data.mota,
+          motaEN: data.motaEN,
+
+        });
+        resolve({
+          errCode:0,
+          errMessage: "Thêm nội quy thành công",
+        });
+      }
+    } catch(e) {
+      reject(e);
+    }
+  })
+}
 module.exports = {
   handlePhong: handlePhong,
   handleLoaiphong: handleLoaiphong,
@@ -196,6 +246,8 @@ module.exports = {
   handleVitri: handleVitri,
   handleKhachhang: handleKhachhang,
   handleDatphong: handleDatphong,
+  handlePhong_tenphong:handlePhong_tenphong,
+  handleNoiquyQL: handleNoiquyQL,
 };
 
 // const salt = bcrypt.genSaltSync(10);

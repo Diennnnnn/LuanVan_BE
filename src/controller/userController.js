@@ -109,6 +109,22 @@ let handlePhong = async (req, res) => {
   });
 };
 
+let handlePhong_tenphong = async (req, res) => {
+  let key = req.query.keyword;
+  if (!key) {
+    return res.status(200).json ({
+      errCode: 1,
+      errMessage: "missing require parameters",
+      phongs: {},
+    });
+  }
+  let phong = await userService.handlePhong_tenphong(key);
+
+  return res.status(200).json({
+    phong,
+  });
+};
+
 let handleLoaiphong = async (req, res) => {
   let key = req.query.keyword;
   if (!key) {
@@ -218,6 +234,19 @@ let handleDatphong = async (req, res) =>{
   }
 };
 
+let handleNoiquyQL = async (req, res) =>{
+  try {
+    let infor = await userService.handleNoiquyQL(req.body);
+    return res.status(200).json(infor);
+  } catch (e) {
+    console.log(e);
+    return res.status(200).json({
+      errCode: -1,
+      errMessage:"Error from the server",
+    });
+  }
+};
+
 module.exports = {
   handlePhong: handlePhong,
   handleLoaiphong: handleLoaiphong,
@@ -227,4 +256,6 @@ module.exports = {
   handleVitri: handleVitri,
   handleKhachhang: handleKhachhang,
   handleDatphong: handleDatphong,
+  handlePhong_tenphong:handlePhong_tenphong,
+  handleNoiquyQL:handleNoiquyQL,
 };
