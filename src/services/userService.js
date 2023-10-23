@@ -208,8 +208,8 @@ let handleDatphong = (data) => {
     }
   })
 }
-
-let handleNoiquyQL = (data) => {
+//noi quy
+let handleThemNoiquyQL = (data) => {
   return new Promise(async (resolve, reject) => {
     try {
       if(
@@ -237,6 +237,169 @@ let handleNoiquyQL = (data) => {
     }
   })
 }
+
+let handleSuaNoiquyQL = (data) => {
+  return new Promise(async ( resolve, reject) => {
+    try{
+      if(
+        !data.id ||
+        !data.mota ||
+        !data.motaEN
+      ) {
+        resolve({
+          errCode: 1,
+          errMessage: "Missing parameter",
+        });
+      } else {
+        let noiquy = await db.noiquys.findOne({
+          where: {
+            id: data.id
+          },
+          raw: false,
+        });
+        if(noiquy){
+          noiquy.mota = data.mota;
+          noiquy.motaEN = data.motaEN;
+          await noiquy.save();
+        }
+        else{
+          resolve({
+            errCode: 1,
+            errMessage: "Cập nhập không thành công"
+          });
+        }
+        resolve({
+          errCode: 0,
+          errMessage:"Cập nhập thành công"
+        });
+      }
+    } catch(e){
+      reject(e);
+    }
+  });
+};
+
+let handleXoaNoiquyQL = async (Id) => {
+  return new Promise (async (resolve, reject) => {
+    let noiquy = await db.noiquys.findOne({
+      where: {id: Id},
+    });
+    if (!noiquy) {
+      resolve({
+        errCode: 2,
+        errMessage: "Không tìm thấy nội quy"
+      });
+    }
+    await db.noiquys.destroy({
+      where: {id: Id},
+    });
+    resolve ({
+      errCode: 0,
+      errMessage: "Đã xóa nội quy"
+    });
+  });
+};
+//csvc
+
+let handleThemCSVCQL = (data) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      if(
+        // !data.truyền từ FE qua
+        !data.tenCSVC ||
+        !data.giagoc ||
+        !data.soluong ||
+        !data.thoigianmua
+      ) {
+        resolve({
+          errCode: 110,
+          errMessage: "Missing parameter",
+        });
+      } else{
+        await db.danhmuccsvcs.create({
+          tenCSVC: data.tenCSVC,
+          giagoc: data.giagoc,
+          soluong: data.soluong,
+          thoigianmua: data.thoigianmua
+
+        });
+        resolve({
+          errCode:0,
+          errMessage: "Thêm cơ sở vật chất thành công",
+        });
+      }
+    } catch(e) {
+      reject(e);
+    }
+  })
+}
+
+let handleSuaCSVCQL = (data) => {
+  return new Promise(async ( resolve, reject) => {
+    try{
+      if(
+        !data.id ||
+        !data.tenCSVC ||
+        !data.giagoc ||
+        !data.soluong ||
+        !data.thoigianmua
+      ) {
+        resolve({
+          errCode: 1,
+          errMessage: "Missing parameter",
+        });
+      } else {
+        let csvc = await db.danhmuccsvcs.findOne({
+          where: {
+            id: data.id
+          },
+          raw: false,
+        });
+        if(csvc){
+          csvc.tenCSVC = data.tenCSVC;
+          csvc.giagoc = data.giagoc;
+          csvc.soluong = data.soluong;
+          csvc.thoigianmua = data.thoigianmua;
+          await csvc.save();
+        }
+        else{
+          resolve({
+            errCode: 1,
+            errMessage: "Cập nhập không thành công"
+          });
+        }
+        resolve({
+          errCode: 0,
+          errMessage:"Cập nhập thành công"
+        });
+      }
+    } catch(e){
+      reject(e);
+    }
+  });
+};
+
+let handleXoaCSVCQL = async (Id) => {
+  return new Promise (async (resolve, reject) => {
+    let csvc = await db.danhmuccsvcs.findOne({
+      where: {id: Id},
+    });
+    if (!csvc) {
+      resolve({
+        errCode: 2,
+        errMessage: "Không tìm thấy cơ sở vật chất"
+      });
+    }
+    await db.danhmuccsvcs.destroy({
+      where: {id: Id},
+    });
+    resolve ({
+      errCode: 0,
+      errMessage: "Đã xóa cơ sở vật chất"
+    });
+  });
+};
+
 module.exports = {
   handlePhong: handlePhong,
   handleLoaiphong: handleLoaiphong,
@@ -247,8 +410,82 @@ module.exports = {
   handleKhachhang: handleKhachhang,
   handleDatphong: handleDatphong,
   handlePhong_tenphong:handlePhong_tenphong,
-  handleNoiquyQL: handleNoiquyQL,
+  handleThemNoiquyQL: handleThemNoiquyQL,
+  handleSuaNoiquyQL: handleSuaNoiquyQL,
+  handleXoaNoiquyQL: handleXoaNoiquyQL,
+  handleThemCSVCQL: handleThemCSVCQL,
+  handleXoaCSVCQL:handleXoaCSVCQL,
+  handleSuaCSVCQL:handleSuaCSVCQL
 };
+
+let handleSuaTTCumrap = (data) => {
+
+  return new Promise(async (resovle, reject) => {
+    try {
+      if (
+        !data.id ||
+        !data.tentttt ||
+        !data.diachi
+      ) {
+        resovle({
+          errCode: 1,
+          errMessage: "Missing parameter",
+        });
+      } else {
+
+        let cumrap = await db.qlcumraps.findOne({
+          where: {
+            id: data.id
+          },
+          raw: false,
+        });
+        if (cumrap) {
+          cumrap.ten_tttt = data.tentttt;
+          cumrap.diachi = data.diachi;
+          await cumrap.save();
+        }
+        else {
+          resovle({
+            errCode: 1,
+            errMessage: "Cập nhật thông tin cụm rạp mới KHÔNG thành thông",
+          });
+        }
+        resovle({
+          errCode: 0,
+          errMessage: "Cập nhật thông tin cụm rạp mới thành thông",
+        });
+      }
+    } catch (e) {
+      reject(e);
+    }
+  });
+};
+
+
+let handleXoaTTCumrap = async (Id) => {
+  return new Promise(async (resolve, reject) => {
+    let cumrap = await db.qlcumraps.findOne({
+      where: { id: Id },
+    });
+
+    if (!cumrap) {
+      resolve({
+        errCode: 2,
+        errMessage: `Không tìm thấy cụm rạp`,
+      });
+    }
+
+    await db.qlcumraps.destroy({
+      where: { id: Id },
+    });
+
+    resolve({
+      errCode: 0,
+      message: "Thông tin cụm rạp đã xóa",
+    });
+  });
+};
+
 
 // const salt = bcrypt.genSaltSync(10);
 

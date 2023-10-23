@@ -11,11 +11,14 @@ module.exports = {
             tenCSVC: {
                 type: Sequelize.STRING,
             },
-            mota: {
-                type: Sequelize.STRING,
-            },
             giagoc: {
                 type: Sequelize.INTEGER,
+            },
+            soluong: {
+                type: Sequelize.INTEGER,
+            },
+            thoigianmua: {
+                type: Sequelize.DATEONLY,
             },
             createdAt: {
                 allowNull: false,

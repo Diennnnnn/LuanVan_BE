@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
             id_CSVC: DataTypes.INTEGER,
             id_Phong: DataTypes.INTEGER,
             soluong: DataTypes.INTEGER,
-            thoigianbatdau: DataTypes. DATEONLY,
+            thoigianbatdau: DataTypes.DATEONLY,
         },
         {
             sequelize,

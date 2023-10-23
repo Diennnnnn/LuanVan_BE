@@ -96,7 +96,7 @@ import userService from "../services/userService";
 let handlePhong = async (req, res) => {
   let key = req.query.keyword;
   if (!key) {
-    return res.status(200).json ({
+    return res.status(200).json({
       errCode: 1,
       errMessage: "missing require parameters",
       phongs: {},
@@ -112,7 +112,7 @@ let handlePhong = async (req, res) => {
 let handlePhong_tenphong = async (req, res) => {
   let key = req.query.keyword;
   if (!key) {
-    return res.status(200).json ({
+    return res.status(200).json({
       errCode: 1,
       errMessage: "missing require parameters",
       phongs: {},
@@ -128,7 +128,7 @@ let handlePhong_tenphong = async (req, res) => {
 let handleLoaiphong = async (req, res) => {
   let key = req.query.keyword;
   if (!key) {
-    return res.status(200).json ({
+    return res.status(200).json({
       errCode: 1,
       errMessage: "missing require parameters",
       loaiphongs: {},
@@ -145,7 +145,7 @@ let handleLoaiphong = async (req, res) => {
 let handleNoiquy = async (req, res) => {
   let key = req.query.keyword;
   if (!key) {
-    return res.status(200).json ({
+    return res.status(200).json({
       errCode: 1,
       errMessage: "missing require parameters",
       noiquys: {},
@@ -161,7 +161,7 @@ let handleNoiquy = async (req, res) => {
 let handleDsthietbi = async (req, res) => {
   let key = req.query.keyword;
   if (!key) {
-    return res.status(200).json ({
+    return res.status(200).json({
       errCode: 1,
       errMessage: "missing require parameters",
       dsthietbis: {},
@@ -174,10 +174,10 @@ let handleDsthietbi = async (req, res) => {
   });
 };
 
-let handleDanhmucCSVC= async (req, res) => {
+let handleDanhmucCSVC = async (req, res) => {
   let key = req.query.keyword;
   if (!key) {
-    return res.status(200).json ({
+    return res.status(200).json({
       errCode: 1,
       errMessage: "missing require parameters",
       danhmuccsvcs: {},
@@ -193,7 +193,7 @@ let handleDanhmucCSVC= async (req, res) => {
 let handleVitri = async (req, res) => {
   let key = req.query.keyword;
   if (!key) {
-    return res.status(200).json ({
+    return res.status(200).json({
       errCode: 1,
       errMessage: "missing require parameters",
       vitris: {},
@@ -208,7 +208,7 @@ let handleVitri = async (req, res) => {
 let handleKhachhang = async (req, res) => {
   let key = req.query.keyword;
   if (!key) {
-    return res.status(200).json ({
+    return res.status(200).json({
       errCode: 1,
       errMessage: "missing require parameters",
       khachhangs: {},
@@ -221,7 +221,7 @@ let handleKhachhang = async (req, res) => {
   });
 };
 
-let handleDatphong = async (req, res) =>{
+let handleDatphong = async (req, res) => {
   try {
     let infor = await userService.handleDatphong(req.body);
     return res.status(200).json(infor);
@@ -229,12 +229,12 @@ let handleDatphong = async (req, res) =>{
     console.log(e);
     return res.status(200).json({
       errCode: -1,
-      errMessage:"Error from the server",
+      errMessage: "Error from the server",
     });
   }
 };
-
-let handleNoiquyQL = async (req, res) =>{
+//noi quy
+let handleThemNoiquyQL = async (req, res) => {
   try {
     let infor = await userService.handleNoiquyQL(req.body);
     return res.status(200).json(infor);
@@ -242,11 +242,73 @@ let handleNoiquyQL = async (req, res) =>{
     console.log(e);
     return res.status(200).json({
       errCode: -1,
-      errMessage:"Error from the server",
+      errMessage: "Error from the server",
     });
   }
 };
 
+let handleSuaNoiquyQL = async (req, res) => {
+  try {
+    let noiquy = await userService.handleSuaNoiquyQL(req.body);
+    return res.status(200).json(noiquy);
+  } catch(e) {
+    console.log(e);
+    return res.status(200).json({
+      errCode: -1,
+      errMessage:"error from the server",
+    });
+  }
+};
+
+let handleXoaNoiquyQL = async (req, res) => {
+  if(!req.body.id) {
+    return res.status(200).json({
+      errCode: 1,
+      errMessage: "missing require parameter",
+    })
+  }
+  let message = await userService.handleXoaNoiquyQL(req.body.id);
+  console.log(message);
+  return res.status(200).json(message);
+}
+//csvc
+let handleThemCSVCQL = async (req, res) => {
+  try {
+    let infor = await userService.handleThemCSVCQL(req.body);
+    return res.status(200).json(infor);
+  } catch (e) {
+    console.log(e);
+    return res.status(200).json({
+      errCode: -1,
+      errMessage: "Error from the server",
+    });
+  }
+};
+
+let handleSuaCSVCQL = async (req, res) => {
+  try {
+    let csvc = await userService.handleSuaCSVCQL(req.body);
+    return res.status(200).json(csvc);
+  } catch(e) {
+    console.log(e);
+    return res.status(200).json({
+      errCode: -1,
+      errMessage:"error from the server",
+    });
+  }
+};
+
+let handleXoaCSVCQL = async (req, res) => {
+  if(!req.body.id) {
+    return res.status(200).json({
+      errCode: 1,
+      errMessage: "missing require parameter",
+    })
+  }
+  let message = await userService.handleXoaCSVCQL(req.body.id);
+  console.log(message);
+  return res.status(200).json(message);
+}
 module.exports = {
   handlePhong: handlePhong,
   handleLoaiphong: handleLoaiphong,
@@ -256,6 +318,14 @@ module.exports = {
   handleVitri: handleVitri,
   handleKhachhang: handleKhachhang,
   handleDatphong: handleDatphong,
-  handlePhong_tenphong:handlePhong_tenphong,
-  handleNoiquyQL:handleNoiquyQL,
+  handlePhong_tenphong: handlePhong_tenphong,
+
+  handleThemNoiquyQL: handleThemNoiquyQL,
+  handleSuaNoiquyQL: handleSuaNoiquyQL,
+  handleXoaNoiquyQL:handleXoaNoiquyQL,
+
+  handleThemCSVCQL: handleThemCSVCQL,
+  handleXoaCSVCQL:handleXoaCSVCQL,
+  handleSuaCSVCQL:handleSuaCSVCQL
 };
+

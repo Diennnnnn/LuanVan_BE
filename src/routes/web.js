@@ -23,7 +23,14 @@ const initWebRoutes = (app) => {
   router.get("/api/Khachhang",userController.handleKhachhang);
   
   router.post("/api/Datphong",userController.handleDatphong);
-  router.post("/api/NoiquyQL",userController.handleNoiquyQL);
+
+  router.post("/api/ThemNoiquyQL",userController.handleThemNoiquyQL);
+  router.post("/api/SuaNoiquyQL",userController.handleSuaNoiquyQL);
+  router.delete("/api/XoaNoiquyQL",userController.handleXoaNoiquyQL);
+
+  router.post("/api/ThemCSVCQL",userController.handleThemCSVCQL);
+  router.post("/api/SuaCSVCQL",userController.handleSuaCSVCQL);
+  router.delete("/api/XoaCSVCQL",userController.handleXoaCSVCQL);
 
 
   return app.use("/", router);

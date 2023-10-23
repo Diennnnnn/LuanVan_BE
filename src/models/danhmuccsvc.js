@@ -9,8 +9,9 @@ module.exports = (sequelize, DataTypes) => {
     danhmuccsvcs.init(
         {
             tenCSVC: DataTypes.STRING,
-            mota: DataTypes.STRING,
             giagoc: DataTypes.INTEGER,
+            soluong: DataTypes.INTEGER,
+            thoigianmua: DataTypes.DATEONLY
         },
         {
             sequelize,
