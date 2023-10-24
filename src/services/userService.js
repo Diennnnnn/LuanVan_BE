@@ -554,7 +554,8 @@ let handleThemKhuyenmaiQL = (data) => {
         !data.phantram ||
         !data.mota ||
         !data.start ||
-        !data.finish
+        !data.finish ||
+        !data.dieukien
       ) {
         resolve({
           errCode: 110,
@@ -566,7 +567,8 @@ let handleThemKhuyenmaiQL = (data) => {
           phantram: data.phantram,
           mota: data.mota,
           start: data.start,
-          finish: data.finish
+          finish: data.finish,
+          dieukien: data.dieukien
 
         });
         resolve({
@@ -589,7 +591,8 @@ let handleSuaKhuyenmaiQL = (data) => {
         !data.phantram ||
         !data.mota ||
         !data.start ||
-        !data.finish
+        !data.finish ||
+        !data.dieukien
       ) {
         resolve({
           errCode: 1,
@@ -608,6 +611,8 @@ let handleSuaKhuyenmaiQL = (data) => {
           khuyenmai.mota = data.mota;
           khuyenmai.start = data.start;
           khuyenmai.finish = data.finish;
+          khuyenmai.dieukien = data.dieukien;
+
           await khuyenmai.save();
         }
         else{
