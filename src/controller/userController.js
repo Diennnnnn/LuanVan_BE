@@ -221,6 +221,38 @@ let handleKhachhang = async (req, res) => {
   });
 };
 
+let handleKhuyenmai = async (req, res) => {
+  let key = req.query.keyword;
+  if (!key) {
+    return res.status(200).json({
+      errCode: 1,
+      errMessage: "missing require parameters",
+      khuyenmais: {},
+    });
+  }
+  let khuyenmai = await userService.handleKhuyenmai(key);
+
+  return res.status(200).json({
+    khuyenmai,
+  });
+};
+
+let handleDichvu = async (req, res) => {
+  let key = req.query.keyword;
+  if (!key) {
+    return res.status(200).json({
+      errCode: 1,
+      errMessage: "missing require parameters",
+      dichvus: {},
+    });
+  }
+  let dichvu = await userService.handleDichvu(key);
+
+  return res.status(200).json({
+    dichvu,
+  });
+};
+
 let handleDatphong = async (req, res) => {
   try {
     let infor = await userService.handleDatphong(req.body);
@@ -236,7 +268,7 @@ let handleDatphong = async (req, res) => {
 //noi quy
 let handleThemNoiquyQL = async (req, res) => {
   try {
-    let infor = await userService.handleNoiquyQL(req.body);
+    let infor = await userService.handleThemNoiquyQL(req.body);
     return res.status(200).json(infor);
   } catch (e) {
     console.log(e);
@@ -271,6 +303,7 @@ let handleXoaNoiquyQL = async (req, res) => {
   console.log(message);
   return res.status(200).json(message);
 }
+
 //csvc
 let handleThemCSVCQL = async (req, res) => {
   try {
@@ -309,6 +342,86 @@ let handleXoaCSVCQL = async (req, res) => {
   console.log(message);
   return res.status(200).json(message);
 }
+
+//dich vu
+let handleThemDichvuQL = async (req, res) => {
+  try {
+    let infor = await userService.handleThemDichvuQL(req.body);
+    return res.status(200).json(infor);
+  } catch (e) {
+    console.log(e);
+    return res.status(200).json({
+      errCode: -1,
+      errMessage: "Error from the server",
+    });
+  }
+};
+
+let handleSuaDichvuQL = async (req, res) => {
+  try {
+    let dichvu = await userService.handleSuaDichvuQL(req.body);
+    return res.status(200).json(dichvu);
+  } catch(e) {
+    console.log(e);
+    return res.status(200).json({
+      errCode: -1,
+      errMessage:"error from the server",
+    });
+  }
+};
+
+let handleXoaDichvuQL = async (req, res) => {
+  if(!req.body.id) {
+    return res.status(200).json({
+      errCode: 1,
+      errMessage: "missing require parameter",
+    })
+  }
+  let message = await userService.handleXoaDichvuQL(req.body.id);
+  console.log(message);
+  return res.status(200).json(message);
+}
+
+
+//khuyen mai
+let handleThemKhuyenmaiQL = async (req, res) => {
+  try {
+    let infor = await userService.handleThemKhuyenmaiQL(req.body);
+    return res.status(200).json(infor);
+  } catch (e) {
+    console.log(e);
+    return res.status(200).json({
+      errCode: -1,
+      errMessage: "Error from the server",
+    });
+  }
+};
+
+let handleSuaKhuyenmaiQL = async (req, res) => {
+  try {
+    let khuyenmai = await userService.handleSuaKhuyenmaiQL(req.body);
+    return res.status(200).json(khuyenmai);
+  } catch(e) {
+    console.log(e);
+    return res.status(200).json({
+      errCode: -1,
+      errMessage:"error from the server",
+    });
+  }
+};
+
+let handleXoaKhuyenmaiQL = async (req, res) => {
+  if(!req.body.id) {
+    return res.status(200).json({
+      errCode: 1,
+      errMessage: "missing require parameter",
+    })
+  }
+  let message = await userService.handleXoaKhuyenmaiQL(req.body.id);
+  console.log(message);
+  return res.status(200).json(message);
+}
+
 module.exports = {
   handlePhong: handlePhong,
   handleLoaiphong: handleLoaiphong,
@@ -319,6 +432,8 @@ module.exports = {
   handleKhachhang: handleKhachhang,
   handleDatphong: handleDatphong,
   handlePhong_tenphong: handlePhong_tenphong,
+  handleDichvu :handleDichvu,
+  handleKhuyenmai: handleKhuyenmai,
 
   handleThemNoiquyQL: handleThemNoiquyQL,
   handleSuaNoiquyQL: handleSuaNoiquyQL,
@@ -326,6 +441,14 @@ module.exports = {
 
   handleThemCSVCQL: handleThemCSVCQL,
   handleXoaCSVCQL:handleXoaCSVCQL,
-  handleSuaCSVCQL:handleSuaCSVCQL
+  handleSuaCSVCQL:handleSuaCSVCQL,
+
+  handleThemDichvuQL: handleThemDichvuQL,
+  handleSuaDichvuQL: handleSuaDichvuQL,
+  handleXoaDichvuQL: handleXoaDichvuQL,
+
+  handleThemKhuyenmaiQL: handleThemKhuyenmaiQL,
+  handleSuaKhuyenmaiQL: handleSuaKhuyenmaiQL,
+  handleXoaKhuyenmaiQL: handleXoaKhuyenmaiQL,
 };
 

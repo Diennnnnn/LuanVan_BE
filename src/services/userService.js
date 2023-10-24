@@ -172,6 +172,48 @@ let handleKhachhang = (key) => {
   });
 };
 
+let handleDichvu = (key) => {
+  return new Promise(async (resolve, reject) =>{
+    try{
+      let dichvu = "";
+      if (key === "ALL") {
+        dichvu = await db.dichvus.findAll({
+
+        });
+      }
+      if (key && key !== "ALL") {
+        dichvu = await db.dichvus.findAll({
+          where: {id:key},
+        });
+      }
+      resolve(dichvu);     
+    } catch(e){
+      reject(e);
+    }
+  });
+};
+
+let handleKhuyenmai = (key) => {
+  return new Promise(async (resolve, reject) =>{
+    try{
+      let khuyenmai = "";
+      if (key === "ALL") {
+        khuyenmai = await db.khuyenmais.findAll({
+
+        });
+      }
+      if (key && key !== "ALL") {
+        khuyenmais = await db.khuyenmais.findAll({
+          where: {id:key},
+        });
+      }
+      resolve(khuyenmai);     
+    } catch(e){
+      reject(e);
+    }
+  });
+};
+
 let handleDatphong = (data) => {
   return new Promise(async (resolve, reject) => {
     try {
@@ -400,6 +442,212 @@ let handleXoaCSVCQL = async (Id) => {
   });
 };
 
+//dichvu
+
+let handleThemDichvuQL = (data) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      if(
+        // !data.truyền từ FE qua
+        !data.tenDV ||
+        !data.gia ||
+        !data.DVT ||
+        !data.ghichu
+      ) {
+        resolve({
+          errCode: 110,
+          errMessage: "Missing parameter",
+        });
+      } else{
+        await db.dichvus.create({
+          tenDV: data.tenDV,
+          gia: data.gia,
+          DVT: data.DVT,
+          ghichu: data.ghichu
+
+        });
+        resolve({
+          errCode:0,
+          errMessage: "Thêm dịch vụ thành công",
+        });
+      }
+    } catch(e) {
+      reject(e);
+    }
+  })
+}
+
+let handleSuaDichvuQL = (data) => {
+  return new Promise(async ( resolve, reject) => {
+    try{
+      if(
+        !data.id ||
+        !data.tenDV ||
+        !data.gia ||
+        !data.DVT ||
+        !data.ghichu
+      ) {
+        resolve({
+          errCode: 1,
+          errMessage: "Missing parameter",
+        });
+      } else {
+        let dichvu = await db.dichvus.findOne({
+          where: {
+            id: data.id
+          },
+          raw: false,
+        });
+        if(dichvu){
+          dichvu.tenDV = data.tenDV;
+          dichvu.gia = data.gia;
+          dichvu.DVT = data.DVT;
+          dichvu.ghichu = data.ghichu;
+          await dichvu.save();
+        }
+        else{
+          resolve({
+            errCode: 1,
+            errMessage: "Cập nhập không thành công"
+          });
+        }
+        resolve({
+          errCode: 0,
+          errMessage:"Cập nhập thành công"
+        });
+      }
+    } catch(e){
+      reject(e);
+    }
+  });
+};
+
+let handleXoaDichvuQL = async (Id) => {
+  return new Promise (async (resolve, reject) => {
+    let dichvu = await db.dichvus.findOne({
+      where: {id: Id},
+    });
+    if (!dichvu) {
+      resolve({
+        errCode: 2,
+        errMessage: "Không tìm thấy dịch vụ"
+      });
+    }
+    await db.dichvus.destroy({
+      where: {id: Id},
+    });
+    resolve ({
+      errCode: 0,
+      errMessage: "Đã xóa dịch vụ"
+    });
+  });
+};
+
+//khuyenmai
+
+let handleThemKhuyenmaiQL = (data) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      if(
+        // !data.truyền từ FE qua
+        !data.tenKM ||
+        !data.phantram ||
+        !data.mota ||
+        !data.start ||
+        !data.finish
+      ) {
+        resolve({
+          errCode: 110,
+          errMessage: "Missing parameter",
+        });
+      } else{
+        await db.khuyenmais.create({
+          tenKM: data.tenKM,
+          phantram: data.phantram,
+          mota: data.mota,
+          start: data.start,
+          finish: data.finish
+
+        });
+        resolve({
+          errCode:0,
+          errMessage: "Thêm khuyễn mãi thành công",
+        });
+      }
+    } catch(e) {
+      reject(e);
+    }
+  })
+}
+
+let handleSuaKhuyenmaiQL = (data) => {
+  return new Promise(async ( resolve, reject) => {
+    try{
+      if(
+        !data.id ||
+        !data.tenKM ||
+        !data.phantram ||
+        !data.mota ||
+        !data.start ||
+        !data.finish
+      ) {
+        resolve({
+          errCode: 1,
+          errMessage: "Missing parameter",
+        });
+      } else {
+        let khuyenmai = await db.khuyenmais.findOne({
+          where: {
+            id: data.id
+          },
+          raw: false,
+        });
+        if(khuyenmai){
+          khuyenmai.tenKM = data.tenKM;
+          khuyenmai.phantram = data.phantram;
+          khuyenmai.mota = data.mota;
+          khuyenmai.start = data.start;
+          khuyenmai.finish = data.finish;
+          await khuyenmai.save();
+        }
+        else{
+          resolve({
+            errCode: 1,
+            errMessage: "Cập nhập không thành công"
+          });
+        }
+        resolve({
+          errCode: 0,
+          errMessage:"Cập nhập thành công"
+        });
+      }
+    } catch(e){
+      reject(e);
+    }
+  });
+};
+
+let handleXoaKhuyenmaiQL = async (Id) => {
+  return new Promise (async (resolve, reject) => {
+    let khuyenmai = await db.khuyenmais.findOne({
+      where: {id: Id},
+    });
+    if (!khuyenmai) {
+      resolve({
+        errCode: 2,
+        errMessage: "Không tìm thấy khuyến mãi"
+      });
+    }
+    await db.khuyenmais.destroy({
+      where: {id: Id},
+    });
+    resolve ({
+      errCode: 0,
+      errMessage: "Đã xóa khuyến mãi"
+    });
+  });
+};
+
 module.exports = {
   handlePhong: handlePhong,
   handleLoaiphong: handleLoaiphong,
@@ -408,14 +656,27 @@ module.exports = {
   handleDanhmucCSVC: handleDanhmucCSVC,
   handleVitri: handleVitri,
   handleKhachhang: handleKhachhang,
+  handleDichvu: handleDichvu,
+  handleKhuyenmai: handleKhuyenmai,
+
   handleDatphong: handleDatphong,
   handlePhong_tenphong:handlePhong_tenphong,
+
   handleThemNoiquyQL: handleThemNoiquyQL,
   handleSuaNoiquyQL: handleSuaNoiquyQL,
   handleXoaNoiquyQL: handleXoaNoiquyQL,
+
   handleThemCSVCQL: handleThemCSVCQL,
   handleXoaCSVCQL:handleXoaCSVCQL,
-  handleSuaCSVCQL:handleSuaCSVCQL
+  handleSuaCSVCQL:handleSuaCSVCQL,
+
+  handleThemDichvuQL: handleThemDichvuQL,
+  handleSuaDichvuQL: handleSuaDichvuQL,
+  handleXoaDichvuQL: handleXoaDichvuQL,
+
+  handleThemKhuyenmaiQL: handleThemKhuyenmaiQL,
+  handleSuaKhuyenmaiQL: handleSuaKhuyenmaiQL,
+  handleXoaKhuyenmaiQL: handleXoaKhuyenmaiQL,
 };
 
 let handleSuaTTCumrap = (data) => {
