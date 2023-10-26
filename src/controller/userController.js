@@ -125,6 +125,22 @@ let handlePhong_tenphong = async (req, res) => {
   });
 };
 
+let handlePhong_idLP = async (req, res) => {
+  let key = req.query.keyword;
+  if (!key) {
+    return res.status(200).json({
+      errCode: 1,
+      errMessage: "missing require parameters",
+      phongs: {},
+    });
+  }
+  let phong_idLP = await userService.handlePhong_idLP(key);
+
+  return res.status(200).json({
+    phong_idLP,
+  });
+};
+
 let handleLoaiphong = async (req, res) => {
   let key = req.query.keyword;
   if (!key) {
@@ -141,6 +157,21 @@ let handleLoaiphong = async (req, res) => {
   });
 };
 
+let handleLoaiphong_tenloai = async (req, res) => {
+  let key = req.query.keyword;
+  if (!key) {
+    return res.status(200).json({
+      errCode: 1,
+      errMessage: "missing require parameters",
+      loaiphongs: {},
+    });
+  }
+  let lp_tenloai = await userService.handleLoaiphong_tenloai(key);
+
+  return res.status(200).json({
+    lp_tenloai,
+  });
+};
 
 let handleNoiquy = async (req, res) => {
   let key = req.query.keyword;
@@ -220,6 +251,24 @@ let handleKhachhang = async (req, res) => {
     khachhang,
   });
 };
+
+
+let handleALLKhachhang = async (req, res) => {
+  let key = req.query.keyword;
+  if (!key) {
+    return res.status(200).json({
+      errCode: 1,
+      errMessage: "missing require parameters",
+      khachhangs: {},
+    });
+  }
+  let allkh= await userService.handleALLKhachhang(key);
+
+  return res.status(200).json({
+    allkh,
+  });
+};
+
 
 let handleKhuyenmai = async (req, res) => {
   let key = req.query.keyword;
@@ -424,12 +473,15 @@ let handleXoaKhuyenmaiQL = async (req, res) => {
 
 module.exports = {
   handlePhong: handlePhong,
+  handlePhong_idLP: handlePhong_idLP,
   handleLoaiphong: handleLoaiphong,
+  handleLoaiphong_tenloai: handleLoaiphong_tenloai,
   handleNoiquy: handleNoiquy,
   handleDsthietbi: handleDsthietbi,
   handleDanhmucCSVC: handleDanhmucCSVC,
   handleVitri: handleVitri,
   handleKhachhang: handleKhachhang,
+  handleALLKhachhang: handleALLKhachhang,
   handleDatphong: handleDatphong,
   handlePhong_tenphong: handlePhong_tenphong,
   handleDichvu :handleDichvu,

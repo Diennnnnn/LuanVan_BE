@@ -11,6 +11,12 @@ module.exports = {
             hotenKH: {
                 type: Sequelize.STRING,
             },
+            ngaysinh: {
+                type: Sequelize.DATEONLY,
+            },
+            gioitinh: {
+                type: Sequelize.STRING,
+            },
             CMND: {
                 type: Sequelize.STRING,
             },

@@ -15,12 +15,18 @@ const initWebRoutes = (app) => {
   // router.get("/api/TTGhe", userController.handleTTGhe);
   router.get("/api/Phong",userController.handlePhong);
   router.get("/api/Phong_tenphong",userController.handlePhong_tenphong);
+  router.get("/api/Phong_idLP",userController.handlePhong_idLP);
+
   router.get("/api/Loaiphong",userController.handleLoaiphong);
+  router.get("/api/Loaiphong_tenloai",userController.handleLoaiphong_tenloai);
+
   router.get("/api/Noiquy",userController.handleNoiquy);
   router.get("/api/Dsthietbi",userController.handleDsthietbi);
   router.get("/api/DanhmucCSVC",userController.handleDanhmucCSVC);
   router.get("/api/Vitri",userController.handleVitri);
   router.get("/api/Khachhang",userController.handleKhachhang);
+  router.get("/api/ALLKhachhang",userController.handleALLKhachhang);
+
   router.get("/api/Dichvu",userController.handleDichvu);
   router.get("/api/Khuyenmai",userController.handleKhuyenmai);
 

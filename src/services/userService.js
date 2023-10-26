@@ -47,6 +47,27 @@ let handlePhong_tenphong = (key) => {
   });
 };
 
+let handlePhong_idLP = (key) => {
+  return new Promise(async (resolve, reject) =>{
+    try{
+      let phong_idLP = "";
+      if (key === "ALL") {
+        phong_idLP = await db.phongs.findAll({
+
+        });
+      }
+      if (key && key !== "ALL") {
+        phong_idLP = await db.phongs.findAll({
+          where: {id_LP:key},
+        });
+      }
+      resolve(phong_idLP);     
+    } catch(e){
+      reject(e);
+    }
+  });
+};
+
 let handleLoaiphong = (key) => {
   return new Promise(async (resolve, reject) =>{
     try{
@@ -62,6 +83,27 @@ let handleLoaiphong = (key) => {
         });
       }
       resolve(loaiphong);
+    } catch(e){
+      reject(e);
+    }
+  });
+};
+
+let handleLoaiphong_tenloai = (key) => {
+  return new Promise(async (resolve, reject) =>{
+    try{
+      let lp_tenloai = "";
+      if (key === "ALL") {
+        lp_tenloai = await db.loaiphongs.findAll({
+
+        });
+      }
+      if (key && key !== "ALL") {
+        lp_tenloai = await db.loaiphongs.findAll({
+          where: {tenloaiphong:key},
+        });
+      }
+      resolve(lp_tenloai);     
     } catch(e){
       reject(e);
     }
@@ -151,6 +193,7 @@ let handleVitri = (key) => {
     }
   });
 };
+
 let handleKhachhang = (key) => {
   return new Promise(async (resolve, reject) =>{
     try{
@@ -187,6 +230,27 @@ let handleDichvu = (key) => {
         });
       }
       resolve(dichvu);     
+    } catch(e){
+      reject(e);
+    }
+  });
+};
+
+let handleALLKhachhang = (key) => {
+  return new Promise(async (resolve, reject) =>{
+    try{
+      let allkh = "";
+      if (key === "ALL") {
+        allkh = await db.khachhangs.findAll({
+
+        });
+      }
+      if (key && key !== "ALL") {
+        allkh = await db.khachhangs.findAll({
+          where: {id:key},
+        });
+      }
+      resolve(allkh);     
     } catch(e){
       reject(e);
     }
@@ -655,12 +719,15 @@ let handleXoaKhuyenmaiQL = async (Id) => {
 
 module.exports = {
   handlePhong: handlePhong,
+  handlePhong_idLP: handlePhong_idLP,
   handleLoaiphong: handleLoaiphong,
+  handleLoaiphong_tenloai: handleLoaiphong_tenloai,
   handleNoiquy: handleNoiquy,
   handleDsthietbi:handleDsthietbi,
   handleDanhmucCSVC: handleDanhmucCSVC,
   handleVitri: handleVitri,
   handleKhachhang: handleKhachhang,
+  handleALLKhachhang: handleALLKhachhang,
   handleDichvu: handleDichvu,
   handleKhuyenmai: handleKhuyenmai,
 

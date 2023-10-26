@@ -9,6 +9,8 @@ module.exports = (sequelize, DataTypes) => {
     khachhangs.init(
         {
             hotenKH: DataTypes.STRING,
+            ngaysinh: DataTypes.DATEONLY,
+            gioitinh: DataTypes.STRING,
             CMND: DataTypes.STRING,
             SDT: DataTypes.STRING,
             email: DataTypes.STRING,
