@@ -1,98 +1,6 @@
 import userService from "../services/userService";
 
 
-// let handleDangnhap = async (req, res) => {
-//   let username = req.body.Taikhoan_KH;
-//   let password = req.body.Matkhau_KH;
-
-//   if (!username || !password) {
-//     return res.status(500).json({
-//       errCode: 1,
-//       message: "Missing input",
-//     });
-//   }
-//   let userdata = await userService.handleDangnhap(username, password);
-//   console.log(userdata);
-//   //check email exist
-//   //compare password
-//   //return userInfor
-//   //accept_token: validate user: JWT: json web token
-//   return res.status(200).json({
-//     errCode: userdata.errCode,
-//     message: userdata.errMessage,
-//     khachhang: userdata.khachhang ? userdata.khachhang : {},
-//   });
-// };
-
-// let handleDangky = async (req, res) => {
-//   try {
-//     let infor = await userService.handleDangky(req.body);
-//     return res.status(200).json(infor);
-//   } catch (e) {
-//     console.log(e);
-//     return res.status(200).json({
-//       errCode: -1,
-//       errMessage: "Error from the server",
-//     });
-//   }
-// };
-
-// let handleDatve = async (req, res) => {
-//   try {
-//     let infor = await userService.handleDatve(req.body);
-//     return res.status(200).json(infor);
-//   } catch (e) {
-//     console.log(e);
-//     return res.status(200).json({
-//       errCode: -1,
-//       errMessage: "Error from the server",
-//     });
-//   }
-// };
-
-// let handleTTchitietve = async (req, res) => {
-//   // let Dienthoai = "ALL"; //req.query.id; //get all or id
-//   let id_ve = req.query.keyword;
-
-//   if (!id_ve) {
-//     return res.status(200).json({
-//       errCode: 1,
-//       errMessage: "missing require parameters",
-//       chitietves: {},
-//     });
-//   }
-
-//   let chitietves = await userService.handleTTchitietve(id_ve);
-
-//   return res.status(200).json({
-//     // errCode: 0,
-//     // errMessage: "ok",
-//     chitietves,
-//   });
-// };
-
-// let handleTTGhe = async (req, res) => {
-//   // let Dienthoai = "ALL"; //req.query.id; //get all or id
-
-//   let key = req.query.keyword;
-
-//   if (!key) {
-//     return res.status(200).json({
-//       errCode: 1,
-//       errMessage: "missing require parameters",
-//       ghes: {},
-//     });
-//   }
-
-//   let ghe = await userService.handleTTGhe(key);
-
-//   return res.status(200).json({
-//     // errCode: 0,
-//     // errMessage: "ok",
-//     ghe,
-//   });
-// };
-
 let handlePhong = async (req, res) => {
   let key = req.query.keyword;
   if (!key) {
@@ -471,6 +379,44 @@ let handleXoaKhuyenmaiQL = async (req, res) => {
   return res.status(200).json(message);
 }
 
+//vitri
+let handleThemVitriQL = async (req, res) => {
+  try {
+    let infor = await userService.handleThemVitriQL(req.body);
+    return res.status(200).json(infor);
+  } catch (e) {
+    console.log(e);
+    return res.status(200).json({
+      errCode: -1,
+      errMessage: "Error from the server",
+    });
+  }
+};
+
+let handleSuaVitriQL = async (req, res) => {
+  try {
+    let vitri = await userService.handleSuaVitriQL(req.body);
+    return res.status(200).json(vitri);
+  } catch(e) {
+    console.log(e);
+    return res.status(200).json({
+      errCode: -1,
+      errMessage:"error from the server",
+    });
+  }
+};
+
+let handleXoaVitriQL = async (req, res) => {
+  if(!req.body.id) {
+    return res.status(200).json({
+      errCode: 1,
+      errMessage: "missing require parameter",
+    })
+  }
+  let message = await userService.handleXoaVitriQL(req.body.id);
+  console.log(message);
+  return res.status(200).json(message);
+}
 module.exports = {
   handlePhong: handlePhong,
   handlePhong_idLP: handlePhong_idLP,
@@ -502,5 +448,9 @@ module.exports = {
   handleThemKhuyenmaiQL: handleThemKhuyenmaiQL,
   handleSuaKhuyenmaiQL: handleSuaKhuyenmaiQL,
   handleXoaKhuyenmaiQL: handleXoaKhuyenmaiQL,
+
+  handleThemVitriQL: handleThemVitriQL,
+  handleSuaVitriQL: handleSuaVitriQL,
+  handleXoaVitriQL: handleXoaVitriQL,
 };
 

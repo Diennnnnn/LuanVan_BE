@@ -14,9 +14,6 @@ module.exports = {
             tang: {
                 type: Sequelize.INTEGER,
             },
-            dientich: {
-                type: Sequelize.INTEGER,
-            },
             createdAt: {
                 allowNull: false,
                 type: Sequelize.DATE,

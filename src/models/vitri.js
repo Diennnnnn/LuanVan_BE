@@ -10,7 +10,6 @@ module.exports = (sequelize, DataTypes) => {
         {
             khu: DataTypes.STRING,
             tang: DataTypes.INTEGER,
-            dientich: DataTypes.INTEGER,
         },
         {
             sequelize,

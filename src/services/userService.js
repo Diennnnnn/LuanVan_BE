@@ -717,6 +717,98 @@ let handleXoaKhuyenmaiQL = async (Id) => {
   });
 };
 
+
+//vi tri
+let handleThemVitriQL = (data) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      if(
+        // !data.truyền từ FE qua
+        !data.khu ||
+        !data.tang 
+      ) {
+        resolve({
+          errCode: 110,
+          errMessage: "Missing parameter",
+        });
+      } else{
+        await db.vitris.create({
+          khu: data.khu,
+          tang: data.tang,
+        });
+        resolve({
+          errCode:0,
+          errMessage: "Thêm vị trí thành công",
+        });
+      }
+    } catch(e) {
+      reject(e);
+    }
+  })
+}
+
+let handleSuaVitriQL = (data) => {
+  return new Promise(async ( resolve, reject) => {
+    try{
+      if(
+        !data.id ||
+        !data.khu ||
+        !data.tang
+      ) {
+        resolve({
+          errCode: 1,
+          errMessage: "Missing parameter",
+        });
+      } else {
+        let vitri = await db.vitris.findOne({
+          where: {
+            id: data.id
+          },
+          raw: false,
+        });
+        if(vitri){
+          vitri.khu = data.khu;
+          vitri.tang = data.tang;
+          
+          await vitri.save();
+        }
+        else{
+          resolve({
+            errCode: 1,
+            errMessage: "Cập nhập không thành công"
+          });
+        }
+        resolve({
+          errCode: 0,
+          errMessage:"Cập nhập thành công"
+        });
+      }
+    } catch(e){
+      reject(e);
+    }
+  });
+};
+
+let handleXoaVitriQL = async (Id) => {
+  return new Promise (async (resolve, reject) => {
+    let vitri = await db.vitris.findOne({
+      where: {id: Id},
+    });
+    if (!vitri) {
+      resolve({
+        errCode: 2,
+        errMessage: "Không tìm thấy vị trí"
+      });
+    }
+    await db.vitris.destroy({
+      where: {id: Id},
+    });
+    resolve ({
+      errCode: 0,
+      errMessage: "Đã xóa vị trí"
+    });
+  });
+};
 module.exports = {
   handlePhong: handlePhong,
   handlePhong_idLP: handlePhong_idLP,
@@ -749,74 +841,10 @@ module.exports = {
   handleThemKhuyenmaiQL: handleThemKhuyenmaiQL,
   handleSuaKhuyenmaiQL: handleSuaKhuyenmaiQL,
   handleXoaKhuyenmaiQL: handleXoaKhuyenmaiQL,
-};
 
-let handleSuaTTCumrap = (data) => {
-
-  return new Promise(async (resovle, reject) => {
-    try {
-      if (
-        !data.id ||
-        !data.tentttt ||
-        !data.diachi
-      ) {
-        resovle({
-          errCode: 1,
-          errMessage: "Missing parameter",
-        });
-      } else {
-
-        let cumrap = await db.qlcumraps.findOne({
-          where: {
-            id: data.id
-          },
-          raw: false,
-        });
-        if (cumrap) {
-          cumrap.ten_tttt = data.tentttt;
-          cumrap.diachi = data.diachi;
-          await cumrap.save();
-        }
-        else {
-          resovle({
-            errCode: 1,
-            errMessage: "Cập nhật thông tin cụm rạp mới KHÔNG thành thông",
-          });
-        }
-        resovle({
-          errCode: 0,
-          errMessage: "Cập nhật thông tin cụm rạp mới thành thông",
-        });
-      }
-    } catch (e) {
-      reject(e);
-    }
-  });
-};
-
-
-let handleXoaTTCumrap = async (Id) => {
-  return new Promise(async (resolve, reject) => {
-    let cumrap = await db.qlcumraps.findOne({
-      where: { id: Id },
-    });
-
-    if (!cumrap) {
-      resolve({
-        errCode: 2,
-        errMessage: `Không tìm thấy cụm rạp`,
-      });
-    }
-
-    await db.qlcumraps.destroy({
-      where: { id: Id },
-    });
-
-    resolve({
-      errCode: 0,
-      message: "Thông tin cụm rạp đã xóa",
-    });
-  });
+  handleThemVitriQL: handleThemVitriQL,
+  handleSuaVitriQL: handleSuaVitriQL,
+  handleXoaVitriQL: handleXoaVitriQL,
 };
 
 

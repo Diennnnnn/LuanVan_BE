@@ -48,7 +48,9 @@ const initWebRoutes = (app) => {
   router.post("/api/SuaKhuyenmaiQL",userController.handleSuaKhuyenmaiQL);
   router.delete("/api/XoaKhuyenmaiQL",userController.handleXoaKhuyenmaiQL);
 
-
+  router.post("/api/ThemVitriQL",userController.handleThemVitriQL);
+  router.post("/api/SuaVitriQL",userController.handleSuaVitriQL);
+  router.delete("/api/XoaVitriQL",userController.handleXoaVitriQL);
   return app.use("/", router);
 };
 
