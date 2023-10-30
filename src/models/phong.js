@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
             tenphong: DataTypes.STRING,
             trangthai: DataTypes.STRING,
             mota: DataTypes.STRING,
+            dientich: DataTypes.INTEGER,
         },
         {
             sequelize,

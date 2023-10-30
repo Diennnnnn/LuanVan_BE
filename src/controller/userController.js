@@ -417,6 +417,86 @@ let handleXoaVitriQL = async (req, res) => {
   console.log(message);
   return res.status(200).json(message);
 }
+
+//loaiphong
+
+let handleThemLoaiphongQL = async (req, res) => {
+  try {
+    let infor = await userService.handleThemLoaiphongQL(req.body);
+    return res.status(200).json(infor);
+  } catch (e) {
+    console.log(e);
+    return res.status(200).json({
+      errCode: -1,
+      errMessage: "Error from the server",
+    });
+  }
+};
+
+let handleSuaLoaiphongQL = async (req, res) => {
+  try {
+    let loaiphong = await userService.handleSuaLoaiphongQL(req.body);
+    return res.status(200).json(loaiphong);
+  } catch(e) {
+    console.log(e);
+    return res.status(200).json({
+      errCode: -1,
+      errMessage:"error from the server",
+    });
+  }
+};
+
+let handleXoaLoaiphongQL = async (req, res) => {
+  if(!req.body.id) {
+    return res.status(200).json({
+      errCode: 1,
+      errMessage: "missing require parameter",
+    })
+  }
+  let message = await userService.handleXoaLoaiphongQL(req.body.id);
+  console.log(message);
+  return res.status(200).json(message);
+}
+
+//thiet bi
+
+let handleThemThietbiQL = async (req, res) => {
+  try {
+    let infor = await userService.handleThemThietbiQL(req.body);
+    return res.status(200).json(infor);
+  } catch (e) {
+    console.log(e);
+    return res.status(200).json({
+      errCode: -1,
+      errMessage: "Error from the server",
+    });
+  }
+};
+
+let handleSuaThietbiQL = async (req, res) => {
+  try {
+    let thietbi = await userService.handleSuaThietbiQL(req.body);
+    return res.status(200).json(thietbi);
+  } catch(e) {
+    console.log(e);
+    return res.status(200).json({
+      errCode: -1,
+      errMessage:"error from the server",
+    });
+  }
+};
+
+let handleXoaThietbiQL = async (req, res) => {
+  if(!req.body.id) {
+    return res.status(200).json({
+      errCode: 1,
+      errMessage: "missing require parameter",
+    })
+  }
+  let message = await userService.handleXoaThietbiQL(req.body.id);
+  console.log(message);
+  return res.status(200).json(message);
+}
 module.exports = {
   handlePhong: handlePhong,
   handlePhong_idLP: handlePhong_idLP,
@@ -452,5 +532,13 @@ module.exports = {
   handleThemVitriQL: handleThemVitriQL,
   handleSuaVitriQL: handleSuaVitriQL,
   handleXoaVitriQL: handleXoaVitriQL,
+
+  handleThemLoaiphongQL: handleThemLoaiphongQL,
+  handleSuaLoaiphongQL: handleSuaLoaiphongQL,
+  handleXoaLoaiphongQL: handleXoaLoaiphongQL,
+
+  handleThemThietbiQL: handleThemThietbiQL,
+  handleSuaThietbiQL: handleSuaThietbiQL,
+  handleXoaThietbiQL: handleXoaThietbiQL,
 };
 

@@ -809,6 +809,207 @@ let handleXoaVitriQL = async (Id) => {
     });
   });
 };
+
+//loaiphong
+
+let handleThemLoaiphongQL = (data) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      if(
+        // !data.truyền từ FE qua
+        !data.tenloaiphong ||
+        !data.songuoi ||
+        !data.gia 
+      ) {
+        resolve({
+          errCode: 110,
+          errMessage: "Missing parameter",
+        });
+      } else{
+        await db.loaiphongs.create({
+          tenloaiphong: data.tenloaiphong,
+          songuoi: data.soluong,
+          gia: data.gia
+        });
+        resolve({
+          errCode:0,
+          errMessage: "Thêm loại phòng thành công",
+        });
+      }
+    } catch(e) {
+      reject(e);
+    }
+  })
+}
+
+let handleSuaLoaiphongQL = (data) => {
+  return new Promise(async ( resolve, reject) => {
+    try{
+      if(
+        !data.id ||
+        !data.tenloaiphong ||
+        !data.songuoi ||
+        !data.gia
+      ) {
+        resolve({
+          errCode: 1,
+          errMessage: "Missing parameter",
+        });
+      } else {
+        let loaiphong = await db.loaiphongs.findOne({
+          where: {
+            id: data.id
+          },
+          raw: false,
+        });
+        if(loaiphong){
+          loaiphong.tenloaiphong = data.tenloaiphong;
+          loaiphong.songuoi = data.songuoi;
+          loaiphong.gia = data.gia;
+
+          
+          await loaiphong.save();
+        }
+        else{
+          resolve({
+            errCode: 1,
+            errMessage: "Cập nhập không thành công"
+          });
+        }
+        resolve({
+          errCode: 0,
+          errMessage:"Cập nhập thành côngggg"
+        });
+      }
+    } catch(e){
+      reject(e);
+    }
+  });
+};
+
+let handleXoaLoaiphongQL = async (Id) => {
+  return new Promise (async (resolve, reject) => {
+    let loaiphong = await db.loaiphongs.findOne({
+      where: {id: Id},
+    });
+    if (!loaiphong) {
+      resolve({
+        errCode: 2,
+        errMessage: "Không tìm thấy loại phòng"
+      });
+    }
+    await db.loaiphongs.destroy({
+      where: {id: Id},
+    });
+    resolve ({
+      errCode: 0,
+      errMessage: "Đã xóa loại phòng"
+    });
+  });
+};
+
+//thietbi
+
+let handleThemThietbiQL = (data) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      if(
+        // !data.truyền từ FE qua
+        !data.id_CSVC ||
+        !data.id_Phong ||
+        !data.soluong ||
+        !data.thoigianbatdau 
+      ) {
+        resolve({
+          errCode: 110,
+          errMessage: "Missing parameter",
+        });
+      } else{
+        await db.dsthietbis.create({
+          id_CSVC: data.id_CSVC,
+          id_Phong: data.id_Phong,
+          soluong: data.soluong,
+          thoigianbatdau: data.thoigianbatdau
+
+        });
+        resolve({
+          errCode:0,
+          errMessage: "Thêm thiết bị thành công",
+        });
+      }
+    } catch(e) {
+      reject(e);
+    }
+  })
+}
+
+let handleSuaThietbiQL = (data) => {
+  return new Promise(async ( resolve, reject) => {
+    try{
+      if(
+        !data.id ||
+        !data.id_CSVC ||
+        !data.id_Phong ||
+        !data.soluong ||
+        !data.thoigianbatdau 
+      ) {
+        resolve({
+          errCode: 1,
+          errMessage: "Missing parameter",
+        });
+      } else {
+        let thietbi = await db.dsthietbis.findOne({
+          where: {
+            id: data.id
+          },
+          raw: false,
+        });
+        if(thietbi){
+          thietbi.id_CSVC = data.id_CSVC;
+          thietbi.id_Phong = data.id_Phong;
+          thietbi.soluong = data.soluong;
+          thietbi.thoigianbatdau = data.thoigianbatdau;
+          
+          await thietbi.save();
+        }
+        else{
+          resolve({
+            errCode: 1,
+            errMessage: "Cập nhập không thành công"
+          });
+        }
+        resolve({
+          errCode: 0,
+          errMessage:"Cập nhập thành côngggg"
+        });
+      }
+    } catch(e){
+      reject(e);
+    }
+  });
+};
+
+let handleXoaThietbiQL = async (Id) => {
+  return new Promise (async (resolve, reject) => {
+    let thietbi = await db.dsthietbis.findOne({
+      where: {id: Id},
+    });
+    if (!thietbi) {
+      resolve({
+        errCode: 2,
+        errMessage: "Không tìm thấy thiết bị"
+      });
+    }
+    await db.dsthietbis.destroy({
+      where: {id: Id},
+    });
+    resolve ({
+      errCode: 0,
+      errMessage: "Đã xóa thiết bị"
+    });
+  });
+};
+
 module.exports = {
   handlePhong: handlePhong,
   handlePhong_idLP: handlePhong_idLP,
@@ -845,6 +1046,14 @@ module.exports = {
   handleThemVitriQL: handleThemVitriQL,
   handleSuaVitriQL: handleSuaVitriQL,
   handleXoaVitriQL: handleXoaVitriQL,
+
+  handleThemLoaiphongQL: handleThemLoaiphongQL,
+  handleSuaLoaiphongQL: handleSuaLoaiphongQL,
+  handleXoaLoaiphongQL: handleXoaLoaiphongQL,
+
+  handleThemThietbiQL: handleThemThietbiQL,
+  handleSuaThietbiQL: handleSuaThietbiQL,
+  handleXoaThietbiQL: handleXoaThietbiQL,
 };
 
 

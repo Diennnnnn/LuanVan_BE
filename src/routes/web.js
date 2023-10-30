@@ -51,6 +51,14 @@ const initWebRoutes = (app) => {
   router.post("/api/ThemVitriQL",userController.handleThemVitriQL);
   router.post("/api/SuaVitriQL",userController.handleSuaVitriQL);
   router.delete("/api/XoaVitriQL",userController.handleXoaVitriQL);
+
+  router.post("/api/ThemLoaiphongQL",userController.handleThemLoaiphongQL);
+  router.post("/api/SuaLoaiphongQL",userController.handleSuaLoaiphongQL);
+  router.delete("/api/XoaLoaiphongQL",userController.handleXoaLoaiphongQL);
+
+  router.post("/api/ThemThietbiQL",userController.handleThemThietbiQL);
+  router.post("/api/SuaThietbiQL",userController.handleSuaThietbiQL);
+  router.delete("/api/XoaThietbiQL",userController.handleXoaThietbiQL);
   return app.use("/", router);
 };
 

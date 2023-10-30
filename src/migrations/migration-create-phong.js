@@ -24,6 +24,9 @@ module.exports = {
             mota: {
                 type: Sequelize.STRING,
             },
+            dientich: {
+                type: Sequelize.INTEGER,
+            },
             createdAt: {
                 allowNull: false,
                 type: Sequelize.DATE,
