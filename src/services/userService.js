@@ -257,6 +257,26 @@ let handleALLKhachhang = (key) => {
   });
 };
 
+let handleLayNhanvien = (key) => {
+  return new Promise(async (resolve, reject) =>{
+    try{
+      let allnv = "";
+      if (key === "ALL") {
+        allnv = await db.nhanviens.findAll({
+
+        });
+      }
+      if (key && key !== "ALL") {
+        allnv = await db.nhanviens.findAll({
+          where: {id:key},
+        });
+      }
+      resolve(allnv);     
+    } catch(e){
+      reject(e);
+    }
+  });
+};
 let handleKhuyenmai = (key) => {
   return new Promise(async (resolve, reject) =>{
     try{
@@ -1010,6 +1030,228 @@ let handleXoaThietbiQL = async (Id) => {
   });
 };
 
+//phong\
+
+let handleThemPhongQL = (data) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      if(
+        // !data.truyền từ FE qua
+        !data.id_LP ||
+        !data.id_VT ||
+        !data.tenphong ||
+        !data.mota ||
+        !data.dientich 
+      ) {
+        resolve({
+          errCode: 110,
+          errMessage: "Missing parameter",
+        });
+      } else{
+        await db.phongs.create({
+          id_LP: data.id_LP,
+          id_VT: data.id_VT,
+          tenphong: data.tenphong,
+          mota: data.mota,
+          dientich: data.dientich
+
+        });
+        resolve({
+          errCode:0,
+          errMessage: "Thêm phòng thành công",
+        });
+      }
+    } catch(e) {
+      reject(e);
+    }
+  })
+}
+
+let handleSuaPhongQL = (data) => {
+  return new Promise(async ( resolve, reject) => {
+    try{
+      if(
+        !data.id ||
+        !data.id_LP ||
+        !data.id_VT ||
+        !data.tenphong ||
+        !data.mota  ||
+        !data.dientich 
+      ) {
+        resolve({
+          errCode: 1,
+          errMessage: "Missing parameter",
+        });
+      } else {
+        let phong = await db.phongs.findOne({
+          where: {
+            id: data.id
+          },
+          raw: false,
+        });
+        if(phong){
+          phong.id_LP = data.id_LP;
+          phong.id_VT = data.id_VT;
+          phong.tenphong = data.tenphong;
+          phong.mota = data.mota;
+          phong.dientich = data.dientich
+          await phong.save();
+        }
+        else{
+          resolve({
+            errCode: 1,
+            errMessage: "Cập nhập không thành công"
+          });
+        }
+        resolve({
+          errCode: 0,
+          errMessage:"Cập nhập thành côngggg"
+        });
+      }
+    } catch(e){
+      reject(e);
+    }
+  });
+};
+
+let handleXoaPhongQL = async (Id) => {
+  return new Promise (async (resolve, reject) => {
+    let phong = await db.phongs.findOne({
+      where: {id: Id},
+    });
+    if (!phong) {
+      resolve({
+        errCode: 2,
+        errMessage: "Không tìm thấy phòng"
+      });
+    }
+    await db.phongs.destroy({
+      where: {id: Id},
+    });
+    resolve ({
+      errCode: 0,
+      errMessage: "Đã xóa phòng"
+    });
+  });
+};
+
+//nhanvien
+
+let handleThemNhanvienQL = (data) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      if(
+        // !data.truyền từ FE qua
+        !data.hotenNV ||
+        !data.ngaysinh ||
+        !data.gioitinh ||
+        !data.CCCD ||
+        !data.SDT ||
+        !data.email ||
+        !data.diachi ||
+        !data.chucvu
+
+      ) {
+        resolve({
+          errCode: 110,
+          errMessage: "Missing parameter",
+        });
+      } else{
+        await db.nhanviens.create({
+          hotenNV: data.hotenNV,
+          ngaysinh: data.ngaysinh,
+          gioitinh: data.gioitinh,
+          CCCD: data.CCCD,
+          SDT: data.SDT,
+          email: data.email,
+          diachi: data.diachi,
+          chucvu: data.chucvu,
+
+        });
+        resolve({
+          errCode:0,
+          errMessage: "Thêm thông tin nhân viên thành công",
+        });
+      }
+    } catch(e) {
+      reject(e);
+    }
+  })
+}
+
+let handleSuaNhanvienQL = (data) => {
+  return new Promise(async ( resolve, reject) => {
+    try{
+      if(
+        !data.id ||
+        !data.hotenNV ||
+        !data.ngaysinh ||
+        !data.gioitinh ||
+        !data.CCCD ||
+        !data.SDT ||
+        !data.email ||
+        !data.diachi ||
+        !data.chucvu
+      ) {
+        resolve({
+          errCode: 1,
+          errMessage: "Missing parameter",
+        });
+      } else {
+        let nhanvien = await db.nhanviens.findOne({
+          where: {
+            id: data.id
+          },
+          raw: false,
+        });
+        if(nhanvien){
+          nhanvien.hotenNV= data.hotenNV,
+          nhanvien.ngaysinh= data.ngaysinh,
+          nhanvien.gioitinh= data.gioitinh,
+          nhanvien.CCCD= data.CCCD,
+          nhanvien.SDT= data.SDT,
+          nhanvien.email= data.email,
+          nhanvien.diachi= data.diachi,
+          nhanvien.chucvu= data.chucvu,
+          await nhanvien.save();
+        }
+        else{
+          resolve({
+            errCode: 1,
+            errMessage: "Cập nhập thông tin nhân viên không thành công"
+          });
+        }
+        resolve({
+          errCode: 0,
+          errMessage:"Cập nhập thông tin nhân viên thành công"
+        });
+      }
+    } catch(e){
+      reject(e);
+    }
+  });
+};
+
+let handleXoaNhanvienQL = async (Id) => {
+  return new Promise (async (resolve, reject) => {
+    let nhanvien = await db.nhanviens.findOne({
+      where: {id: Id},
+    });
+    if (!nhanvien) {
+      resolve({
+        errCode: 2,
+        errMessage: "Không tìm thấy thông tin nhân viên"
+      });
+    }
+    await db.nhanviens.destroy({
+      where: {id: Id},
+    });
+    resolve ({
+      errCode: 0,
+      errMessage: "Đã xóa thông tin nhân viên"
+    });
+  });
+};
 module.exports = {
   handlePhong: handlePhong,
   handlePhong_idLP: handlePhong_idLP,
@@ -1021,6 +1263,7 @@ module.exports = {
   handleVitri: handleVitri,
   handleKhachhang: handleKhachhang,
   handleALLKhachhang: handleALLKhachhang,
+  handleLayNhanvien: handleLayNhanvien,
   handleDichvu: handleDichvu,
   handleKhuyenmai: handleKhuyenmai,
 
@@ -1054,6 +1297,14 @@ module.exports = {
   handleThemThietbiQL: handleThemThietbiQL,
   handleSuaThietbiQL: handleSuaThietbiQL,
   handleXoaThietbiQL: handleXoaThietbiQL,
+
+  handleThemPhongQL: handleThemPhongQL,
+  handleSuaPhongQL: handleSuaPhongQL,
+  handleXoaPhongQL: handleXoaPhongQL,
+
+  handleThemNhanvienQL: handleThemNhanvienQL,
+  handleSuaNhanvienQL: handleSuaNhanvienQL,
+  handleXoaNhanvienQL: handleXoaNhanvienQL,
 };
 
 

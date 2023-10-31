@@ -177,6 +177,22 @@ let handleALLKhachhang = async (req, res) => {
   });
 };
 
+let handleLayNhanvien = async (req, res) => {
+  let key = req.query.keyword;
+  if (!key) {
+    return res.status(200).json({
+      errCode: 1,
+      errMessage: "missing require parameters",
+      khachhangs: {},
+    });
+  }
+  let allnv= await userService.handleLayNhanvien(key);
+
+  return res.status(200).json({
+    allnv,
+  });
+};
+
 
 let handleKhuyenmai = async (req, res) => {
   let key = req.query.keyword;
@@ -497,6 +513,86 @@ let handleXoaThietbiQL = async (req, res) => {
   console.log(message);
   return res.status(200).json(message);
 }
+
+//phong
+
+let handleThemPhongQL = async (req, res) => {
+  try {
+    let infor = await userService.handleThemPhongQL(req.body);
+    return res.status(200).json(infor);
+  } catch (e) {
+    console.log(e);
+    return res.status(200).json({
+      errCode: -1,
+      errMessage: "Error from the server",
+    });
+  }
+};
+
+let handleSuaPhongQL = async (req, res) => {
+  try {
+    let phong = await userService.handleSuaPhongQL(req.body);
+    return res.status(200).json(phong);
+  } catch(e) {
+    console.log(e);
+    return res.status(200).json({
+      errCode: -1,
+      errMessage:"error from the server",
+    });
+  }
+};
+
+let handleXoaPhongQL = async (req, res) => {
+  if(!req.body.id) {
+    return res.status(200).json({
+      errCode: 1,
+      errMessage: "missing require parameter",
+    })
+  }
+  let message = await userService.handleXoaPhongQL(req.body.id);
+  console.log(message);
+  return res.status(200).json(message);
+}
+
+//nhanvien
+
+let handleThemNhanvienQL = async (req, res) => {
+  try {
+    let infor = await userService.handleThemNhanvienQL(req.body);
+    return res.status(200).json(infor);
+  } catch (e) {
+    console.log(e);
+    return res.status(200).json({
+      errCode: -1,
+      errMessage: "Error from the server",
+    });
+  }
+};
+
+let handleSuaNhanvienQL = async (req, res) => {
+  try {
+    let nhanvien = await userService.handleSuaNhanvienQL(req.body);
+    return res.status(200).json(nhanvien);
+  } catch(e) {
+    console.log(e);
+    return res.status(200).json({
+      errCode: -1,
+      errMessage:"error from the server",
+    });
+  }
+};
+
+let handleXoaNhanvienQL = async (req, res) => {
+  if(!req.body.id) {
+    return res.status(200).json({
+      errCode: 1,
+      errMessage: "missing require parameter",
+    })
+  }
+  let message = await userService.handleXoaNhanvienQL(req.body.id);
+  console.log(message);
+  return res.status(200).json(message);
+}
 module.exports = {
   handlePhong: handlePhong,
   handlePhong_idLP: handlePhong_idLP,
@@ -508,6 +604,7 @@ module.exports = {
   handleVitri: handleVitri,
   handleKhachhang: handleKhachhang,
   handleALLKhachhang: handleALLKhachhang,
+  handleLayNhanvien:handleLayNhanvien,
   handleDatphong: handleDatphong,
   handlePhong_tenphong: handlePhong_tenphong,
   handleDichvu :handleDichvu,
@@ -540,5 +637,13 @@ module.exports = {
   handleThemThietbiQL: handleThemThietbiQL,
   handleSuaThietbiQL: handleSuaThietbiQL,
   handleXoaThietbiQL: handleXoaThietbiQL,
+
+  handleThemPhongQL: handleThemPhongQL,
+  handleSuaPhongQL: handleSuaPhongQL,
+  handleXoaPhongQL: handleXoaPhongQL,
+
+  handleThemNhanvienQL: handleThemNhanvienQL,
+  handleSuaNhanvienQL: handleSuaNhanvienQL,
+  handleXoaNhanvienQL: handleXoaNhanvienQL,
 };
 

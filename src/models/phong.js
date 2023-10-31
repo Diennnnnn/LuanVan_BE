@@ -11,7 +11,6 @@ module.exports = (sequelize, DataTypes) => {
             id_LP: DataTypes.INTEGER,
             id_VT:DataTypes.INTEGER,
             tenphong: DataTypes.STRING,
-            trangthai: DataTypes.STRING,
             mota: DataTypes.STRING,
             dientich: DataTypes.INTEGER,
         },

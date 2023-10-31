@@ -26,6 +26,7 @@ const initWebRoutes = (app) => {
   router.get("/api/Vitri",userController.handleVitri);
   router.get("/api/Khachhang",userController.handleKhachhang);
   router.get("/api/ALLKhachhang",userController.handleALLKhachhang);
+  router.get("/api/LayNhanvien",userController.handleLayNhanvien);
 
   router.get("/api/Dichvu",userController.handleDichvu);
   router.get("/api/Khuyenmai",userController.handleKhuyenmai);
@@ -59,6 +60,14 @@ const initWebRoutes = (app) => {
   router.post("/api/ThemThietbiQL",userController.handleThemThietbiQL);
   router.post("/api/SuaThietbiQL",userController.handleSuaThietbiQL);
   router.delete("/api/XoaThietbiQL",userController.handleXoaThietbiQL);
+
+  router.post("/api/ThemPhongQL",userController.handleThemPhongQL);
+  router.post("/api/SuaPhongQL",userController.handleSuaPhongQL);
+  router.delete("/api/XoaPhongQL",userController.handleXoaPhongQL);
+
+  router.post("/api/ThemNhanvienQL",userController.handleThemNhanvienQL);
+  router.post("/api/SuaNhanvienQL",userController.handleSuaNhanvienQL);
+  router.delete("/api/XoaNhanvienQL",userController.handleXoaNhanvienQL);
   return app.use("/", router);
 };
 
