@@ -593,6 +593,74 @@ let handleXoaNhanvienQL = async (req, res) => {
   console.log(message);
   return res.status(200).json(message);
 }
+
+//hinh anh
+let handleLayhinhanh = async (req, res) => {
+  let key = req.query.keyword;
+  if (!key) {
+    return res.status(200).json({
+      errCode: 1,
+      errMessage: "missing require parameters",
+      hinhanhPhongs: {},
+    });
+  }
+  let layha = await userService.handleLayhinhanh(key);
+
+  return res.status(200).json({
+    layha,
+  });
+};
+let handleLayhinhanh_IdPhong = async (req, res) => {
+  let key = req.query.keyword;
+  if (!key) {
+    return res.status(200).json({
+      errCode: 1,
+      errMessage: "missing require parameters",
+      hinhanhPhongs: {},
+    });
+  }
+  let layha = await userService.handleLayhinhanh_IdPhong(key);
+
+  return res.status(200).json({
+    layha,
+  });
+};
+let handlePostPictures = async (req, res) => {
+  try {
+    let infor = await userService.handlePostPictures(req.body);
+    return res.status(200).json(infor);
+  } catch (e) {
+    console.log(e);
+    return res.status(200).json({
+      errCode: -1,
+      errMessage: "Error from the server",
+    });
+  }
+};
+let handleSuaHinhanh = async (req, res) => {
+  try {
+    let ha = await userService.handleSuaHinhanh(req.body);
+    return res.status(200).json(ha);
+  } catch(e) {
+    console.log(e);
+    return res.status(200).json({
+      errCode: -1,
+      errMessage:"error from the server",
+    });
+  }
+};
+
+let handleXoaHinhanh = async (req, res) => {
+  if(!req.body.id) {
+    return res.status(200).json({
+      errCode: 1,
+      errMessage: "missing require parameter",
+    })
+  }
+  let message = await userService.handleXoaHinhanh(req.body.id);
+  console.log(message);
+  return res.status(200).json(message);
+}
 module.exports = {
   handlePhong: handlePhong,
   handlePhong_idLP: handlePhong_idLP,
@@ -645,5 +713,11 @@ module.exports = {
   handleThemNhanvienQL: handleThemNhanvienQL,
   handleSuaNhanvienQL: handleSuaNhanvienQL,
   handleXoaNhanvienQL: handleXoaNhanvienQL,
+
+  handleLayhinhanh: handleLayhinhanh,
+  handleLayhinhanh_IdPhong: handleLayhinhanh_IdPhong,
+  handlePostPictures: handlePostPictures,
+  handleSuaHinhanh:handleSuaHinhanh,
+  handleXoaHinhanh: handleXoaHinhanh,
 };
 

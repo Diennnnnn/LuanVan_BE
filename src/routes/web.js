@@ -68,6 +68,13 @@ const initWebRoutes = (app) => {
   router.post("/api/ThemNhanvienQL",userController.handleThemNhanvienQL);
   router.post("/api/SuaNhanvienQL",userController.handleSuaNhanvienQL);
   router.delete("/api/XoaNhanvienQL",userController.handleXoaNhanvienQL);
+
+  router.get("/api/Layhinhanh",userController.handleLayhinhanh);
+  router.get("/api/Layhinhanh_IdPhong",userController.handleLayhinhanh_IdPhong);
+
+  router.post("/api/PostPictures",userController.handlePostPictures);
+  router.post("/api/SuaHinhanh",userController.handleSuaHinhanh);
+  router.delete("/api/XoaHinhanh",userController.handleXoaHinhanh);
   return app.use("/", router);
 };
 

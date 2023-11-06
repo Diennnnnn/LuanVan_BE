@@ -1252,6 +1252,139 @@ let handleXoaNhanvienQL = async (Id) => {
     });
   });
 };
+
+//hinh anh
+let handlePostPictures = (data) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      if(
+        // !data.truyền từ FE qua
+        !data.hinhanh ||
+        !data.id_Phong
+
+      ) {
+        resolve({
+          errCode: 110,
+          errMessage: "Missing parameter",
+        });
+      } else{
+        await db.hinhanhPhongs.create({
+          hinhanh: data.hinhanh,
+          id_Phong: data.id_Phong,
+
+        });
+        resolve({
+          errCode:0,
+          errMessage: "Thêm hình ảnh thành công",
+        });
+      }
+    } catch(e) {
+      reject(e);
+    }
+  })
+}
+
+let handleLayhinhanh = (key) => {
+  return new Promise(async (resolve, reject) =>{
+    try{
+      let layha = "";
+      if (key === "ALL") {
+        layha = await db.hinhanhPhongs.findAll({
+
+        });
+      }
+      if (key && key !== "ALL") {
+        layha = await db.hinhanhPhongs.findAll({
+          where: {id:key},
+        });
+      }
+      resolve(layha);
+    } catch(e){
+      reject(e);
+    }
+  });
+};
+let handleLayhinhanh_IdPhong = (key) => {
+  return new Promise(async (resolve, reject) =>{
+    try{
+      let layha = "";
+      if (key === "ALL") {
+        layha = await db.hinhanhPhongs.findAll({
+
+        });
+      }
+      if (key && key !== "ALL") {
+        layha = await db.hinhanhPhongs.findAll({
+          where: {id_Phong:key},
+        });
+      }
+      resolve(layha);
+    } catch(e){
+      reject(e);
+    }
+  });
+};
+let handleSuaHinhanh = (data) => {
+  return new Promise(async ( resolve, reject) => {
+    try{
+      if(
+        !data.id ||
+        !data.hinhanh ||
+        !data.id_Phong
+      ) {
+        resolve({
+          errCode: 1,
+          errMessage: "Missing parameter",
+        });
+      } else {
+        let ha = await db.hinhanhPhongs.findOne({
+          where: {
+            id: data.id
+          },
+          raw: false,
+        });
+        if(ha){
+          ha.hinhanh = data.hinhanh;
+          ha.id_Phong = data.id_Phong;
+          await ha.save();
+        }
+        else{
+          resolve({
+            errCode: 1,
+            errMessage: "Cập nhập không thành công"
+          });
+        }
+        resolve({
+          errCode: 0,
+          errMessage:"Cập nhập thành công"
+        });
+      }
+    } catch(e){
+      reject(e);
+    }
+  });
+};
+
+let handleXoaHinhanh = async (Id) => {
+  return new Promise (async (resolve, reject) => {
+    let ha = await db.hinhanhPhongs.findOne({
+      where: {id: Id},
+    });
+    if (!ha) {
+      resolve({
+        errCode: 2,
+        errMessage: "Không tìm thấy hình ảnh"
+      });
+    }
+    await db.hinhanhPhongs.destroy({
+      where: {id: Id},
+    });
+    resolve ({
+      errCode: 0,
+      errMessage: "Đã xóa hình ảnh"
+    });
+  });
+};
 module.exports = {
   handlePhong: handlePhong,
   handlePhong_idLP: handlePhong_idLP,
@@ -1305,6 +1438,12 @@ module.exports = {
   handleThemNhanvienQL: handleThemNhanvienQL,
   handleSuaNhanvienQL: handleSuaNhanvienQL,
   handleXoaNhanvienQL: handleXoaNhanvienQL,
+
+  handleLayhinhanh: handleLayhinhanh,
+  handleLayhinhanh_IdPhong: handleLayhinhanh_IdPhong,
+  handlePostPictures: handlePostPictures,
+  handleSuaHinhanh:handleSuaHinhanh,
+  handleXoaHinhanh: handleXoaHinhanh,
 };
 
 
