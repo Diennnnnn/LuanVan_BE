@@ -15,7 +15,8 @@ const corsConfig = {
 
 const app = express();
 app.use(cors(corsConfig));
-
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true }));
+app.use(bodyParser.json({limit: '50mb'}));
 const port = process.env.PORT || 8080; //backup, .port or 3000
 
 //cauhinh cho phep gui data tu client len phia server; body-parser da tich hop trong express

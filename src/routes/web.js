@@ -75,6 +75,8 @@ const initWebRoutes = (app) => {
   router.post("/api/PostPictures",userController.handlePostPictures);
   router.post("/api/SuaHinhanh",userController.handleSuaHinhanh);
   router.delete("/api/XoaHinhanh",userController.handleXoaHinhanh);
+
+  router.post("/api/SuaTTKH",userController.handleSuaTTKH);
   return app.use("/", router);
 };
 

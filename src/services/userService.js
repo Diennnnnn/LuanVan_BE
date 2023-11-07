@@ -1385,6 +1385,58 @@ let handleXoaHinhanh = async (Id) => {
     });
   });
 };
+
+
+let handleSuaTTKH = (data) => {
+  return new Promise(async ( resolve, reject) => {
+    try{
+      if(
+        !data.id ||
+        !data.hotenKH ||
+        !data.ngaysinh ||
+        !data.gioitinh ||
+        !data.CMND ||
+        !data.SDT ||
+        !data.email ||
+        !data.avt
+      ) {
+        resolve({
+          errCode: 1,
+          errMessage: "Missing parameter",
+        });
+      } else {
+        let ttkh = await db.khachhangs.findOne({
+          where: {
+            id: data.id
+          },
+          raw: false,
+        });
+        if(ttkh){
+          ttkh.hotenKH = data.hotenKH;
+          ttkh.ngaysinh = data.ngaysinh;
+          ttkh.gioitinh = data.gioitinh;
+          ttkh.CMND = data.CMND;
+          ttkh.SDT = data.SDT;
+          ttkh.email = data.email;
+          ttkh.avt = data.avt;
+          await ttkh.save();
+        }
+        else{
+          resolve({
+            errCode: 1,
+            errMessage: "Cập nhập không thành công"
+          });
+        }
+        resolve({
+          errCode: 0,
+          errMessage:"Cập nhập thành công"
+        });
+      }
+    } catch(e){
+      reject(e);
+    }
+  });
+};
 module.exports = {
   handlePhong: handlePhong,
   handlePhong_idLP: handlePhong_idLP,
@@ -1444,6 +1496,8 @@ module.exports = {
   handlePostPictures: handlePostPictures,
   handleSuaHinhanh:handleSuaHinhanh,
   handleXoaHinhanh: handleXoaHinhanh,
+
+  handleSuaTTKH: handleSuaTTKH,
 };
 
 

@@ -661,6 +661,19 @@ let handleXoaHinhanh = async (req, res) => {
   console.log(message);
   return res.status(200).json(message);
 }
+
+let handleSuaTTKH = async (req, res) => {
+  try {
+    let ttkh = await userService.handleSuaTTKH(req.body);
+    return res.status(200).json(ttkh);
+  } catch(e) {
+    console.log(e);
+    return res.status(200).json({
+      errCode: -1,
+      errMessage:"error from the server",
+    });
+  }
+};
 module.exports = {
   handlePhong: handlePhong,
   handlePhong_idLP: handlePhong_idLP,
@@ -719,5 +732,7 @@ module.exports = {
   handlePostPictures: handlePostPictures,
   handleSuaHinhanh:handleSuaHinhanh,
   handleXoaHinhanh: handleXoaHinhanh,
+
+  handleSuaTTKH: handleSuaTTKH,
 };
 

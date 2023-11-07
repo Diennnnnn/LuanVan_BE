@@ -14,6 +14,8 @@ module.exports = (sequelize, DataTypes) => {
             CMND: DataTypes.STRING,
             SDT: DataTypes.STRING,
             email: DataTypes.STRING,
+            avt: DataTypes.STRING,
+
         },
         {
             sequelize,
