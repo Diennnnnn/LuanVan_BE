@@ -77,6 +77,12 @@ const initWebRoutes = (app) => {
   router.delete("/api/XoaHinhanh",userController.handleXoaHinhanh);
 
   router.post("/api/SuaTTKH",userController.handleSuaTTKH);
+  router.post("/api/ThemTTKH_SDT",userController.handleThemTTKH_SDT);
+  router.post("/api/XoaAvtKH",userController.handleXoaAvtKH);
+
+
+
+
   return app.use("/", router);
 };
 

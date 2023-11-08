@@ -1437,6 +1437,72 @@ let handleSuaTTKH = (data) => {
     }
   });
 };
+
+let handleThemTTKH_SDT = (data) => {
+  return new Promise(async ( resolve, reject) => {
+    try{
+      if(
+        !data.sdt
+      ) {
+        resolve({
+          errCode: 1,
+          errMessage: "Missing parameter",
+        });
+      } else {
+        await db.khachhangs.create({          
+          SDT: data.sdt
+
+        });
+        resolve({
+          errCode: 0,
+          errMessage:"Cập nhập thành công"
+        });
+      }
+    } catch(e){
+      reject(e);
+    }
+  });
+};
+
+let handleXoaAvtKH = (data) => {
+  return new Promise(async ( resolve, reject) => {
+    try{
+      if(
+        !data.id
+      ) {
+        resolve({
+          errCode: 1,
+          errMessage: "Missing parameter",
+        });
+      } else {
+        let ttkh = await db.khachhangs.findOne({
+          where: {
+            id: data.id
+          },
+          raw: false,
+        });
+        if(ttkh){
+          ttkh.avt = null;         
+          await ttkh.save();
+        }
+        else{
+          resolve({
+            errCode: 1,
+            errMessage: "Cập nhập không thành công"
+          });
+        }
+        resolve({
+          errCode: 0,
+          errMessage:"Cập nhập thành công"
+        });
+      }
+    } catch(e){
+      reject(e);
+    }
+  });
+};
+
+
 module.exports = {
   handlePhong: handlePhong,
   handlePhong_idLP: handlePhong_idLP,
@@ -1498,6 +1564,10 @@ module.exports = {
   handleXoaHinhanh: handleXoaHinhanh,
 
   handleSuaTTKH: handleSuaTTKH,
+  handleThemTTKH_SDT: handleThemTTKH_SDT,
+  handleXoaAvtKH: handleXoaAvtKH
+
+
 };
 
 

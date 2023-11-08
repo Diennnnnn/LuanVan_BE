@@ -674,6 +674,32 @@ let handleSuaTTKH = async (req, res) => {
     });
   }
 };
+
+let handleThemTTKH_SDT = async (req, res) => {
+  try {
+    let ttkh = await userService.handleThemTTKH_SDT(req.body);
+    return res.status(200).json(ttkh);
+  } catch(e) {
+    console.log(e);
+    return res.status(200).json({
+      errCode: -1,
+      errMessage:"error from the server",
+    });
+  }
+};
+let handleXoaAvtKH = async (req, res) => {
+  try {
+    let ttkh = await userService.handleXoaAvtKH(req.body);
+    return res.status(200).json(ttkh);
+  } catch(e) {
+    console.log(e);
+    return res.status(200).json({
+      errCode: -1,
+      errMessage:"error from the server",
+    });
+  }
+};
+
 module.exports = {
   handlePhong: handlePhong,
   handlePhong_idLP: handlePhong_idLP,
@@ -734,5 +760,7 @@ module.exports = {
   handleXoaHinhanh: handleXoaHinhanh,
 
   handleSuaTTKH: handleSuaTTKH,
+  handleThemTTKH_SDT: handleThemTTKH_SDT,
+  handleXoaAvtKH: handleXoaAvtKH
 };
 

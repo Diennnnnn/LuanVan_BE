@@ -5,6 +5,7 @@ import initWebRoutes from "./routes/web";
 import connectDB from "./configs/connectDB";
 import cors from "cors";
 import bodyParser from "body-parser";
+import order from "./routes/order";
 
 
 require("dotenv").config();
@@ -25,6 +26,7 @@ const port = process.env.PORT || 8080; //backup, .port or 3000
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true }));
 app.use(bodyParser.json({limit: '50mb'}));
 
+app.use('/order', order);
 
 // app.use(express.urlencoded({ extended: true }));
 // app.use(express.json());
