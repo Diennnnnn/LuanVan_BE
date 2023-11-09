@@ -80,6 +80,8 @@ const initWebRoutes = (app) => {
   router.post("/api/ThemTTKH_SDT",userController.handleThemTTKH_SDT);
   router.post("/api/XoaAvtKH",userController.handleXoaAvtKH);
 
+  router.get("/api/LayPhieudat",userController.handleLayPhieudat);
+  router.get("/api/LayPhieudat_idKH",userController.handleLayPhieudat_idKH);
 
 
 

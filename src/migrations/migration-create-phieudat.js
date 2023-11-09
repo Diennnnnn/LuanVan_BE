@@ -26,6 +26,27 @@ module.exports = {
             songuoi: {
                 type: Sequelize.INTEGER,
             },
+            tongtien: {
+                type: Sequelize.INTEGER,
+            },
+            thanhtoan: {
+                type: Sequelize.STRING,
+            },
+            trangthai: {
+                type: Sequelize.STRING,
+            },
+            ghichu: {
+                type: Sequelize.STRING,
+            },
+            hotennguoio: {
+                type: Sequelize.STRING,
+            },
+            SDT_nguoio: {
+                type: Sequelize.STRING,
+            },
+            CCCD_nguoio: {
+                type: Sequelize.STRING,
+            },
             createdAt: {
                 allowNull: false,
                 type: Sequelize.DATE,

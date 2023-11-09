@@ -700,6 +700,40 @@ let handleXoaAvtKH = async (req, res) => {
   }
 };
 
+
+//phieudat
+
+let handleLayPhieudat = async (req, res) => {
+  let key = req.query.keyword;
+  if (!key) {
+    return res.status(200).json({
+      errCode: 1,
+      errMessage: "missing require parameters",
+      phieudats: {},
+    });
+  }
+  let phieudat= await userService.handleLayPhieudat(key);
+
+  return res.status(200).json({
+    phieudat,
+  });
+};
+
+let handleLayPhieudat_idKH = async (req, res) => {
+  let key = req.query.keyword;
+  if (!key) {
+    return res.status(200).json({
+      errCode: 1,
+      errMessage: "missing require parameters",
+      phongs: {},
+    });
+  }
+  let phieudat_idKH = await userService.handleLayPhieudat_idKH(key);
+
+  return res.status(200).json({
+    phieudat_idKH,
+  });
+};
 module.exports = {
   handlePhong: handlePhong,
   handlePhong_idLP: handlePhong_idLP,
@@ -716,6 +750,7 @@ module.exports = {
   handlePhong_tenphong: handlePhong_tenphong,
   handleDichvu :handleDichvu,
   handleKhuyenmai: handleKhuyenmai,
+ 
 
   handleThemNoiquyQL: handleThemNoiquyQL,
   handleSuaNoiquyQL: handleSuaNoiquyQL,
@@ -761,6 +796,10 @@ module.exports = {
 
   handleSuaTTKH: handleSuaTTKH,
   handleThemTTKH_SDT: handleThemTTKH_SDT,
-  handleXoaAvtKH: handleXoaAvtKH
+  handleXoaAvtKH: handleXoaAvtKH,
+
+  handleLayPhieudat: handleLayPhieudat,
+  handleLayPhieudat_idKH :handleLayPhieudat_idKH,
+
 };
 

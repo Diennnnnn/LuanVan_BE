@@ -287,7 +287,7 @@ let handleKhuyenmai = (key) => {
         });
       }
       if (key && key !== "ALL") {
-        khuyenmais = await db.khuyenmais.findAll({
+        khuyenmai = await db.khuyenmais.findAll({
           where: {id:key},
         });
       }
@@ -308,7 +308,17 @@ let handleDatphong = (data) => {
         !data.ngaydat ||
         !data.check_in ||
         !data.check_out ||
-        !data.songuoi 
+        !data.songuoi ||
+        !data.tongtien 
+        
+        //có thể rỗng
+        // !data.thanhtoan ||
+        // !data.trangthai ||
+        // !data.ghichu ||
+        // !data.hotennguoio ||
+        // !data.SDT_nguoio ||
+        // !data.CCCD_nguoio
+
       ) {
         resolve({
           errCode: 110,
@@ -321,7 +331,13 @@ let handleDatphong = (data) => {
           ngaydat: data.ngaydat,
           check_in: data.check_in,
           check_out: data.check_out,
+          tongtien: data.tongtien,
+          ghichu: data.ghichu,
           songuoi: data.songuoi,
+          thanhtoan: data.thanhtoan,
+          hotennguoio: data.hotennguoio,
+          SDT_nguoio: data.SDT_nguoio,
+          CCCD_nguoio: data.CCCD_nguoio,
 
         });
         resolve({
@@ -1502,6 +1518,50 @@ let handleXoaAvtKH = (data) => {
   });
 };
 
+//phieudat
+
+let handleLayPhieudat = (key) => {
+  return new Promise(async (resolve, reject) =>{
+    try{
+      let phieudat = "";
+      if (key === "ALL") {
+        phieudat = await db.phieudats.findAll({
+
+        });
+      }
+      if (key && key !== "ALL") {
+        phieudat = await db.phieudats.findAll({
+          where: {id:key},
+        });
+      }
+      resolve(phieudat);     
+    } catch(e){
+      reject(e);
+    }
+  });
+};
+
+
+let handleLayPhieudat_idKH = (key) => {
+  return new Promise(async (resolve, reject) =>{
+    try{
+      let phieudat_idKH = "";
+      if (key === "ALL") {
+        phieudat_idKH = await db.phieudats.findAll({
+
+        });
+      }
+      if (key && key !== "ALL") {
+        phieudat_idKH = await db.phieudats.findAll({
+          where: {id_KH:key},
+        });
+      }
+      resolve(phieudat_idKH);     
+    } catch(e){
+      reject(e);
+    }
+  });
+};
 
 module.exports = {
   handlePhong: handlePhong,
@@ -1517,7 +1577,8 @@ module.exports = {
   handleLayNhanvien: handleLayNhanvien,
   handleDichvu: handleDichvu,
   handleKhuyenmai: handleKhuyenmai,
-
+  
+  
   handleDatphong: handleDatphong,
   handlePhong_tenphong:handlePhong_tenphong,
 
@@ -1565,9 +1626,10 @@ module.exports = {
 
   handleSuaTTKH: handleSuaTTKH,
   handleThemTTKH_SDT: handleThemTTKH_SDT,
-  handleXoaAvtKH: handleXoaAvtKH
+  handleXoaAvtKH: handleXoaAvtKH,
 
-
+  handleLayPhieudat:handleLayPhieudat,
+  handleLayPhieudat_idKH :handleLayPhieudat_idKH,
 };
 
 

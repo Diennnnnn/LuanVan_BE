@@ -14,6 +14,13 @@ module.exports = (sequelize, DataTypes) => {
             check_in: DataTypes.DATEONLY,
             check_out: DataTypes.DATEONLY,
             songuoi: DataTypes.INTEGER,
+            tongtien: DataTypes.INTEGER,
+            thanhtoan: DataTypes.STRING,
+            trangthai: DataTypes.STRING,
+            ghichu: DataTypes.STRING,
+            hotennguoio: DataTypes.STRING,
+            SDT_nguoio: DataTypes.STRING,
+            CCCD_nguoio: DataTypes.STRING,
 
         },
         {
