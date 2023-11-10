@@ -356,8 +356,9 @@ let handleThemNoiquyQL = (data) => {
     try {
       if(
         // !data.truyền từ FE qua
-        !data.mota ||
-        !data.motaEN
+        !data.mota
+        //  ||
+        // !data.motaEN
       ) {
         resolve({
           errCode: 110,
@@ -760,8 +761,9 @@ let handleThemVitriQL = (data) => {
     try {
       if(
         // !data.truyền từ FE qua
-        !data.khu ||
-        !data.tang 
+        !data.khu 
+        // ||
+        // !data.tang 
       ) {
         resolve({
           errCode: 110,
@@ -864,7 +866,7 @@ let handleThemLoaiphongQL = (data) => {
       } else{
         await db.loaiphongs.create({
           tenloaiphong: data.tenloaiphong,
-          songuoi: data.soluong,
+          songuoi: data.songuoi,
           gia: data.gia
         });
         resolve({
@@ -1563,6 +1565,30 @@ let handleLayPhieudat_idKH = (key) => {
   });
 };
 
+//nhanvien
+
+let handleLayNhanvien_SDT = (key) => {
+  return new Promise(async (resolve, reject) =>{
+    try{
+      let nhanvien_sdt = "";
+      if (key === "ALL") {
+        nhanvien_sdt = await db.nhanviens.findAll({
+
+        });
+      }
+      if (key && key !== "ALL") {
+        nhanvien_sdt = await db.nhanviens.findAll({
+          where: {SDT:key},
+        });
+      }
+      resolve(nhanvien_sdt);     
+    } catch(e){
+      reject(e);
+    }
+  });
+};
+
+
 module.exports = {
   handlePhong: handlePhong,
   handlePhong_idLP: handlePhong_idLP,
@@ -1630,6 +1656,8 @@ module.exports = {
 
   handleLayPhieudat:handleLayPhieudat,
   handleLayPhieudat_idKH :handleLayPhieudat_idKH,
+
+  handleLayNhanvien_SDT:handleLayNhanvien_SDT,
 };
 
 

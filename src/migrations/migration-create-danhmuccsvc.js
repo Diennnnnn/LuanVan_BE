@@ -8,10 +8,10 @@ module.exports = {
                 primaryKey: true,
                 type: Sequelize.INTEGER,
             },
-            tenDV: {
+            tenCSVC: {
                 type: Sequelize.STRING,
             },
-            gia: {
+            giagoc: {
                 type: Sequelize.INTEGER,
             },
             soluong: {

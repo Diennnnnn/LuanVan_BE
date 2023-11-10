@@ -734,6 +734,23 @@ let handleLayPhieudat_idKH = async (req, res) => {
     phieudat_idKH,
   });
 };
+
+//Nhanvien
+let handleLayNhanvien_SDT = async (req, res) => {
+  let key = req.query.keyword;
+  if (!key) {
+    return res.status(200).json({
+      errCode: 1,
+      errMessage: "missing require parameters",
+      nhanviens: {},
+    });
+  }
+  let nhanvien_sdt = await userService.handleLayNhanvien_SDT(key);
+
+  return res.status(200).json({
+    nhanvien_sdt,
+  });
+};
 module.exports = {
   handlePhong: handlePhong,
   handlePhong_idLP: handlePhong_idLP,
@@ -800,6 +817,8 @@ module.exports = {
 
   handleLayPhieudat: handleLayPhieudat,
   handleLayPhieudat_idKH :handleLayPhieudat_idKH,
+
+  handleLayNhanvien_SDT:handleLayNhanvien_SDT,
 
 };
 
