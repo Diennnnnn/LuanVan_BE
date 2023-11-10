@@ -790,8 +790,9 @@ let handleSuaVitriQL = (data) => {
     try{
       if(
         !data.id ||
-        !data.khu ||
-        !data.tang
+        !data.khu 
+        // ||
+        // !data.tang
       ) {
         resolve({
           errCode: 1,
