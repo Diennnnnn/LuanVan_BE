@@ -3,7 +3,7 @@
  */
 
 const crypto = require("crypto");
-
+const {randomInt} = require('crypto')
 
 let express = require('express');
 let router = express.Router();
@@ -17,7 +17,7 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/create_payment_url', function (req, res, next) {
-    res.render('../views/order.jade', { title: 'Tạo mới đơn hàng', amount: req.query.keyword })
+    res.render('../views/order.jade', { title: 'Tạo mới đơn hàng', amount: req.query.keyword})
 });
 
 router.get('/querydr', function (req, res, next) {
@@ -50,9 +50,9 @@ router.post('/create_payment_url', function (req, res, next) {
     let tmnCode = 'YU3U50KG';
     let secretKey = 'HDJCRZALTIXXRPSXGHDBSIVCVSYAADUH';
     let vnpUrl = 'https://sandbox.vnpayment.vn/paymentv2/vpcpay.html'
-    let returnUrl = 'https://www.facebook.com/?locale=vi_VN' // sau khi thanh toán thành công trả về link nè
+    let returnUrl = 'http://localhost:3000/lichsu/' // sau khi thanh toán thành công trả về link nè
     // let orderId = req.body.orderId // random id hóa đơn từ 0->999
-    let orderId = Math.floor(Math.random(999)); // random id hóa đơn từ 0->999
+    let orderId = randomInt(0,999) // random id hóa đơn từ 0->999
 
     // let amount =100000; // số tiền
     let amount = req.body.amount; // số tiền
