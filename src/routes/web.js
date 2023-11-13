@@ -82,10 +82,11 @@ const initWebRoutes = (app) => {
 
   router.get("/api/LayPhieudat",userController.handleLayPhieudat);
   router.get("/api/LayPhieudat_idKH",userController.handleLayPhieudat_idKH);
+  router.get("/api/LayPhieudat_ngay",userController.handleLayPhieudat_ngay);
 
   router.get("/api/LayNhanvien_SDT",userController.handleLayNhanvien_SDT);
 
-
+  
   return app.use("/", router);
 };
 

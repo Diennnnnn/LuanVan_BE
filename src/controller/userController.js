@@ -734,6 +734,22 @@ let handleLayPhieudat_idKH = async (req, res) => {
     phieudat_idKH,
   });
 };
+let handleLayPhieudat_ngay = async (req, res) => {
+  let key = req.query.keyword;
+  if (!key) {
+    return res.status(200).json({
+      errCode: 1,
+      errMessage: "missing require parameters",
+      phieudats: {},
+    });
+  }
+  let phieudat_ngay= await userService.handleLayPhieudat_ngay(key);
+  // console.log(phieudat_ngay)
+
+  return res.status(200).json({
+    phieudat_ngay,
+  });
+};
 
 //Nhanvien
 let handleLayNhanvien_SDT = async (req, res) => {
@@ -817,6 +833,7 @@ module.exports = {
 
   handleLayPhieudat: handleLayPhieudat,
   handleLayPhieudat_idKH :handleLayPhieudat_idKH,
+  handleLayPhieudat_ngay: handleLayPhieudat_ngay,
 
   handleLayNhanvien_SDT:handleLayNhanvien_SDT,
 

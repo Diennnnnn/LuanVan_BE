@@ -1,4 +1,6 @@
 const { Op } = require("sequelize");
+var Sequelize = require('sequelize');
+
 import { reject } from "lodash";
 import db from "../models/index";
 import { resolve } from "app-root-path";
@@ -1566,6 +1568,36 @@ let handleLayPhieudat_idKH = (key) => {
   });
 };
 
+let handleLayPhieudat_ngay = (key) => {
+  return new Promise(async (resolve, reject) =>{
+    try{
+      let phieudat_ngay = "";
+
+      if (key === "ALL") {
+        phieudat_ngay = await db.phieudats.findAll({
+
+        });
+      }
+      if (key && key !== "ALL") {
+         phieudat_ngay = await db.phieudats.findAll({
+          attributes: [
+            'id',
+            'check_in',
+            [Sequelize.fn('sum', Sequelize.col('tongtien')), 'total_amount'],
+          ],
+          group: ['check_in'],
+          raw: true
+        });
+        // phieudat_ngay = await db.phieudats.findAll({
+        //   where: {check_in:key},
+        // });
+      }
+      resolve(phieudat_ngay);     
+    } catch(e){
+      reject(e);
+    }
+  });
+};
 //nhanvien
 
 let handleLayNhanvien_SDT = (key) => {
@@ -1657,6 +1689,7 @@ module.exports = {
 
   handleLayPhieudat:handleLayPhieudat,
   handleLayPhieudat_idKH :handleLayPhieudat_idKH,
+  handleLayPhieudat_ngay: handleLayPhieudat_ngay,
 
   handleLayNhanvien_SDT:handleLayNhanvien_SDT,
 };
