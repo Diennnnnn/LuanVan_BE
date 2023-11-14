@@ -735,20 +735,32 @@ let handleLayPhieudat_idKH = async (req, res) => {
   });
 };
 let handleLayPhieudat_ngay = async (req, res) => {
-  let key = req.query.keyword;
-  if (!key) {
-    return res.status(200).json({
-      errCode: 1,
-      errMessage: "missing require parameters",
-      phieudats: {},
-    });
-  }
-  let phieudat_ngay= await userService.handleLayPhieudat_ngay(key);
+  // let key = req.query.keyword;
+  // if (!key) {
+  //   return res.status(200).json({
+  //     errCode: 1,
+  //     errMessage: "missing require parameters",
+  //     phieudats: {},
+  //   });
+  // }
+  let phieudat_ngay= await userService.handleLayPhieudat_ngay();
   // console.log(phieudat_ngay)
 
   return res.status(200).json({
     phieudat_ngay,
   });
+};
+let handleSuaPhieudat = async (req, res) => {
+  try {
+    let phieudat = await userService.handleSuaPhieudat(req.body);
+    return res.status(200).json(phieudat);
+  } catch(e) {
+    console.log(e);
+    return res.status(200).json({
+      errCode: -1,
+      errMessage:"error from the server",
+    });
+  }
 };
 
 //Nhanvien
@@ -834,6 +846,7 @@ module.exports = {
   handleLayPhieudat: handleLayPhieudat,
   handleLayPhieudat_idKH :handleLayPhieudat_idKH,
   handleLayPhieudat_ngay: handleLayPhieudat_ngay,
+  handleSuaPhieudat: handleSuaPhieudat,
 
   handleLayNhanvien_SDT:handleLayNhanvien_SDT,
 

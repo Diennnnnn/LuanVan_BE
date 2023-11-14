@@ -337,6 +337,7 @@ let handleDatphong = (data) => {
           ghichu: data.ghichu,
           songuoi: data.songuoi,
           thanhtoan: data.thanhtoan,
+          trangthai: data.trangthai,
           hotennguoio: data.hotennguoio,
           SDT_nguoio: data.SDT_nguoio,
           CCCD_nguoio: data.CCCD_nguoio,
@@ -1568,18 +1569,18 @@ let handleLayPhieudat_idKH = (key) => {
   });
 };
 
-let handleLayPhieudat_ngay = (key) => {
+let handleLayPhieudat_ngay = () => {
   return new Promise(async (resolve, reject) =>{
     try{
       let phieudat_ngay = "";
 
-      if (key === "ALL") {
-        phieudat_ngay = await db.phieudats.findAll({
+      // if (key === "ALL") {
+      //   phieudat_ngay = await db.phieudats.findAll({
 
-        });
-      }
-      if (key && key !== "ALL") {
-         phieudat_ngay = await db.phieudats.findAll({
+      //   });
+      // }
+      // if (key && key !== "ALL") {
+        phieudat_ngay = await db.phieudats.findAll({
           attributes: [
             'id',
             'check_in',
@@ -1591,8 +1592,48 @@ let handleLayPhieudat_ngay = (key) => {
         // phieudat_ngay = await db.phieudats.findAll({
         //   where: {check_in:key},
         // });
-      }
+      // }
       resolve(phieudat_ngay);     
+    } catch(e){
+      reject(e);
+    }
+  });
+};
+
+let handleSuaPhieudat = (data) => {
+  return new Promise(async ( resolve, reject) => {
+    try{
+      if(
+        !data.id ||
+        // !data.mota ||
+        !data.trangthai
+      ) {
+        resolve({
+          errCode: 1,
+          errMessage: "Missing parameter",
+        });
+      } else {
+        let phieudat = await db.phieudats.findOne({
+          where: {
+            id: data.id
+          },
+          raw: false,
+        });
+        if(phieudat){
+          phieudat.trangthai = data.trangthai;
+          await phieudat.save();
+        }
+        else{
+          resolve({
+            errCode: 1,
+            errMessage: "Cập nhập không thành công"
+          });
+        }
+        resolve({
+          errCode: 0,
+          errMessage:"Cập nhập thành công"
+        });
+      }
     } catch(e){
       reject(e);
     }
@@ -1690,6 +1731,7 @@ module.exports = {
   handleLayPhieudat:handleLayPhieudat,
   handleLayPhieudat_idKH :handleLayPhieudat_idKH,
   handleLayPhieudat_ngay: handleLayPhieudat_ngay,
+  handleSuaPhieudat: handleSuaPhieudat,
 
   handleLayNhanvien_SDT:handleLayNhanvien_SDT,
 };
