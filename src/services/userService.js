@@ -1613,14 +1613,19 @@ let handleSuaPhieudat = (data) => {
           errMessage: "Missing parameter",
         });
       } else {
+
+        let i = data.trangthai.indexOf('Hoàn')
+        let cut = data.trangthai.slice(i+5, data.trangthai.length - 1)
         let phieudat = await db.phieudats.findOne({
           where: {
             id: data.id
           },
           raw: false,
         });
+
         if(phieudat){
           phieudat.trangthai = data.trangthai;
+          phieudat.tongtien = phieudat.tongtien - phieudat.tongtien*(Number(cut/100));
           await phieudat.save();
         }
         else{
