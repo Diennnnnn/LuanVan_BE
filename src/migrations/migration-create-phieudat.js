@@ -47,6 +47,12 @@ module.exports = {
             CCCD_nguoio: {
                 type: Sequelize.STRING,
             },
+            maGD: {
+                type: Sequelize.INTEGER,
+            },
+            thoigianGD: {
+                type: Sequelize.STRING,
+            },
             createdAt: {
                 allowNull: false,
                 type: Sequelize.DATE,

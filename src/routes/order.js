@@ -189,9 +189,9 @@ router.post('/querydr', function (req, res, next) {
     let config = require('config');
     let crypto = require("crypto");
 
-    let vnp_TmnCode = config.get('vnp_TmnCode');
-    let secretKey = config.get('vnp_HashSecret');
-    let vnp_Api = config.get('vnp_Api');
+    let vnp_TmnCode = 'YU3U50KG';
+    let secretKey = 'HDJCRZALTIXXRPSXGHDBSIVCVSYAADUH';
+    let vnp_Api = "https://sandbox.vnpayment.vn/merchant_webapi/api/transaction";
 
     let vnp_TxnRef = req.body.orderId;
     let vnp_TransactionDate = req.body.transDate;
@@ -246,13 +246,13 @@ router.post('/refund', function (req, res, next) {
     let config = require('config');
     let crypto = require("crypto");
 
-    let vnp_TmnCode = config.get('vnp_TmnCode');
-    let secretKey = config.get('vnp_HashSecret');
-    let vnp_Api = config.get('vnp_Api');
+    let vnp_TmnCode = 'YU3U50KG';
+    let secretKey = 'HDJCRZALTIXXRPSXGHDBSIVCVSYAADUH';
+    let vnp_Api = "https://sandbox.vnpayment.vn/merchant_webapi/api/transaction";
 
     let vnp_TxnRef = req.body.orderId;
     let vnp_TransactionDate = req.body.transDate;
-    let vnp_Amount = req.body.amount * 100;
+    let vnp_Amount = req.body.amount *100;
     let vnp_TransactionType = req.body.transType;
     let vnp_CreateBy = req.body.user;
 

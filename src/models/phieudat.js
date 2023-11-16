@@ -21,6 +21,8 @@ module.exports = (sequelize, DataTypes) => {
             hotennguoio: DataTypes.STRING,
             SDT_nguoio: DataTypes.STRING,
             CCCD_nguoio: DataTypes.STRING,
+            maGD: DataTypes.INTEGER,
+            thoigianGD: DataTypes.STRING,
 
         },
         {

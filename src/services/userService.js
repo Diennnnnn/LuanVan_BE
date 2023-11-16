@@ -311,7 +311,9 @@ let handleDatphong = (data) => {
         !data.check_in ||
         !data.check_out ||
         !data.songuoi ||
-        !data.tongtien 
+        !data.tongtien ||
+        !data.maGD ||
+        !data.thoigianGD
         
         //có thể rỗng
         // !data.thanhtoan ||
@@ -341,7 +343,8 @@ let handleDatphong = (data) => {
           hotennguoio: data.hotennguoio,
           SDT_nguoio: data.SDT_nguoio,
           CCCD_nguoio: data.CCCD_nguoio,
-
+          maGD: data.maGD,
+          thoigianGD: data.thoigianGD,
         });
         resolve({
           errCode:0,
