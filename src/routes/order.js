@@ -300,7 +300,11 @@ router.post('/refund', function (req, res, next) {
         json: true,
         body: dataObj
     }, function (error, response, body) {
-        console.log(response);
+        return res.status(200).json({
+            // errCode: 0,
+            // message: "Hoàn tiền thành công",
+            response
+        })
     });
 
 });

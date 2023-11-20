@@ -1,5 +1,6 @@
 const { Op } = require("sequelize");
 var Sequelize = require('sequelize');
+import emailService from "./emailService"
 
 import { reject } from "lodash";
 import db from "../models/index";
@@ -346,6 +347,37 @@ let handleDatphong = (data) => {
           maGD: data.maGD,
           thoigianGD: data.thoigianGD,
         });
+        let kh = await db.khachhangs.findOne({
+          where: {
+            id: data.id_KH
+          },
+          // raw : false
+        });
+        let phong = await db.phongs.findOne({
+          where: {
+            id: data.id_phong
+          },
+          // raw : false
+        });
+        let loaiphong = await db.loaiphongs.findOne({
+          where: {
+            id: phong.id_LP
+          },
+          // raw : false
+        });
+        // console.log("check>>>",kh)
+        // console.log("check>>>",phong)
+        // console.log("check>>>",loaiphong)
+
+        emailService.sendEmail( 
+          kh.email,
+           "Xác nhận lịch đặt HomeStay", 
+            `
+            <h1>Xin chào ${kh.hotenKH}, cảm ơn bạn đã đặt phòng ở The Kubip Homestay </h1>
+            <p>Bạn đã đặt thành công phòng ${phong.tenphong} có ${loaiphong.tenloaiphong} </p>
+            <p> Từ ${data.check_in} tới ${data.check_out} </p>
+            <h3>Tổng tiền: ${data.tongtien}</h3>
+            `)
         resolve({
           errCode:0,
           errMessage: "Đặt phòng thành công",
@@ -1616,9 +1648,9 @@ let handleSuaPhieudat = (data) => {
           errMessage: "Missing parameter",
         });
       } else {
-
+        let cut = '0'
         let i = data.trangthai.indexOf('Hoàn')
-        let cut = data.trangthai.slice(i+5, data.trangthai.length - 1)
+        cut = data.trangthai.slice(i+5, data.trangthai.length - 1)
         let phieudat = await db.phieudats.findOne({
           where: {
             id: data.id
@@ -1630,6 +1662,36 @@ let handleSuaPhieudat = (data) => {
           phieudat.trangthai = data.trangthai;
           phieudat.tongtien = phieudat.tongtien - phieudat.tongtien*(Number(cut/100));
           await phieudat.save();
+
+          let kh = await db.khachhangs.findOne({
+            where: {
+              id: phieudat.id_KH
+            },
+            // raw : false
+          });
+          let phong = await db.phongs.findOne({
+            where: {
+              id: phieudat.id_Phong
+            },
+            // raw : false
+          });
+          let loaiphong = await db.loaiphongs.findOne({
+            where: {
+              id: phong.id_LP
+            },
+            // raw : false
+          });
+
+          emailService.sendEmail( 
+            kh.email,
+             "Xác nhận HỦY lịch đặt HomeStay", 
+              `
+              <h1>Xin chào ${kh.hotenKH}, bạn đã hủy lịch đặt phòng ở The Kubip Homestay </h1>
+              <p>Bạn đã đặt thành công phòng ${phong.tenphong} có ${loaiphong.tenloaiphong} </p>
+              <p> Từ ${phieudat.check_in} tới ${phieudat.check_out} </p>
+              ${phieudat.tongtien*(Number(cut/100)) > 0 ? `<h3>Bạn được hoàn: phieudat.tongtien*(Number(cut/100)) , tiền sẽ được hệ thống chuyển về tài khoản khi bạn đặt</h3>` : ''}
+              `)
+
         }
         else{
           resolve({
