@@ -734,6 +734,21 @@ let handleLayPhieudat_idKH = async (req, res) => {
     phieudat_idKH,
   });
 };
+let handleLayPhieudat_idPhong = async (req, res) => {
+  let key = req.query.keyword;
+  if (!key) {
+    return res.status(200).json({
+      errCode: 1,
+      errMessage: "missing require parameters",
+      phongs: {},
+    });
+  }
+  let phieudat_idPhong = await userService.handleLayPhieudat_idPhong(key);
+
+  return res.status(200).json({
+    phieudat_idPhong,
+  });
+};
 let handleLayPhieudat_ngay = async (req, res) => {
   // let key = req.query.keyword;
   // if (!key) {
@@ -778,6 +793,19 @@ let handleLayNhanvien_SDT = async (req, res) => {
   return res.status(200).json({
     nhanvien_sdt,
   });
+};
+
+let handleTimkiem = async (req, res) => {
+  try {
+    let infor = await userService.handleTimkiem(req.body);
+    return res.status(200).json(infor);
+  } catch (e) {
+    console.log(e);
+    return res.status(200).json({
+      errCode: -1,
+      errMessage: "Error from the server",
+    });
+  }
 };
 module.exports = {
   handlePhong: handlePhong,
@@ -846,9 +874,13 @@ module.exports = {
   handleLayPhieudat: handleLayPhieudat,
   handleLayPhieudat_idKH :handleLayPhieudat_idKH,
   handleLayPhieudat_ngay: handleLayPhieudat_ngay,
+  handleLayPhieudat_idPhong :handleLayPhieudat_idPhong,
   handleSuaPhieudat: handleSuaPhieudat,
 
   handleLayNhanvien_SDT:handleLayNhanvien_SDT,
+
+  handleTimkiem:handleTimkiem,
+
 
 };
 

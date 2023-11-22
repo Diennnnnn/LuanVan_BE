@@ -9,8 +9,8 @@ import { resolve } from "app-root-path";
 
 
 let handlePhong = (key) => {
-  return new Promise(async (resolve, reject) =>{
-    try{
+  return new Promise(async (resolve, reject) => {
+    try {
       let phong = "";
       if (key === "ALL") {
         phong = await db.phongs.findAll({
@@ -19,19 +19,19 @@ let handlePhong = (key) => {
       }
       if (key && key !== "ALL") {
         phong = await db.phongs.findAll({
-          where: {id:key},
+          where: { id: key },
         });
       }
-      resolve(phong);     
-    } catch(e){
+      resolve(phong);
+    } catch (e) {
       reject(e);
     }
   });
 };
 
 let handlePhong_tenphong = (key) => {
-  return new Promise(async (resolve, reject) =>{
-    try{
+  return new Promise(async (resolve, reject) => {
+    try {
       let phong = "";
       if (key === "ALL") {
         phong = await db.phongs.findAll({
@@ -40,19 +40,19 @@ let handlePhong_tenphong = (key) => {
       }
       if (key && key !== "ALL") {
         phong = await db.phongs.findAll({
-          where: {tenphong:key},
+          where: { tenphong: key },
         });
       }
-      resolve(phong);     
-    } catch(e){
+      resolve(phong);
+    } catch (e) {
       reject(e);
     }
   });
 };
 
 let handlePhong_idLP = (key) => {
-  return new Promise(async (resolve, reject) =>{
-    try{
+  return new Promise(async (resolve, reject) => {
+    try {
       let phong_idLP = "";
       if (key === "ALL") {
         phong_idLP = await db.phongs.findAll({
@@ -61,19 +61,19 @@ let handlePhong_idLP = (key) => {
       }
       if (key && key !== "ALL") {
         phong_idLP = await db.phongs.findAll({
-          where: {id_LP:key},
+          where: { id_LP: key },
         });
       }
-      resolve(phong_idLP);     
-    } catch(e){
+      resolve(phong_idLP);
+    } catch (e) {
       reject(e);
     }
   });
 };
 
 let handleLoaiphong = (key) => {
-  return new Promise(async (resolve, reject) =>{
-    try{
+  return new Promise(async (resolve, reject) => {
+    try {
       let loaiphong = "";
       if (key === "ALL") {
         loaiphong = await db.loaiphongs.findAll({
@@ -82,19 +82,19 @@ let handleLoaiphong = (key) => {
       }
       if (key && key !== "ALL") {
         loaiphong = await db.loaiphongs.findAll({
-          where: {id:key},
+          where: { id: key },
         });
       }
       resolve(loaiphong);
-    } catch(e){
+    } catch (e) {
       reject(e);
     }
   });
 };
 
 let handleLoaiphong_tenloai = (key) => {
-  return new Promise(async (resolve, reject) =>{
-    try{
+  return new Promise(async (resolve, reject) => {
+    try {
       let lp_tenloai = "";
       if (key === "ALL") {
         lp_tenloai = await db.loaiphongs.findAll({
@@ -103,19 +103,19 @@ let handleLoaiphong_tenloai = (key) => {
       }
       if (key && key !== "ALL") {
         lp_tenloai = await db.loaiphongs.findAll({
-          where: {tenloaiphong:key},
+          where: { tenloaiphong: key },
         });
       }
-      resolve(lp_tenloai);     
-    } catch(e){
+      resolve(lp_tenloai);
+    } catch (e) {
       reject(e);
     }
   });
 };
 
 let handleNoiquy = (key) => {
-  return new Promise(async (resolve, reject) =>{
-    try{
+  return new Promise(async (resolve, reject) => {
+    try {
       let nq = "";
       if (key === "ALL") {
         nq = await db.noiquys.findAll({
@@ -124,19 +124,19 @@ let handleNoiquy = (key) => {
       }
       if (key && key !== "ALL") {
         nq = await db.noiquys.findAll({
-          where: {id:key},
+          where: { id: key },
         });
       }
       resolve(nq);
-    } catch(e){
+    } catch (e) {
       reject(e);
     }
   });
 };
 
 let handleDsthietbi = (key) => {
-  return new Promise(async (resolve, reject) =>{
-    try{
+  return new Promise(async (resolve, reject) => {
+    try {
       let dstb = "";
       if (key === "ALL") {
         dstb = await db.dsthietbis.findAll({
@@ -145,19 +145,19 @@ let handleDsthietbi = (key) => {
       }
       if (key && key !== "ALL") {
         dstb = await db.dsthietbis.findAll({
-          where: {id_phong:key},
+          where: { id_phong: key },
         });
       }
       resolve(dstb);
-    } catch(e){
+    } catch (e) {
       reject(e);
     }
   });
 };
 
 let handleDanhmucCSVC = (key) => {
-  return new Promise(async (resolve, reject) =>{
-    try{
+  return new Promise(async (resolve, reject) => {
+    try {
       let dmcsvc = "";
       if (key === "ALL") {
         dmcsvc = await db.danhmuccsvcs.findAll({
@@ -166,19 +166,19 @@ let handleDanhmucCSVC = (key) => {
       }
       if (key && key !== "ALL") {
         dmcsvc = await db.danhmuccsvcs.findAll({
-          where: {id:key},
+          where: { id: key },
         });
       }
       resolve(dmcsvc);
-    } catch(e){
+    } catch (e) {
       reject(e);
     }
   });
 };
 
 let handleVitri = (key) => {
-  return new Promise(async (resolve, reject) =>{
-    try{
+  return new Promise(async (resolve, reject) => {
+    try {
       let vt = "";
       if (key === "ALL") {
         vt = await db.vitris.findAll({
@@ -187,19 +187,19 @@ let handleVitri = (key) => {
       }
       if (key && key !== "ALL") {
         vt = await db.vitris.findAll({
-          where: {id:key},
+          where: { id: key },
         });
       }
       resolve(vt);
-    } catch(e){
+    } catch (e) {
       reject(e);
     }
   });
 };
 
 let handleKhachhang = (key) => {
-  return new Promise(async (resolve, reject) =>{
-    try{
+  return new Promise(async (resolve, reject) => {
+    try {
       let khachhang = "";
       if (key === "ALL") {
         khachhang = await db.khachhangs.findAll({
@@ -208,19 +208,19 @@ let handleKhachhang = (key) => {
       }
       if (key && key !== "ALL") {
         khachhang = await db.khachhangs.findAll({
-          where: {SDT:key},
+          where: { SDT: key },
         });
       }
-      resolve(khachhang);     
-    } catch(e){
+      resolve(khachhang);
+    } catch (e) {
       reject(e);
     }
   });
 };
 
 let handleDichvu = (key) => {
-  return new Promise(async (resolve, reject) =>{
-    try{
+  return new Promise(async (resolve, reject) => {
+    try {
       let dichvu = "";
       if (key === "ALL") {
         dichvu = await db.dichvus.findAll({
@@ -229,19 +229,19 @@ let handleDichvu = (key) => {
       }
       if (key && key !== "ALL") {
         dichvu = await db.dichvus.findAll({
-          where: {id:key},
+          where: { id: key },
         });
       }
-      resolve(dichvu);     
-    } catch(e){
+      resolve(dichvu);
+    } catch (e) {
       reject(e);
     }
   });
 };
 
 let handleALLKhachhang = (key) => {
-  return new Promise(async (resolve, reject) =>{
-    try{
+  return new Promise(async (resolve, reject) => {
+    try {
       let allkh = "";
       if (key === "ALL") {
         allkh = await db.khachhangs.findAll({
@@ -250,19 +250,19 @@ let handleALLKhachhang = (key) => {
       }
       if (key && key !== "ALL") {
         allkh = await db.khachhangs.findAll({
-          where: {id:key},
+          where: { id: key },
         });
       }
-      resolve(allkh);     
-    } catch(e){
+      resolve(allkh);
+    } catch (e) {
       reject(e);
     }
   });
 };
 
 let handleLayNhanvien = (key) => {
-  return new Promise(async (resolve, reject) =>{
-    try{
+  return new Promise(async (resolve, reject) => {
+    try {
       let allnv = "";
       if (key === "ALL") {
         allnv = await db.nhanviens.findAll({
@@ -271,18 +271,18 @@ let handleLayNhanvien = (key) => {
       }
       if (key && key !== "ALL") {
         allnv = await db.nhanviens.findAll({
-          where: {id:key},
+          where: { id: key },
         });
       }
-      resolve(allnv);     
-    } catch(e){
+      resolve(allnv);
+    } catch (e) {
       reject(e);
     }
   });
 };
 let handleKhuyenmai = (key) => {
-  return new Promise(async (resolve, reject) =>{
-    try{
+  return new Promise(async (resolve, reject) => {
+    try {
       let khuyenmai = "";
       if (key === "ALL") {
         khuyenmai = await db.khuyenmais.findAll({
@@ -291,11 +291,11 @@ let handleKhuyenmai = (key) => {
       }
       if (key && key !== "ALL") {
         khuyenmai = await db.khuyenmais.findAll({
-          where: {id:key},
+          where: { id: key },
         });
       }
-      resolve(khuyenmai);     
-    } catch(e){
+      resolve(khuyenmai);
+    } catch (e) {
       reject(e);
     }
   });
@@ -304,7 +304,7 @@ let handleKhuyenmai = (key) => {
 let handleDatphong = (data) => {
   return new Promise(async (resolve, reject) => {
     try {
-      if(
+      if (
         // !data.truyền từ FE qua
         !data.id_KH ||
         !data.id_phong ||
@@ -315,7 +315,7 @@ let handleDatphong = (data) => {
         !data.tongtien ||
         !data.maGD ||
         !data.thoigianGD
-        
+
         //có thể rỗng
         // !data.thanhtoan ||
         // !data.trangthai ||
@@ -329,7 +329,7 @@ let handleDatphong = (data) => {
           errCode: 110,
           errMessage: "Missing parameter",
         });
-      } else{
+      } else {
         await db.phieudats.create({
           id_KH: data.id_KH,
           id_Phong: data.id_phong,
@@ -369,21 +369,21 @@ let handleDatphong = (data) => {
         // console.log("check>>>",phong)
         // console.log("check>>>",loaiphong)
 
-        emailService.sendEmail( 
+        emailService.sendEmail(
           kh.email,
-           "Xác nhận lịch đặt HomeStay", 
-            `
+          "Xác nhận lịch đặt HomeStay",
+          `
             <h1>Xin chào ${kh.hotenKH}, cảm ơn bạn đã đặt phòng ở The Kubip Homestay </h1>
             <p>Bạn đã đặt thành công phòng ${phong.tenphong} có ${loaiphong.tenloaiphong} </p>
             <p> Từ ${data.check_in} tới ${data.check_out} </p>
             <h3>Tổng tiền: ${data.tongtien}</h3>
             `)
         resolve({
-          errCode:0,
+          errCode: 0,
           errMessage: "Đặt phòng thành công",
         });
       }
-    } catch(e) {
+    } catch (e) {
       reject(e);
     }
   })
@@ -392,7 +392,7 @@ let handleDatphong = (data) => {
 let handleThemNoiquyQL = (data) => {
   return new Promise(async (resolve, reject) => {
     try {
-      if(
+      if (
         // !data.truyền từ FE qua
         !data.mota
         //  ||
@@ -402,27 +402,27 @@ let handleThemNoiquyQL = (data) => {
           errCode: 110,
           errMessage: "Missing parameter",
         });
-      } else{
+      } else {
         await db.noiquys.create({
           mota: data.mota,
           motaEN: data.motaEN,
 
         });
         resolve({
-          errCode:0,
+          errCode: 0,
           errMessage: "Thêm nội quy thành công",
         });
       }
-    } catch(e) {
+    } catch (e) {
       reject(e);
     }
   })
 }
 
 let handleSuaNoiquyQL = (data) => {
-  return new Promise(async ( resolve, reject) => {
-    try{
-      if(
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (
         !data.id ||
         !data.mota ||
         !data.motaEN
@@ -438,12 +438,12 @@ let handleSuaNoiquyQL = (data) => {
           },
           raw: false,
         });
-        if(noiquy){
+        if (noiquy) {
           noiquy.mota = data.mota;
           noiquy.motaEN = data.motaEN;
           await noiquy.save();
         }
-        else{
+        else {
           resolve({
             errCode: 1,
             errMessage: "Cập nhập không thành công"
@@ -451,19 +451,19 @@ let handleSuaNoiquyQL = (data) => {
         }
         resolve({
           errCode: 0,
-          errMessage:"Cập nhập thành công"
+          errMessage: "Cập nhập thành công"
         });
       }
-    } catch(e){
+    } catch (e) {
       reject(e);
     }
   });
 };
 
 let handleXoaNoiquyQL = async (Id) => {
-  return new Promise (async (resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
     let noiquy = await db.noiquys.findOne({
-      where: {id: Id},
+      where: { id: Id },
     });
     if (!noiquy) {
       resolve({
@@ -472,9 +472,9 @@ let handleXoaNoiquyQL = async (Id) => {
       });
     }
     await db.noiquys.destroy({
-      where: {id: Id},
+      where: { id: Id },
     });
-    resolve ({
+    resolve({
       errCode: 0,
       errMessage: "Đã xóa nội quy"
     });
@@ -485,7 +485,7 @@ let handleXoaNoiquyQL = async (Id) => {
 let handleThemCSVCQL = (data) => {
   return new Promise(async (resolve, reject) => {
     try {
-      if(
+      if (
         // !data.truyền từ FE qua
         !data.tenCSVC ||
         !data.giagoc ||
@@ -496,7 +496,7 @@ let handleThemCSVCQL = (data) => {
           errCode: 110,
           errMessage: "Missing parameter",
         });
-      } else{
+      } else {
         await db.danhmuccsvcs.create({
           tenCSVC: data.tenCSVC,
           giagoc: data.giagoc,
@@ -505,20 +505,20 @@ let handleThemCSVCQL = (data) => {
 
         });
         resolve({
-          errCode:0,
+          errCode: 0,
           errMessage: "Thêm cơ sở vật chất thành công",
         });
       }
-    } catch(e) {
+    } catch (e) {
       reject(e);
     }
   })
 }
 
 let handleSuaCSVCQL = (data) => {
-  return new Promise(async ( resolve, reject) => {
-    try{
-      if(
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (
         !data.id ||
         !data.tenCSVC ||
         !data.giagoc ||
@@ -536,14 +536,14 @@ let handleSuaCSVCQL = (data) => {
           },
           raw: false,
         });
-        if(csvc){
+        if (csvc) {
           csvc.tenCSVC = data.tenCSVC;
           csvc.giagoc = data.giagoc;
           csvc.soluong = data.soluong;
           csvc.thoigianmua = data.thoigianmua;
           await csvc.save();
         }
-        else{
+        else {
           resolve({
             errCode: 1,
             errMessage: "Cập nhập không thành công"
@@ -551,19 +551,19 @@ let handleSuaCSVCQL = (data) => {
         }
         resolve({
           errCode: 0,
-          errMessage:"Cập nhập thành công"
+          errMessage: "Cập nhập thành công"
         });
       }
-    } catch(e){
+    } catch (e) {
       reject(e);
     }
   });
 };
 
 let handleXoaCSVCQL = async (Id) => {
-  return new Promise (async (resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
     let csvc = await db.danhmuccsvcs.findOne({
-      where: {id: Id},
+      where: { id: Id },
     });
     if (!csvc) {
       resolve({
@@ -572,9 +572,9 @@ let handleXoaCSVCQL = async (Id) => {
       });
     }
     await db.danhmuccsvcs.destroy({
-      where: {id: Id},
+      where: { id: Id },
     });
-    resolve ({
+    resolve({
       errCode: 0,
       errMessage: "Đã xóa cơ sở vật chất"
     });
@@ -586,7 +586,7 @@ let handleXoaCSVCQL = async (Id) => {
 let handleThemDichvuQL = (data) => {
   return new Promise(async (resolve, reject) => {
     try {
-      if(
+      if (
         // !data.truyền từ FE qua
         !data.tenDV ||
         !data.gia ||
@@ -597,7 +597,7 @@ let handleThemDichvuQL = (data) => {
           errCode: 110,
           errMessage: "Missing parameter",
         });
-      } else{
+      } else {
         await db.dichvus.create({
           tenDV: data.tenDV,
           gia: data.gia,
@@ -606,20 +606,20 @@ let handleThemDichvuQL = (data) => {
 
         });
         resolve({
-          errCode:0,
+          errCode: 0,
           errMessage: "Thêm dịch vụ thành công",
         });
       }
-    } catch(e) {
+    } catch (e) {
       reject(e);
     }
   })
 }
 
 let handleSuaDichvuQL = (data) => {
-  return new Promise(async ( resolve, reject) => {
-    try{
-      if(
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (
         !data.id ||
         !data.tenDV ||
         !data.gia ||
@@ -637,14 +637,14 @@ let handleSuaDichvuQL = (data) => {
           },
           raw: false,
         });
-        if(dichvu){
+        if (dichvu) {
           dichvu.tenDV = data.tenDV;
           dichvu.gia = data.gia;
           dichvu.DVT = data.DVT;
           dichvu.ghichu = data.ghichu;
           await dichvu.save();
         }
-        else{
+        else {
           resolve({
             errCode: 1,
             errMessage: "Cập nhập không thành công"
@@ -652,19 +652,19 @@ let handleSuaDichvuQL = (data) => {
         }
         resolve({
           errCode: 0,
-          errMessage:"Cập nhập thành công"
+          errMessage: "Cập nhập thành công"
         });
       }
-    } catch(e){
+    } catch (e) {
       reject(e);
     }
   });
 };
 
 let handleXoaDichvuQL = async (Id) => {
-  return new Promise (async (resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
     let dichvu = await db.dichvus.findOne({
-      where: {id: Id},
+      where: { id: Id },
     });
     if (!dichvu) {
       resolve({
@@ -673,9 +673,9 @@ let handleXoaDichvuQL = async (Id) => {
       });
     }
     await db.dichvus.destroy({
-      where: {id: Id},
+      where: { id: Id },
     });
-    resolve ({
+    resolve({
       errCode: 0,
       errMessage: "Đã xóa dịch vụ"
     });
@@ -687,7 +687,7 @@ let handleXoaDichvuQL = async (Id) => {
 let handleThemKhuyenmaiQL = (data) => {
   return new Promise(async (resolve, reject) => {
     try {
-      if(
+      if (
         // !data.truyền từ FE qua
         !data.tenKM ||
         !data.phantram ||
@@ -700,7 +700,7 @@ let handleThemKhuyenmaiQL = (data) => {
           errCode: 110,
           errMessage: "Missing parameter",
         });
-      } else{
+      } else {
         await db.khuyenmais.create({
           tenKM: data.tenKM,
           phantram: data.phantram,
@@ -711,20 +711,20 @@ let handleThemKhuyenmaiQL = (data) => {
 
         });
         resolve({
-          errCode:0,
+          errCode: 0,
           errMessage: "Thêm khuyễn mãi thành công",
         });
       }
-    } catch(e) {
+    } catch (e) {
       reject(e);
     }
   })
 }
 
 let handleSuaKhuyenmaiQL = (data) => {
-  return new Promise(async ( resolve, reject) => {
-    try{
-      if(
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (
         !data.id ||
         !data.tenKM ||
         !data.phantram ||
@@ -744,7 +744,7 @@ let handleSuaKhuyenmaiQL = (data) => {
           },
           raw: false,
         });
-        if(khuyenmai){
+        if (khuyenmai) {
           khuyenmai.tenKM = data.tenKM;
           khuyenmai.phantram = data.phantram;
           khuyenmai.mota = data.mota;
@@ -754,7 +754,7 @@ let handleSuaKhuyenmaiQL = (data) => {
 
           await khuyenmai.save();
         }
-        else{
+        else {
           resolve({
             errCode: 1,
             errMessage: "Cập nhập không thành công"
@@ -762,19 +762,19 @@ let handleSuaKhuyenmaiQL = (data) => {
         }
         resolve({
           errCode: 0,
-          errMessage:"Cập nhập thành công"
+          errMessage: "Cập nhập thành công"
         });
       }
-    } catch(e){
+    } catch (e) {
       reject(e);
     }
   });
 };
 
 let handleXoaKhuyenmaiQL = async (Id) => {
-  return new Promise (async (resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
     let khuyenmai = await db.khuyenmais.findOne({
-      where: {id: Id},
+      where: { id: Id },
     });
     if (!khuyenmai) {
       resolve({
@@ -783,9 +783,9 @@ let handleXoaKhuyenmaiQL = async (Id) => {
       });
     }
     await db.khuyenmais.destroy({
-      where: {id: Id},
+      where: { id: Id },
     });
-    resolve ({
+    resolve({
       errCode: 0,
       errMessage: "Đã xóa khuyến mãi"
     });
@@ -797,9 +797,9 @@ let handleXoaKhuyenmaiQL = async (Id) => {
 let handleThemVitriQL = (data) => {
   return new Promise(async (resolve, reject) => {
     try {
-      if(
+      if (
         // !data.truyền từ FE qua
-        !data.khu 
+        !data.khu
         // ||
         // !data.tang 
       ) {
@@ -807,28 +807,28 @@ let handleThemVitriQL = (data) => {
           errCode: 110,
           errMessage: "Missing parameter",
         });
-      } else{
+      } else {
         await db.vitris.create({
           khu: data.khu,
           tang: data.tang,
         });
         resolve({
-          errCode:0,
+          errCode: 0,
           errMessage: "Thêm vị trí thành công",
         });
       }
-    } catch(e) {
+    } catch (e) {
       reject(e);
     }
   })
 }
 
 let handleSuaVitriQL = (data) => {
-  return new Promise(async ( resolve, reject) => {
-    try{
-      if(
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (
         !data.id ||
-        !data.khu 
+        !data.khu
         // ||
         // !data.tang
       ) {
@@ -843,13 +843,13 @@ let handleSuaVitriQL = (data) => {
           },
           raw: false,
         });
-        if(vitri){
+        if (vitri) {
           vitri.khu = data.khu;
           vitri.tang = data.tang;
-          
+
           await vitri.save();
         }
-        else{
+        else {
           resolve({
             errCode: 1,
             errMessage: "Cập nhập không thành công"
@@ -857,19 +857,19 @@ let handleSuaVitriQL = (data) => {
         }
         resolve({
           errCode: 0,
-          errMessage:"Cập nhập thành công"
+          errMessage: "Cập nhập thành công"
         });
       }
-    } catch(e){
+    } catch (e) {
       reject(e);
     }
   });
 };
 
 let handleXoaVitriQL = async (Id) => {
-  return new Promise (async (resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
     let vitri = await db.vitris.findOne({
-      where: {id: Id},
+      where: { id: Id },
     });
     if (!vitri) {
       resolve({
@@ -878,9 +878,9 @@ let handleXoaVitriQL = async (Id) => {
       });
     }
     await db.vitris.destroy({
-      where: {id: Id},
+      where: { id: Id },
     });
-    resolve ({
+    resolve({
       errCode: 0,
       errMessage: "Đã xóa vị trí"
     });
@@ -892,37 +892,37 @@ let handleXoaVitriQL = async (Id) => {
 let handleThemLoaiphongQL = (data) => {
   return new Promise(async (resolve, reject) => {
     try {
-      if(
+      if (
         // !data.truyền từ FE qua
         !data.tenloaiphong ||
         !data.songuoi ||
-        !data.gia 
+        !data.gia
       ) {
         resolve({
           errCode: 110,
           errMessage: "Missing parameter",
         });
-      } else{
+      } else {
         await db.loaiphongs.create({
           tenloaiphong: data.tenloaiphong,
           songuoi: data.songuoi,
           gia: data.gia
         });
         resolve({
-          errCode:0,
+          errCode: 0,
           errMessage: "Thêm loại phòng thành công",
         });
       }
-    } catch(e) {
+    } catch (e) {
       reject(e);
     }
   })
 }
 
 let handleSuaLoaiphongQL = (data) => {
-  return new Promise(async ( resolve, reject) => {
-    try{
-      if(
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (
         !data.id ||
         !data.tenloaiphong ||
         !data.songuoi ||
@@ -939,15 +939,15 @@ let handleSuaLoaiphongQL = (data) => {
           },
           raw: false,
         });
-        if(loaiphong){
+        if (loaiphong) {
           loaiphong.tenloaiphong = data.tenloaiphong;
           loaiphong.songuoi = data.songuoi;
           loaiphong.gia = data.gia;
 
-          
+
           await loaiphong.save();
         }
-        else{
+        else {
           resolve({
             errCode: 1,
             errMessage: "Cập nhập không thành công"
@@ -955,19 +955,19 @@ let handleSuaLoaiphongQL = (data) => {
         }
         resolve({
           errCode: 0,
-          errMessage:"Cập nhập thành côngggg"
+          errMessage: "Cập nhập thành côngggg"
         });
       }
-    } catch(e){
+    } catch (e) {
       reject(e);
     }
   });
 };
 
 let handleXoaLoaiphongQL = async (Id) => {
-  return new Promise (async (resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
     let loaiphong = await db.loaiphongs.findOne({
-      where: {id: Id},
+      where: { id: Id },
     });
     if (!loaiphong) {
       resolve({
@@ -976,9 +976,9 @@ let handleXoaLoaiphongQL = async (Id) => {
       });
     }
     await db.loaiphongs.destroy({
-      where: {id: Id},
+      where: { id: Id },
     });
-    resolve ({
+    resolve({
       errCode: 0,
       errMessage: "Đã xóa loại phòng"
     });
@@ -990,18 +990,18 @@ let handleXoaLoaiphongQL = async (Id) => {
 let handleThemThietbiQL = (data) => {
   return new Promise(async (resolve, reject) => {
     try {
-      if(
+      if (
         // !data.truyền từ FE qua
         !data.id_CSVC ||
         !data.id_Phong ||
         !data.soluong ||
-        !data.thoigianbatdau 
+        !data.thoigianbatdau
       ) {
         resolve({
           errCode: 110,
           errMessage: "Missing parameter",
         });
-      } else{
+      } else {
         await db.dsthietbis.create({
           id_CSVC: data.id_CSVC,
           id_Phong: data.id_Phong,
@@ -1010,25 +1010,25 @@ let handleThemThietbiQL = (data) => {
 
         });
         resolve({
-          errCode:0,
+          errCode: 0,
           errMessage: "Thêm thiết bị thành công",
         });
       }
-    } catch(e) {
+    } catch (e) {
       reject(e);
     }
   })
 }
 
 let handleSuaThietbiQL = (data) => {
-  return new Promise(async ( resolve, reject) => {
-    try{
-      if(
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (
         !data.id ||
         !data.id_CSVC ||
         !data.id_Phong ||
         !data.soluong ||
-        !data.thoigianbatdau 
+        !data.thoigianbatdau
       ) {
         resolve({
           errCode: 1,
@@ -1041,15 +1041,15 @@ let handleSuaThietbiQL = (data) => {
           },
           raw: false,
         });
-        if(thietbi){
+        if (thietbi) {
           thietbi.id_CSVC = data.id_CSVC;
           thietbi.id_Phong = data.id_Phong;
           thietbi.soluong = data.soluong;
           thietbi.thoigianbatdau = data.thoigianbatdau;
-          
+
           await thietbi.save();
         }
-        else{
+        else {
           resolve({
             errCode: 1,
             errMessage: "Cập nhập không thành công"
@@ -1057,19 +1057,19 @@ let handleSuaThietbiQL = (data) => {
         }
         resolve({
           errCode: 0,
-          errMessage:"Cập nhập thành côngggg"
+          errMessage: "Cập nhập thành côngggg"
         });
       }
-    } catch(e){
+    } catch (e) {
       reject(e);
     }
   });
 };
 
 let handleXoaThietbiQL = async (Id) => {
-  return new Promise (async (resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
     let thietbi = await db.dsthietbis.findOne({
-      where: {id: Id},
+      where: { id: Id },
     });
     if (!thietbi) {
       resolve({
@@ -1078,9 +1078,9 @@ let handleXoaThietbiQL = async (Id) => {
       });
     }
     await db.dsthietbis.destroy({
-      where: {id: Id},
+      where: { id: Id },
     });
-    resolve ({
+    resolve({
       errCode: 0,
       errMessage: "Đã xóa thiết bị"
     });
@@ -1092,19 +1092,19 @@ let handleXoaThietbiQL = async (Id) => {
 let handleThemPhongQL = (data) => {
   return new Promise(async (resolve, reject) => {
     try {
-      if(
+      if (
         // !data.truyền từ FE qua
         !data.id_LP ||
         !data.id_VT ||
         !data.tenphong ||
         !data.mota ||
-        !data.dientich 
+        !data.dientich
       ) {
         resolve({
           errCode: 110,
           errMessage: "Missing parameter",
         });
-      } else{
+      } else {
         await db.phongs.create({
           id_LP: data.id_LP,
           id_VT: data.id_VT,
@@ -1114,26 +1114,26 @@ let handleThemPhongQL = (data) => {
 
         });
         resolve({
-          errCode:0,
+          errCode: 0,
           errMessage: "Thêm phòng thành công",
         });
       }
-    } catch(e) {
+    } catch (e) {
       reject(e);
     }
   })
 }
 
 let handleSuaPhongQL = (data) => {
-  return new Promise(async ( resolve, reject) => {
-    try{
-      if(
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (
         !data.id ||
         !data.id_LP ||
         !data.id_VT ||
         !data.tenphong ||
-        !data.mota  ||
-        !data.dientich 
+        !data.mota ||
+        !data.dientich
       ) {
         resolve({
           errCode: 1,
@@ -1146,7 +1146,7 @@ let handleSuaPhongQL = (data) => {
           },
           raw: false,
         });
-        if(phong){
+        if (phong) {
           phong.id_LP = data.id_LP;
           phong.id_VT = data.id_VT;
           phong.tenphong = data.tenphong;
@@ -1154,7 +1154,7 @@ let handleSuaPhongQL = (data) => {
           phong.dientich = data.dientich
           await phong.save();
         }
-        else{
+        else {
           resolve({
             errCode: 1,
             errMessage: "Cập nhập không thành công"
@@ -1162,19 +1162,19 @@ let handleSuaPhongQL = (data) => {
         }
         resolve({
           errCode: 0,
-          errMessage:"Cập nhập thành côngggg"
+          errMessage: "Cập nhập thành côngggg"
         });
       }
-    } catch(e){
+    } catch (e) {
       reject(e);
     }
   });
 };
 
 let handleXoaPhongQL = async (Id) => {
-  return new Promise (async (resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
     let phong = await db.phongs.findOne({
-      where: {id: Id},
+      where: { id: Id },
     });
     if (!phong) {
       resolve({
@@ -1183,9 +1183,9 @@ let handleXoaPhongQL = async (Id) => {
       });
     }
     await db.phongs.destroy({
-      where: {id: Id},
+      where: { id: Id },
     });
-    resolve ({
+    resolve({
       errCode: 0,
       errMessage: "Đã xóa phòng"
     });
@@ -1197,7 +1197,7 @@ let handleXoaPhongQL = async (Id) => {
 let handleThemNhanvienQL = (data) => {
   return new Promise(async (resolve, reject) => {
     try {
-      if(
+      if (
         // !data.truyền từ FE qua
         !data.hotenNV ||
         !data.ngaysinh ||
@@ -1213,7 +1213,7 @@ let handleThemNhanvienQL = (data) => {
           errCode: 110,
           errMessage: "Missing parameter",
         });
-      } else{
+      } else {
         await db.nhanviens.create({
           hotenNV: data.hotenNV,
           ngaysinh: data.ngaysinh,
@@ -1226,20 +1226,20 @@ let handleThemNhanvienQL = (data) => {
 
         });
         resolve({
-          errCode:0,
+          errCode: 0,
           errMessage: "Thêm thông tin nhân viên thành công",
         });
       }
-    } catch(e) {
+    } catch (e) {
       reject(e);
     }
   })
 }
 
 let handleSuaNhanvienQL = (data) => {
-  return new Promise(async ( resolve, reject) => {
-    try{
-      if(
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (
         !data.id ||
         !data.hotenNV ||
         !data.ngaysinh ||
@@ -1261,18 +1261,18 @@ let handleSuaNhanvienQL = (data) => {
           },
           raw: false,
         });
-        if(nhanvien){
-          nhanvien.hotenNV= data.hotenNV,
-          nhanvien.ngaysinh= data.ngaysinh,
-          nhanvien.gioitinh= data.gioitinh,
-          nhanvien.CCCD= data.CCCD,
-          nhanvien.SDT= data.SDT,
-          nhanvien.email= data.email,
-          nhanvien.diachi= data.diachi,
-          nhanvien.chucvu= data.chucvu,
-          await nhanvien.save();
+        if (nhanvien) {
+          nhanvien.hotenNV = data.hotenNV,
+            nhanvien.ngaysinh = data.ngaysinh,
+            nhanvien.gioitinh = data.gioitinh,
+            nhanvien.CCCD = data.CCCD,
+            nhanvien.SDT = data.SDT,
+            nhanvien.email = data.email,
+            nhanvien.diachi = data.diachi,
+            nhanvien.chucvu = data.chucvu,
+            await nhanvien.save();
         }
-        else{
+        else {
           resolve({
             errCode: 1,
             errMessage: "Cập nhập thông tin nhân viên không thành công"
@@ -1280,19 +1280,19 @@ let handleSuaNhanvienQL = (data) => {
         }
         resolve({
           errCode: 0,
-          errMessage:"Cập nhập thông tin nhân viên thành công"
+          errMessage: "Cập nhập thông tin nhân viên thành công"
         });
       }
-    } catch(e){
+    } catch (e) {
       reject(e);
     }
   });
 };
 
 let handleXoaNhanvienQL = async (Id) => {
-  return new Promise (async (resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
     let nhanvien = await db.nhanviens.findOne({
-      where: {id: Id},
+      where: { id: Id },
     });
     if (!nhanvien) {
       resolve({
@@ -1301,9 +1301,9 @@ let handleXoaNhanvienQL = async (Id) => {
       });
     }
     await db.nhanviens.destroy({
-      where: {id: Id},
+      where: { id: Id },
     });
-    resolve ({
+    resolve({
       errCode: 0,
       errMessage: "Đã xóa thông tin nhân viên"
     });
@@ -1314,7 +1314,7 @@ let handleXoaNhanvienQL = async (Id) => {
 let handlePostPictures = (data) => {
   return new Promise(async (resolve, reject) => {
     try {
-      if(
+      if (
         // !data.truyền từ FE qua
         !data.hinhanh ||
         !data.id_Phong
@@ -1324,26 +1324,26 @@ let handlePostPictures = (data) => {
           errCode: 110,
           errMessage: "Missing parameter",
         });
-      } else{
+      } else {
         await db.hinhanhPhongs.create({
           hinhanh: data.hinhanh,
           id_Phong: data.id_Phong,
 
         });
         resolve({
-          errCode:0,
+          errCode: 0,
           errMessage: "Thêm hình ảnh thành công",
         });
       }
-    } catch(e) {
+    } catch (e) {
       reject(e);
     }
   })
 }
 
 let handleLayhinhanh = (key) => {
-  return new Promise(async (resolve, reject) =>{
-    try{
+  return new Promise(async (resolve, reject) => {
+    try {
       let layha = "";
       if (key === "ALL") {
         layha = await db.hinhanhPhongs.findAll({
@@ -1352,18 +1352,18 @@ let handleLayhinhanh = (key) => {
       }
       if (key && key !== "ALL") {
         layha = await db.hinhanhPhongs.findAll({
-          where: {id:key},
+          where: { id: key },
         });
       }
       resolve(layha);
-    } catch(e){
+    } catch (e) {
       reject(e);
     }
   });
 };
 let handleLayhinhanh_IdPhong = (key) => {
-  return new Promise(async (resolve, reject) =>{
-    try{
+  return new Promise(async (resolve, reject) => {
+    try {
       let layha = "";
       if (key === "ALL") {
         layha = await db.hinhanhPhongs.findAll({
@@ -1372,19 +1372,19 @@ let handleLayhinhanh_IdPhong = (key) => {
       }
       if (key && key !== "ALL") {
         layha = await db.hinhanhPhongs.findAll({
-          where: {id_Phong:key},
+          where: { id_Phong: key },
         });
       }
       resolve(layha);
-    } catch(e){
+    } catch (e) {
       reject(e);
     }
   });
 };
 let handleSuaHinhanh = (data) => {
-  return new Promise(async ( resolve, reject) => {
-    try{
-      if(
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (
         !data.id ||
         !data.hinhanh ||
         !data.id_Phong
@@ -1400,12 +1400,12 @@ let handleSuaHinhanh = (data) => {
           },
           raw: false,
         });
-        if(ha){
+        if (ha) {
           ha.hinhanh = data.hinhanh;
           ha.id_Phong = data.id_Phong;
           await ha.save();
         }
-        else{
+        else {
           resolve({
             errCode: 1,
             errMessage: "Cập nhập không thành công"
@@ -1413,19 +1413,19 @@ let handleSuaHinhanh = (data) => {
         }
         resolve({
           errCode: 0,
-          errMessage:"Cập nhập thành công"
+          errMessage: "Cập nhập thành công"
         });
       }
-    } catch(e){
+    } catch (e) {
       reject(e);
     }
   });
 };
 
 let handleXoaHinhanh = async (Id) => {
-  return new Promise (async (resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
     let ha = await db.hinhanhPhongs.findOne({
-      where: {id: Id},
+      where: { id: Id },
     });
     if (!ha) {
       resolve({
@@ -1434,9 +1434,9 @@ let handleXoaHinhanh = async (Id) => {
       });
     }
     await db.hinhanhPhongs.destroy({
-      where: {id: Id},
+      where: { id: Id },
     });
-    resolve ({
+    resolve({
       errCode: 0,
       errMessage: "Đã xóa hình ảnh"
     });
@@ -1445,9 +1445,9 @@ let handleXoaHinhanh = async (Id) => {
 
 
 let handleSuaTTKH = (data) => {
-  return new Promise(async ( resolve, reject) => {
-    try{
-      if(
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (
         !data.id ||
         !data.hotenKH ||
         !data.ngaysinh ||
@@ -1468,7 +1468,7 @@ let handleSuaTTKH = (data) => {
           },
           raw: false,
         });
-        if(ttkh){
+        if (ttkh) {
           ttkh.hotenKH = data.hotenKH;
           ttkh.ngaysinh = data.ngaysinh;
           ttkh.gioitinh = data.gioitinh;
@@ -1478,7 +1478,7 @@ let handleSuaTTKH = (data) => {
           ttkh.avt = data.avt;
           await ttkh.save();
         }
-        else{
+        else {
           resolve({
             errCode: 1,
             errMessage: "Cập nhập không thành công"
@@ -1486,19 +1486,19 @@ let handleSuaTTKH = (data) => {
         }
         resolve({
           errCode: 0,
-          errMessage:"Cập nhập thành công"
+          errMessage: "Cập nhập thành công"
         });
       }
-    } catch(e){
+    } catch (e) {
       reject(e);
     }
   });
 };
 
 let handleThemTTKH_SDT = (data) => {
-  return new Promise(async ( resolve, reject) => {
-    try{
-      if(
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (
         !data.sdt
       ) {
         resolve({
@@ -1506,25 +1506,25 @@ let handleThemTTKH_SDT = (data) => {
           errMessage: "Missing parameter",
         });
       } else {
-        await db.khachhangs.create({          
+        await db.khachhangs.create({
           SDT: data.sdt
 
         });
         resolve({
           errCode: 0,
-          errMessage:"Cập nhập thành công"
+          errMessage: "Cập nhập thành công"
         });
       }
-    } catch(e){
+    } catch (e) {
       reject(e);
     }
   });
 };
 
 let handleXoaAvtKH = (data) => {
-  return new Promise(async ( resolve, reject) => {
-    try{
-      if(
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (
         !data.id
       ) {
         resolve({
@@ -1538,11 +1538,11 @@ let handleXoaAvtKH = (data) => {
           },
           raw: false,
         });
-        if(ttkh){
-          ttkh.avt = null;         
+        if (ttkh) {
+          ttkh.avt = null;
           await ttkh.save();
         }
-        else{
+        else {
           resolve({
             errCode: 1,
             errMessage: "Cập nhập không thành công"
@@ -1550,10 +1550,10 @@ let handleXoaAvtKH = (data) => {
         }
         resolve({
           errCode: 0,
-          errMessage:"Cập nhập thành công"
+          errMessage: "Cập nhập thành công"
         });
       }
-    } catch(e){
+    } catch (e) {
       reject(e);
     }
   });
@@ -1562,8 +1562,8 @@ let handleXoaAvtKH = (data) => {
 //phieudat
 
 let handleLayPhieudat = (key) => {
-  return new Promise(async (resolve, reject) =>{
-    try{
+  return new Promise(async (resolve, reject) => {
+    try {
       let phieudat = "";
       if (key === "ALL") {
         phieudat = await db.phieudats.findAll({
@@ -1572,11 +1572,11 @@ let handleLayPhieudat = (key) => {
       }
       if (key && key !== "ALL") {
         phieudat = await db.phieudats.findAll({
-          where: {id:key},
+          where: { id: key },
         });
       }
-      resolve(phieudat);     
-    } catch(e){
+      resolve(phieudat);
+    } catch (e) {
       reject(e);
     }
   });
@@ -1584,8 +1584,8 @@ let handleLayPhieudat = (key) => {
 
 
 let handleLayPhieudat_idKH = (key) => {
-  return new Promise(async (resolve, reject) =>{
-    try{
+  return new Promise(async (resolve, reject) => {
+    try {
       let phieudat_idKH = "";
       if (key === "ALL") {
         phieudat_idKH = await db.phieudats.findAll({
@@ -1594,19 +1594,19 @@ let handleLayPhieudat_idKH = (key) => {
       }
       if (key && key !== "ALL") {
         phieudat_idKH = await db.phieudats.findAll({
-          where: {id_KH:key},
+          where: { id_KH: key },
         });
       }
-      resolve(phieudat_idKH);     
-    } catch(e){
+      resolve(phieudat_idKH);
+    } catch (e) {
       reject(e);
     }
   });
 };
 
 let handleLayPhieudat_ngay = () => {
-  return new Promise(async (resolve, reject) =>{
-    try{
+  return new Promise(async (resolve, reject) => {
+    try {
       let phieudat_ngay = "";
 
       // if (key === "ALL") {
@@ -1615,30 +1615,49 @@ let handleLayPhieudat_ngay = () => {
       //   });
       // }
       // if (key && key !== "ALL") {
-        phieudat_ngay = await db.phieudats.findAll({
-          attributes: [
-            'id',
-            'check_in',
-            [Sequelize.fn('sum', Sequelize.col('tongtien')), 'total_amount'],
-          ],
-          group: ['check_in'],
-          raw: true
-        });
-        // phieudat_ngay = await db.phieudats.findAll({
-        //   where: {check_in:key},
-        // });
+      phieudat_ngay = await db.phieudats.findAll({
+        attributes: [
+          'id',
+          'check_in',
+          [Sequelize.fn('sum', Sequelize.col('tongtien')), 'total_amount'],
+        ],
+        group: ['check_in'],
+        raw: true
+      });
+      // phieudat_ngay = await db.phieudats.findAll({
+      //   where: {check_in:key},
+      // });
       // }
-      resolve(phieudat_ngay);     
-    } catch(e){
+      resolve(phieudat_ngay);
+    } catch (e) {
       reject(e);
     }
   });
 };
+let handleLayPhieudat_idPhong = (key) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let phieudat_idKH = "";
+      if (key === "ALL") {
+        phieudat_idKH = await db.phieudats.findAll({
 
+        });
+      }
+      if (key && key !== "ALL") {
+        phieudat_idKH = await db.phieudats.findAll({
+          where: { id_Phong: key },
+        });
+      }
+      resolve(phieudat_idKH);
+    } catch (e) {
+      reject(e);
+    }
+  });
+};
 let handleSuaPhieudat = (data) => {
-  return new Promise(async ( resolve, reject) => {
-    try{
-      if(
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (
         !data.id ||
         // !data.mota ||
         !data.trangthai
@@ -1650,7 +1669,7 @@ let handleSuaPhieudat = (data) => {
       } else {
         let cut = '0'
         let i = data.trangthai.indexOf('Hoàn')
-        cut = data.trangthai.slice(i+5, data.trangthai.length - 1)
+        cut = data.trangthai.slice(i + 5, data.trangthai.length - 1)
         let phieudat = await db.phieudats.findOne({
           where: {
             id: data.id
@@ -1658,42 +1677,49 @@ let handleSuaPhieudat = (data) => {
           raw: false,
         });
 
-        if(phieudat){
-          phieudat.trangthai = data.trangthai;
-          phieudat.tongtien = phieudat.tongtien - phieudat.tongtien*(Number(cut/100));
-          await phieudat.save();
+        if (phieudat) {
+          if (data.trangthai === 'Đã nhận phòng') {
+            phieudat.trangthai = data.trangthai;
+            // phieudat.tongtien = phieudat.tongtien;
+            await phieudat.save();
+          } else {
+            phieudat.trangthai = data.trangthai;
+            phieudat.tongtien = phieudat.tongtien - phieudat.tongtien * (Number(cut / 100));
+            await phieudat.save();
+            let kh = await db.khachhangs.findOne({
+              where: {
+                id: phieudat.id_KH
+              },
+              // raw : false
+            });
+            let phong = await db.phongs.findOne({
+              where: {
+                id: phieudat.id_Phong
+              },
+              // raw : false
+            });
+            let loaiphong = await db.loaiphongs.findOne({
+              where: {
+                id: phong.id_LP
+              },
+              // raw : false
+            });
 
-          let kh = await db.khachhangs.findOne({
-            where: {
-              id: phieudat.id_KH
-            },
-            // raw : false
-          });
-          let phong = await db.phongs.findOne({
-            where: {
-              id: phieudat.id_Phong
-            },
-            // raw : false
-          });
-          let loaiphong = await db.loaiphongs.findOne({
-            where: {
-              id: phong.id_LP
-            },
-            // raw : false
-          });
-
-          emailService.sendEmail( 
-            kh.email,
-             "Xác nhận HỦY lịch đặt HomeStay", 
+            emailService.sendEmail(
+              kh.email,
+              "Xác nhận HỦY lịch đặt HomeStay",
               `
-              <h1>Xin chào ${kh.hotenKH}, bạn đã hủy lịch đặt phòng ở The Kubip Homestay </h1>
-              <p>Bạn đã đặt thành công phòng ${phong.tenphong} có ${loaiphong.tenloaiphong} </p>
-              <p> Từ ${phieudat.check_in} tới ${phieudat.check_out} </p>
-              ${phieudat.tongtien*(Number(cut/100)) > 0 ? `<h3>Bạn được hoàn: phieudat.tongtien*(Number(cut/100)) , tiền sẽ được hệ thống chuyển về tài khoản khi bạn đặt</h3>` : ''}
-              `)
+                <h1>Xin chào ${kh.hotenKH}, bạn đã hủy lịch đặt phòng ở The Kubip Homestay </h1>
+                <p>Bạn đã đặt thành công phòng ${phong.tenphong} có ${loaiphong.tenloaiphong} </p>
+                <p> Từ ${phieudat.check_in} tới ${phieudat.check_out} </p>
+                ${phieudat.tongtien * (Number(cut / 100)) > 0 ? `<h3>Bạn được hoàn: ${phieudat.tongtien * (Number(cut / 100))} , tiền sẽ được hệ thống chuyển về tài khoản khi bạn đặt</h3>` : ''}
+                `)
 
-        }
-        else{
+
+          }
+
+
+        } else {
           resolve({
             errCode: 1,
             errMessage: "Cập nhập không thành công"
@@ -1701,10 +1727,10 @@ let handleSuaPhieudat = (data) => {
         }
         resolve({
           errCode: 0,
-          errMessage:"Cập nhập thành công"
+          errMessage: "Cập nhập thành công"
         });
       }
-    } catch(e){
+    } catch (e) {
       reject(e);
     }
   });
@@ -1712,8 +1738,8 @@ let handleSuaPhieudat = (data) => {
 //nhanvien
 
 let handleLayNhanvien_SDT = (key) => {
-  return new Promise(async (resolve, reject) =>{
-    try{
+  return new Promise(async (resolve, reject) => {
+    try {
       let nhanvien_sdt = "";
       if (key === "ALL") {
         nhanvien_sdt = await db.nhanviens.findAll({
@@ -1722,24 +1748,44 @@ let handleLayNhanvien_SDT = (key) => {
       }
       if (key && key !== "ALL") {
         nhanvien_sdt = await db.nhanviens.findAll({
-          where: {SDT:key},
+          where: { SDT: key },
         });
       }
-      resolve(nhanvien_sdt);     
-    } catch(e){
+      resolve(nhanvien_sdt);
+    } catch (e) {
       reject(e);
     }
   });
 };
 
 
+let handleTimkiem = (data) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let phong = ''
+      if (data.songuoi && data.songuoi !== "ALL") {
+        let loaiphong = await db.loaiphongs.findAll({
+          where: { songuoi: data.songuoi },
+          raw: false
+        });
+        phong = await db.phongs.findAll({
+          where: { id_LP: loaiphong.id },
+          raw: false
+        });
+      }
+      resolve(phong);
+    } catch (e) {
+      reject(e);
+    }
+  })
+}
 module.exports = {
   handlePhong: handlePhong,
   handlePhong_idLP: handlePhong_idLP,
   handleLoaiphong: handleLoaiphong,
   handleLoaiphong_tenloai: handleLoaiphong_tenloai,
   handleNoiquy: handleNoiquy,
-  handleDsthietbi:handleDsthietbi,
+  handleDsthietbi: handleDsthietbi,
   handleDanhmucCSVC: handleDanhmucCSVC,
   handleVitri: handleVitri,
   handleKhachhang: handleKhachhang,
@@ -1747,18 +1793,18 @@ module.exports = {
   handleLayNhanvien: handleLayNhanvien,
   handleDichvu: handleDichvu,
   handleKhuyenmai: handleKhuyenmai,
-  
-  
+
+
   handleDatphong: handleDatphong,
-  handlePhong_tenphong:handlePhong_tenphong,
+  handlePhong_tenphong: handlePhong_tenphong,
 
   handleThemNoiquyQL: handleThemNoiquyQL,
   handleSuaNoiquyQL: handleSuaNoiquyQL,
   handleXoaNoiquyQL: handleXoaNoiquyQL,
 
   handleThemCSVCQL: handleThemCSVCQL,
-  handleXoaCSVCQL:handleXoaCSVCQL,
-  handleSuaCSVCQL:handleSuaCSVCQL,
+  handleXoaCSVCQL: handleXoaCSVCQL,
+  handleSuaCSVCQL: handleSuaCSVCQL,
 
   handleThemDichvuQL: handleThemDichvuQL,
   handleSuaDichvuQL: handleSuaDichvuQL,
@@ -1791,225 +1837,21 @@ module.exports = {
   handleLayhinhanh: handleLayhinhanh,
   handleLayhinhanh_IdPhong: handleLayhinhanh_IdPhong,
   handlePostPictures: handlePostPictures,
-  handleSuaHinhanh:handleSuaHinhanh,
+  handleSuaHinhanh: handleSuaHinhanh,
   handleXoaHinhanh: handleXoaHinhanh,
 
   handleSuaTTKH: handleSuaTTKH,
   handleThemTTKH_SDT: handleThemTTKH_SDT,
   handleXoaAvtKH: handleXoaAvtKH,
 
-  handleLayPhieudat:handleLayPhieudat,
-  handleLayPhieudat_idKH :handleLayPhieudat_idKH,
+  handleLayPhieudat: handleLayPhieudat,
+  handleLayPhieudat_idKH: handleLayPhieudat_idKH,
   handleLayPhieudat_ngay: handleLayPhieudat_ngay,
+  handleLayPhieudat_idPhong: handleLayPhieudat_idPhong,
   handleSuaPhieudat: handleSuaPhieudat,
 
-  handleLayNhanvien_SDT:handleLayNhanvien_SDT,
+  handleLayNhanvien_SDT: handleLayNhanvien_SDT,
+
+  handleTimkiem: handleTimkiem,
 };
 
-
-// const salt = bcrypt.genSaltSync(10);
-
-// let handleDangnhap = (username, password) => {
-//   return new Promise(async (resolve, reject) => {
-//     try {
-//       let userdata = {};
-//       if (username) {
-//         //user ton tai >>> true
-//         //compare password
-//         let khachhang = await db.khachhangs.findOne({
-//           //get duoc alldata user
-//           attributes: ["Taikhoan_Kh", "Matkhau_KH"], //get data can thiet
-//           where: { Taikhoan_Kh: username },
-//           raw: true,
-//         });
-//         if (khachhang) {
-//           if (password === khachhang.Matkhau_KH) {
-//             userdata.errCode = 0;
-//             userdata.message = "ok";
-//           } else {
-//             userdata.errCode = 1;
-//             userdata.message = "sai password";
-//           }
-//         } else {
-//           userdata.errCode = 2;
-//           userdata.message = "user khong ton tai";
-//         }
-//         resolve(userdata);
-//       } else {
-//         //return err
-//         reject({
-//           errCode: 3,
-//           errMessage: `Email not found. Try again`,
-//         });
-//         // userdata.errCode = 1;
-//         // userdata.errMessage = `Email not found. Try again`;
-//       }
-//       // resolve(userdata);
-//     } catch (e) {
-//       reject(e);
-//     }
-//   });
-// };
-
-// let handleDangky = (data) => {
-
-//   return new Promise(async (resovle, reject) => {
-//     try {
-//       if (
-//         !data.hten_KH ||
-//         !data.Ngaysinh ||
-//         !data.gt_KH ||
-//         !data.sdt_KH ||
-//         !data.cccd_KH ||
-//         !data.email_KH ||
-//         !data.diachi_KH ||
-//         !data.taikhoan_KH ||
-//         !data.matkhau_KH       
-//       ) {
-//         resovle({
-//           errCode: 101,
-//           errMessage: "Missing parameter",
-//         });
-//       } else {    
-//         let khachhang = await db.khachhangs.findOne({
-//           where: {
-//             Hten_KH: data.hten_KH,
-//             Email_KH: data.email_KH,
-//             Sdt_KH: data.sdt_KH,
-//           },
-//         });
-
-//         if (khachhang) {
-//           resovle({
-//             errCode: 1,
-//             errMessage: "Người dùng đã có tài khoản",
-//           });
-//         } else {
-//           await db.khachhangs.create({
-//             id_KH: 5,
-//             Hten_KH: data.hten_KH,
-//             Sdt_KH: data.sdt_KH,
-//             Email_KH: data.email_KH,
-//             Ngaysinh_KH: data.Ngaysinh,           
-//             Diachi_KH: data.diachi_KH,
-//             Gioitinh_KH: data.gt_KH,
-//             Cccd_KH: data.cccd_KH,
-//             Taikhoan_KH: data.taikhoan_KH,
-//             Matkhau_KH: data.matkhau_KH,
-//           });
-
-//           resovle({
-//             errCode: 0,
-//             errMessage: "Tạo tài khoản thành công",
-//           });
-//         }
-//         resovle({
-//           errCode: 0,
-//           errMessage: "Tạo và lưu",
-//         });
-//       }
-//     } catch (e) {
-//       reject(e);
-//     }
-//   });
-// };
-
-// let handleDatve = (data) => {
-
-//   return new Promise(async (resovle, reject) => {
-//     try {
-//       if (
-//         !data.hten_KH ||
-//         !data.httt ||
-//         !data.tongtien ||
-//         !data.soluongghe ||
-//         !data.ngaymuave ||
-//         !data.id_KH ||
-//         !data.id_ghe ||
-//         !data.id_suatchieu ||
-//         !data.id_rap  ||
-//         !data.id_cumrap ||
-//         !data.id_KM ||
-//         !data.id_NV ||
-//         !data.id_doan    
-//       ) {
-//         resovle({
-//           errCode: 110,
-//           errMessage: "Missing parameter",
-//         });
-//       } else {    
- 
-//           await db.ves.create({
-//             // id_KH: 5,
-//             Hten_KH: data.hten_KH,
-//             HTTT: data.httt,
-//             Tongtien: data.tongtien,
-//             SLghe: data.soluongghe,           
-//             Ngaymuave: data.ngaymuave,
-//             id_KH: data.id_KH,
-//             id_ghe: data.id_ghe,
-//             id_suatchieu	: data.id_suatchieu,
-//             id_rap	: data.id_rap,
-//             id_cumrap: data.id_cumrap,
-//             id_KM: data.id_KM,
-//             id_NV: data.id_NV,
-//             id_DA: data.id_doan,
-//           });
-
-//           resovle({
-//             errCode: 0,
-//             errMessage: "Tạo tài khoản thành công",
-//           });
-//         }
-//         resovle({
-//           errCode: 0,
-//           errMessage: "Tạo và lưu",
-//         });
-//       // }
-//     } catch (e) {
-//       reject(e);
-//     }
-//   });
-// };
-
-// let handleTTchitietve = (id_ve) => {
-//   return new Promise(async (resolve, reject) => {
-//     try {
-//       let chitietve = "";
-//       if (id_ve === "ALL") {
-//         chitietve = await db.chitietves.findAll({
-//         });
-//       }
-
-//       if (id_ve && id_ve !== "ALL") {
-//         chitietve = await db.chitietves.findAll({
-//           where: { id_Ve: id_ve },
-//         });
-//       }
-//       resolve(chitietve);
-//     } catch (e) {
-//       reject(e);
-//     }
-//   });
-// };
-
-// let handleTTGhe = (key) => {
-//   return new Promise(async (resolve, reject) => {
-//     try {
-//       let ghe = "";
-//       if (key === "ALL") {
-//         ghe = await db.ghes.findAll({
-//         });
-//       }
-
-//       if (key && key !== "ALL") {
-//         ghe = await db.ghes.findAll({
-//           where: { id: key },
-//         });
-//       }
-//       resolve(ghe);
-//     } catch (e) {
-//       reject(e);
-//     }
-//   });
-// };
