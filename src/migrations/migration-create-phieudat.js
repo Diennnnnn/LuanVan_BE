@@ -53,14 +53,20 @@ module.exports = {
             thoigianGD: {
                 type: Sequelize.STRING,
             },
+            ngaygio_nhanphong: {
+                type: Sequelize.DATE,
+            },
+            ngaygio_traphong: {
+                type: Sequelize.DATE,
+            },
             createdAt: {
                 allowNull: false,
                 type: Sequelize.DATE,
-              },
-              updatedAt: {
+            },
+            updatedAt: {
                 allowNull: false,
                 type: Sequelize.DATE,
-              },
+            },
         });
     },
     down: async (queryInterface, Sequelize) => {

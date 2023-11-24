@@ -590,8 +590,9 @@ let handleThemDichvuQL = (data) => {
         // !data.truyền từ FE qua
         !data.tenDV ||
         !data.gia ||
-        !data.DVT ||
-        !data.ghichu
+        !data.DVT 
+        // ||
+        // !data.ghichu
       ) {
         resolve({
           errCode: 110,
@@ -1452,7 +1453,7 @@ let handleSuaTTKH = (data) => {
         !data.hotenKH ||
         !data.ngaysinh ||
         !data.gioitinh ||
-        !data.CMND ||
+        !data.CCCD ||
         !data.SDT ||
         !data.email ||
         !data.avt
@@ -1472,7 +1473,7 @@ let handleSuaTTKH = (data) => {
           ttkh.hotenKH = data.hotenKH;
           ttkh.ngaysinh = data.ngaysinh;
           ttkh.gioitinh = data.gioitinh;
-          ttkh.CMND = data.CMND;
+          ttkh.CCCD = data.CCCD;
           ttkh.SDT = data.SDT;
           ttkh.email = data.email;
           ttkh.avt = data.avt;
@@ -1604,7 +1605,7 @@ let handleLayPhieudat_idKH = (key) => {
   });
 };
 
-let handleLayPhieudat_ngay = () => {
+let handleThongke_ngay = () => {
   return new Promise(async (resolve, reject) => {
     try {
       let phieudat_ngay = "";
@@ -1618,10 +1619,10 @@ let handleLayPhieudat_ngay = () => {
       phieudat_ngay = await db.phieudats.findAll({
         attributes: [
           'id',
-          'check_in',
+          'ngaydat',
           [Sequelize.fn('sum', Sequelize.col('tongtien')), 'total_amount'],
         ],
-        group: ['check_in'],
+        group: ['ngaydat'],
         raw: true
       });
       // phieudat_ngay = await db.phieudats.findAll({
@@ -1634,6 +1635,32 @@ let handleLayPhieudat_ngay = () => {
     }
   });
 };
+let handleThongke_thang = () => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let phieudat_thang = "";
+
+      phieudat_thang = await db.phieudats.findAll({
+        attributes: [
+          'id',
+          'ngaydat',
+          [Sequelize.fn('month', Sequelize.col('ngaydat')), 'thang_ngaydat'],
+          [Sequelize.fn('sum', Sequelize.col('tongtien')), 'total_amount'],
+        ],
+        group: ['thang_ngaydat'],
+        raw: true
+      });
+      // phieudat_ngay = await db.phieudats.findAll({
+      //   where: {check_in:key},
+      // });
+      // }
+      resolve(phieudat_thang);
+    } catch (e) {
+      reject(e);
+    }
+  });
+};
+
 let handleLayPhieudat_idPhong = (key) => {
   return new Promise(async (resolve, reject) => {
     try {
@@ -1779,6 +1806,129 @@ let handleTimkiem = (data) => {
     }
   })
 }
+
+//sddv
+let handleLayChitietSDDV = (key) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let sddichvu = "";
+      if (key === "ALL") {
+        sddichvu = await db.chitietSDDVs.findAll({
+
+        });
+      }
+      if (key && key !== "ALL") {
+        sddichvu = await db.chitietSDDVs.findAll({
+          where: { id: key },
+        });
+      }
+      resolve(sddichvu);
+    } catch (e) {
+      reject(e);
+    }
+  });
+};
+
+let handleThemChitietSDDV = (data) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (
+        // !data.truyền từ FE qua
+        !data.id_PD ||
+        !data.id_DV ||
+        !data.solansudung ||
+        !data.soluong
+      ) {
+        resolve({
+          errCode: 110,
+          errMessage: "Missing parameter",
+        });
+      } else {
+        await db.chitietSDDVs.create({
+          id_PD: data.id_PD,
+          id_DV: data.id_DV,
+          solansudung: data.solansudung,
+          soluong: data.soluong,
+          thanhtien: data.thanhtien,
+        });
+        resolve({
+          errCode: 0,
+          errMessage: "Thêm chi tiết SDDV thành công",
+        });
+      }
+    } catch (e) {
+      reject(e);
+    }
+  })
+}
+
+let handleSuaChitietSDDV = (data) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (
+        !data.id ||
+        !data.id_PD ||
+        !data.id_DV ||
+        !data.solansudung ||
+        !data.soluong
+      ) {
+        resolve({
+          errCode: 1,
+          errMessage: "Missing parameter",
+        });
+      } else {
+        let sddichvu = await db.chitietSDDVs.findOne({
+          where: {
+            id: data.id
+          },
+          raw: false,
+        });
+        if (sddichvu) {
+          sddichvu.id_PD = data.id_PD;
+          sddichvu.id_DV = data.id_DV;
+          sddichvu.solansudung = data.solansudung;
+          sddichvu.soluong = data.soluong;
+          sddichvu.thanhtien = data.thanhtien;
+          await sddichvu.save();
+        }
+        else {
+          resolve({
+            errCode: 1,
+            errMessage: "Cập nhập không thành công"
+          });
+        }
+        resolve({
+          errCode: 0,
+          errMessage: "Cập nhập thành công"
+        });
+      }
+    } catch (e) {
+      reject(e);
+    }
+  });
+};
+
+let handleXoaChitietSDDV = async (Id) => {
+  return new Promise(async (resolve, reject) => {
+    let sddichvu = await db.chitietSDDVs.findOne({
+      where: { id: Id },
+    });
+    if (!sddichvu) {
+      resolve({
+        errCode: 2,
+        errMessage: "Không tìm thấy chi tiết SDDV"
+      });
+    }
+    await db.chitietSDDVs.destroy({
+      where: { id: Id },
+    });
+    resolve({
+      errCode: 0,
+      errMessage: "Đã xóa chi tiết SDDV"
+    });
+  });
+};
+
 module.exports = {
   handlePhong: handlePhong,
   handlePhong_idLP: handlePhong_idLP,
@@ -1846,12 +1996,18 @@ module.exports = {
 
   handleLayPhieudat: handleLayPhieudat,
   handleLayPhieudat_idKH: handleLayPhieudat_idKH,
-  handleLayPhieudat_ngay: handleLayPhieudat_ngay,
+  handleThongke_ngay: handleThongke_ngay,
+  handleThongke_thang:handleThongke_thang,
   handleLayPhieudat_idPhong: handleLayPhieudat_idPhong,
   handleSuaPhieudat: handleSuaPhieudat,
 
   handleLayNhanvien_SDT: handleLayNhanvien_SDT,
 
   handleTimkiem: handleTimkiem,
+
+  handleLayChitietSDDV:handleLayChitietSDDV,
+  handleThemChitietSDDV:handleThemChitietSDDV,
+  handleSuaChitietSDDV:handleSuaChitietSDDV,
+  handleXoaChitietSDDV:handleXoaChitietSDDV,
 };
 

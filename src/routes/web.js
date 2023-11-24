@@ -82,7 +82,9 @@ const initWebRoutes = (app) => {
 
   router.get("/api/LayPhieudat",userController.handleLayPhieudat);
   router.get("/api/LayPhieudat_idKH",userController.handleLayPhieudat_idKH);
-  router.get("/api/LayPhieudat_ngay",userController.handleLayPhieudat_ngay);
+  router.get("/api/Thongke_ngay",userController.handleThongke_ngay);
+  router.get("/api/Thongke_thang",userController.handleThongke_thang);
+
   router.get("/api/LayPhieudat_idPhong",userController.handleLayPhieudat_idPhong);
 
   router.post("/api/SuaPhieudat",userController.handleSuaPhieudat);
@@ -91,7 +93,11 @@ const initWebRoutes = (app) => {
 
   router.post("/api/Timkiem",userController.handleTimkiem);
 
-  
+  router.get("/api/LayChitietSDDV",userController.handleLayChitietSDDV);
+  router.post("/api/ThemChitietSDDV",userController.handleThemChitietSDDV);
+  router.post("/api/SuaChitietSDDV",userController.handleSuaChitietSDDV);
+  router.delete("/api/XoaChitietSDDV",userController.handleXoaChitietSDDV);
+
   return app.use("/", router);
 };
 

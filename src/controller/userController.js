@@ -749,7 +749,7 @@ let handleLayPhieudat_idPhong = async (req, res) => {
     phieudat_idPhong,
   });
 };
-let handleLayPhieudat_ngay = async (req, res) => {
+let handleThongke_ngay = async (req, res) => {
   // let key = req.query.keyword;
   // if (!key) {
   //   return res.status(200).json({
@@ -758,11 +758,28 @@ let handleLayPhieudat_ngay = async (req, res) => {
   //     phieudats: {},
   //   });
   // }
-  let phieudat_ngay= await userService.handleLayPhieudat_ngay();
+  let phieudat_ngay= await userService.handleThongke_ngay();
   // console.log(phieudat_ngay)
 
   return res.status(200).json({
     phieudat_ngay,
+  });
+};
+
+let handleThongke_thang = async (req, res) => {
+  // let key = req.query.keyword;
+  // if (!key) {
+  //   return res.status(200).json({
+  //     errCode: 1,
+  //     errMessage: "missing require parameters",
+  //     phieudats: {},
+  //   });
+  // }
+  let phieudat_thang= await userService.handleThongke_thang();
+  // console.log(phieudat_ngay)
+
+  return res.status(200).json({
+    phieudat_thang,
   });
 };
 let handleSuaPhieudat = async (req, res) => {
@@ -807,7 +824,64 @@ let handleTimkiem = async (req, res) => {
     });
   }
 };
+
+
+//sddv
+let handleLayChitietSDDV = async (req, res) => {
+  let key = req.query.keyword;
+  if (!key) {
+    return res.status(200).json({
+      errCode: 1,
+      errMessage: "missing require parameters",
+      chitietSDDVs: {},
+    });
+  }
+  let sddichvu = await userService.handleLayChitietSDDV(key);
+
+  return res.status(200).json({
+    sddichvu,
+  });
+};
+let handleThemChitietSDDV = async (req, res) => {
+  try {
+    let infor = await userService.handleThemChitietSDDV(req.body);
+    return res.status(200).json(infor);
+  } catch (e) {
+    console.log(e);
+    return res.status(200).json({
+      errCode: -1,
+      errMessage: "Error from the server",
+    });
+  }
+};
+
+let handleSuaChitietSDDV = async (req, res) => {
+  try {
+    let sddichvu = await userService.handleSuaChitietSDDV(req.body);
+    return res.status(200).json(sddichvu);
+  } catch(e) {
+    console.log(e);
+    return res.status(200).json({
+      errCode: -1,
+      errMessage:"error from the server",
+    });
+  }
+};
+
+let handleXoaChitietSDDV = async (req, res) => {
+  if(!req.body.id) {
+    return res.status(200).json({
+      errCode: 1,
+      errMessage: "missing require parameter",
+    })
+  }
+  let message = await userService.handleXoaChitietSDDV(req.body.id);
+  console.log(message);
+  return res.status(200).json(message);
+}
+
 module.exports = {
+  
   handlePhong: handlePhong,
   handlePhong_idLP: handlePhong_idLP,
   handleLoaiphong: handleLoaiphong,
@@ -873,7 +947,8 @@ module.exports = {
 
   handleLayPhieudat: handleLayPhieudat,
   handleLayPhieudat_idKH :handleLayPhieudat_idKH,
-  handleLayPhieudat_ngay: handleLayPhieudat_ngay,
+  handleThongke_ngay: handleThongke_ngay,
+  handleThongke_thang:handleThongke_thang,
   handleLayPhieudat_idPhong :handleLayPhieudat_idPhong,
   handleSuaPhieudat: handleSuaPhieudat,
 
@@ -881,6 +956,10 @@ module.exports = {
 
   handleTimkiem:handleTimkiem,
 
+  handleLayChitietSDDV:handleLayChitietSDDV,
+  handleThemChitietSDDV:handleThemChitietSDDV,
+  handleSuaChitietSDDV:handleSuaChitietSDDV,
+  handleXoaChitietSDDV:handleXoaChitietSDDV,
 
 };
 

@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
             hotenKH: DataTypes.STRING,
             ngaysinh: DataTypes.DATEONLY,
             gioitinh: DataTypes.STRING,
-            CMND: DataTypes.STRING,
+            CCCD: DataTypes.STRING,
             SDT: DataTypes.STRING,
             email: DataTypes.STRING,
             avt: DataTypes.STRING,
