@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
             tenDV: DataTypes.STRING,
             gia: DataTypes.INTEGER,
             DVT: DataTypes.INTEGER,
-            ghichu: DataTypes.INTEGER,
+            ghichu: DataTypes.STRING,
         },
         {
             sequelize,

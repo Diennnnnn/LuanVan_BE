@@ -1705,7 +1705,7 @@ let handleSuaPhieudat = (data) => {
         });
 
         if (phieudat) {
-          if (data.trangthai === 'Đã nhận phòng') {
+          if (data.trangthai === 'Đã nhận phòng' || data.trangthai === 'Đã trả phòng') {
             phieudat.trangthai = data.trangthai;
             // phieudat.tongtien = phieudat.tongtien;
             await phieudat.save();
@@ -1929,7 +1929,197 @@ let handleXoaChitietSDDV = async (Id) => {
   });
 };
 
+let handleNhanphong = (data) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (
+        // !data.truyền từ FE qua
+        !data.ngaynhan ||
+        !data.id_pd
+        
+      ) {
+        resolve({
+          errCode: 110,
+          errMessage: "Missing parameter",
+        });
+      } else {
+        await db.nhanphongs.create({
+         ngaynhan: data.ngaynhan,
+         id_pd: data.id_pd
+        });
+        resolve({
+          errCode: 0,
+          errMessage: "Nhận phòng thành công",
+        });
+      }
+    } catch (e) {
+      reject(e);
+    }
+  })
+}
+
+let handleTraphong = (data) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (
+        // !data.truyền từ FE qua
+        !data.ngaytra ||
+        !data.id_pd
+        
+      ) {
+        resolve({
+          errCode: 110,
+          errMessage: "Missing parameter",
+        });
+      } else {
+        let nhanphong = await db.nhanphongs.findOne({
+          where: {id_pd: data.id_pd},
+          raw: false,
+        })
+        if(nhanphong){
+          
+            nhanphong.ngaytra= data.ngaytra;
+            // id_pd: data.id_pd
+            await nhanphong.save();
+        }else{
+          resolve({
+            errCode: 1,
+            errMessage: "Lỗi không tìm thấy phiếu đặt tương ứng",
+          });
+        }
+        resolve({
+          errCode: 0,
+          errMessage: "Trả phòng thành công",
+        });
+      }
+    } catch (e) {
+      reject(e);
+    }
+  })
+}
+
+let   handleLayttnhanphong = (key) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let nhanphong = "";
+      if (key === "ALL") {
+        nhanphong = await db.nhanphongs.findAll({
+
+        });
+      }
+      if (key && key !== "ALL") {
+       
+        nhanphong = await db.nhanphongs.findAll({
+          where: { id_pd: key },
+        });
+      }
+      resolve(nhanphong);
+    } catch (e) {
+      reject(e);
+    }
+  });
+};
+let handleLayttCTSDDV = (key) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let ctsddv = "";
+      if (key != "ALL" && key) {
+        ctsddv = await db.chitietSDDVs.findAll({
+          where:{id_pd: key},
+        });
+      }
+      if (key && key === "ALL") {
+        ctsddv = await db.chitietSDDVs.findAll({
+          // where:{id_pd: key},
+          attributes: [
+           'id',
+           'id_PD',
+           'id_DV',
+           'solansudung',
+           'soluong',
+           'thanhtien',
+            [Sequelize.fn('sum', Sequelize.col('thanhtien')), 'total_amount'],
+          ],
+          group: ['id_pd'],
+          raw: true
+        });
+      //   ctsddv = await db.chitietSDDVs.findAll({
+      //     where: { id_PD: key },
+      //   });
+      }
+      resolve(ctsddv);
+    } catch (e) {
+      reject(e);
+    }
+  });
+};
+
+let handleTaohoadon = (data) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (
+        // !data.truyền từ FE qua
+        // !data.ngaylapHD ||
+        !data.id_pd ||
+        // !data.id_nv ||
+        !data.tongtien ||
+        !data.id_kh
+        
+      ) {
+        resolve({
+          errCode: 110,
+          errMessage: "Missing parameter",
+        });
+      } else {
+        await db.hoadons.create({
+         ngaylapHD: new Date(),
+         id_PD: data.id_pd,
+        //  id_NV: data.id_nv,
+         id_KH: data.id_kh,
+         tongtien: data.tongtien
+        });
+        resolve({
+          errCode: 0,
+          errMessage: "Nhận phòng thành công",
+        });
+      }
+    } catch (e) {
+      reject(e);
+    }
+  })
+}
+
+
+let   handleLayHoadon = (key) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let hd = "";
+      if (key === "ALL") {
+        hd = await db.hoadons.findAll({
+
+        });
+      }
+      if (key && key !== "ALL") {
+       
+        hd = await db.hoadons.findAll({
+          where: { id: key },
+        });
+      }
+      resolve(hd);
+    } catch (e) {
+      reject(e);
+    }
+  });
+};
+
 module.exports = {
+  handleLayHoadon:handleLayHoadon,
+  handleTaohoadon: handleTaohoadon,
+  handleLayttCTSDDV: handleLayttCTSDDV,
+  handleNhanphong: handleNhanphong,
+  handleTraphong:handleTraphong,
+  handleLayttnhanphong:handleLayttnhanphong,
+
   handlePhong: handlePhong,
   handlePhong_idLP: handlePhong_idLP,
   handleLoaiphong: handleLoaiphong,

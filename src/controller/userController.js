@@ -880,7 +880,98 @@ let handleXoaChitietSDDV = async (req, res) => {
   return res.status(200).json(message);
 }
 
+let handleNhanphong = async (req, res) => {
+  try {
+    let infor = await userService.handleNhanphong(req.body);
+    return res.status(200).json(infor);
+  } catch (e) {
+    console.log(e);
+    return res.status(200).json({
+      errCode: -1,
+      errMessage: "Error from the server",
+    });
+  }
+};
+let handleTraphong = async (req, res) => {
+  try {
+    let infor = await userService.handleTraphong(req.body);
+    return res.status(200).json(infor);
+  } catch (e) {
+    console.log(e);
+    return res.status(200).json({
+      errCode: -1,
+      errMessage: "Error from the server",
+    });
+  }
+};
+let handleLayttnhanphong = async (req, res) => {
+  let key = req.query.keyword;
+  if (!key) {
+    return res.status(200).json({
+      errCode: 1,
+      errMessage: "missing require parameters",
+      nhanphong: {},
+    });
+  }
+  let nhanphong = await userService.handleLayttnhanphong(key);
+
+  return res.status(200).json({
+    nhanphong,
+  });
+};
+let handleLayttCTSDDV = async (req, res) => {
+  let key = req.query.keyword;
+  if (!key) {
+    return res.status(200).json({
+      errCode: 1,
+      errMessage: "missing require parameters",
+      ctsddv: {},
+    });
+  }
+  let ctsddv = await userService.handleLayttCTSDDV(key);
+
+  return res.status(200).json({
+    ctsddv,
+  });
+};
+
+let handleTaohoadon = async (req, res) => {
+  try {
+    let infor = await userService.handleTaohoadon(req.body);
+    return res.status(200).json(infor);
+  } catch (e) {
+    console.log(e);
+    return res.status(200).json({
+      errCode: -1,
+      errMessage: "Error from the server",
+    });
+  }
+};
+
+
+let handleLayHoadon = async (req, res) => {
+  let key = req.query.keyword;
+  if (!key) {
+    return res.status(200).json({
+      errCode: 1,
+      errMessage: "missing require parameters",
+      hd: {},
+    });
+  }
+  let hoadon = await userService.handleLayHoadon(key);
+
+  return res.status(200).json({
+    hoadon,
+  });
+};
+
 module.exports = {
+  handleLayHoadon:handleLayHoadon,
+  handleTaohoadon: handleTaohoadon,
+  handleLayttCTSDDV: handleLayttCTSDDV,
+  handleNhanphong: handleNhanphong,
+  handleTraphong:handleTraphong,
+  handleLayttnhanphong:handleLayttnhanphong,
   
   handlePhong: handlePhong,
   handlePhong_idLP: handlePhong_idLP,
@@ -960,6 +1051,7 @@ module.exports = {
   handleThemChitietSDDV:handleThemChitietSDDV,
   handleSuaChitietSDDV:handleSuaChitietSDDV,
   handleXoaChitietSDDV:handleXoaChitietSDDV,
+
 
 };
 

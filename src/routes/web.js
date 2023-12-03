@@ -98,6 +98,16 @@ const initWebRoutes = (app) => {
   router.post("/api/SuaChitietSDDV",userController.handleSuaChitietSDDV);
   router.delete("/api/XoaChitietSDDV",userController.handleXoaChitietSDDV);
 
+
+  router.post("/api/nhanphong",userController.handleNhanphong);
+  router.post("/api/traphong",userController.handleTraphong);
+  router.get("/api/Layttnhanphong",userController.handleLayttnhanphong);
+  router.get("/api/LayttCTSDDV",userController.handleLayttCTSDDV);
+
+  router.post("/api/Taohoadon",userController.handleTaohoadon);
+
+  router.get("/api/LayHoadon",userController.handleLayHoadon);
+  
   return app.use("/", router);
 };
 
