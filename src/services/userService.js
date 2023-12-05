@@ -371,12 +371,16 @@ let handleDatphong = (data) => {
 
         emailService.sendEmail(
           kh.email,
-          "Xác nhận lịch đặt HomeStay",
+          "XÁC NHẬN ĐẶT PHÒNG TẠI HOMESTAY THE KUPID",
           `
-            <h1>Xin chào ${kh.hotenKH}, cảm ơn bạn đã đặt phòng ở The Kubip Homestay </h1>
-            <p>Bạn đã đặt thành công phòng ${phong.tenphong} có ${loaiphong.tenloaiphong} </p>
-            <p> Từ ${data.check_in} tới ${data.check_out} </p>
+            <p>Xin chào ${kh.hotenKH}!</p>
+            <p>Cảm ơn bạn đã đặt phòng tại Homestay The Kupid. </p>
+            <p>Home xin gửi bạn thông tin đặt phòng: </p>
+            <p>Tên phòng: ${phong.tenphong} </p>
+            <p>Ngày nhận phòng: ${data.check_in}    Ngày trả phòng: ${data.check_out}</p>
             <h3>Tổng tiền: ${data.tongtien}</h3>
+            <p>Bạn vui lòng đến nhận phòng đúng ngày, từ 14h ạ. Nếu bạn nhận phòng sớm hơn, home xin phụ thu thêm phí 150000 VNĐ</p>
+            <p>Hẹn gặp bạn tại The Kupid Homestay.</p>
             `)
         resolve({
           errCode: 0,
@@ -1734,12 +1738,12 @@ let handleSuaPhieudat = (data) => {
 
             emailService.sendEmail(
               kh.email,
-              "Xác nhận HỦY lịch đặt HomeStay",
+              "Xác nhận HỦY đặt phòng tại Homestay The Kupid",
               `
-                <h1>Xin chào ${kh.hotenKH}, bạn đã hủy lịch đặt phòng ở The Kubip Homestay </h1>
-                <p>Bạn đã đặt thành công phòng ${phong.tenphong} có ${loaiphong.tenloaiphong} </p>
-                <p> Từ ${phieudat.check_in} tới ${phieudat.check_out} </p>
-                ${phieudat.tongtien * (Number(cut / 100)) > 0 ? `<h3>Bạn được hoàn: ${phieudat.tongtien * (Number(cut / 100))} , tiền sẽ được hệ thống chuyển về tài khoản khi bạn đặt</h3>` : ''}
+                <p>Xin chào ${kh.hotenKH}, Home đã nhận thông tin hủy đặt phòng của bạn tại The Kupid Homestay </p>
+                <p>Cảm ơn bạn đã quan tâm đến The Kupid. </p>
+                ${phieudat.tongtien * (Number(cut / 100)) > 0 ? `<h3>Bạn được hoàn: ${phieudat.tongtien * (Number(cut / 100))} ,
+                 tiền sẽ được hệ thống chuyển về tài khoản khi bạn đặt</h3>` : ''}
                 `)
 
 
