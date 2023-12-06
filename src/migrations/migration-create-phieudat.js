@@ -12,7 +12,7 @@ module.exports = {
                 type: Sequelize.INTEGER,
             },
             id_Phong: {
-                type: Sequelize.INTEGER,
+                type: Sequelize.STRING,
             },
             ngaydat: {
                 type: Sequelize.DATEONLY,

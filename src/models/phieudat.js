@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
     phieudats.init(
         {
             id_KH: DataTypes.INTEGER,
-            id_Phong: DataTypes.INTEGER,
+            id_Phong: DataTypes.STRING,
             ngaydat: DataTypes.DATEONLY,
             check_in: DataTypes.DATEONLY,
             check_out: DataTypes.DATEONLY,

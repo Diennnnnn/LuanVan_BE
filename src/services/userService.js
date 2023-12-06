@@ -594,7 +594,7 @@ let handleThemDichvuQL = (data) => {
         // !data.truyền từ FE qua
         !data.tenDV ||
         !data.gia ||
-        !data.DVT 
+        !data.DVT
         // ||
         // !data.ghichu
       ) {
@@ -1710,13 +1710,13 @@ let handleSuaPhieudat = (data) => {
 
         if (phieudat) {
           if (data.trangthai === 'Đã nhận phòng' || data.trangthai === 'Đã trả phòng') {
-            phieudat.trangthai = data.trangthai;
+            // phieudat.trangthai = data.trangthai;
             // phieudat.tongtien = phieudat.tongtien;
-            await phieudat.save();
+            // await phieudat.save();
           } else {
-            phieudat.trangthai = data.trangthai;
-            phieudat.tongtien = phieudat.tongtien - phieudat.tongtien * (Number(cut / 100));
-            await phieudat.save();
+            // phieudat.trangthai = data.trangthai;
+            // phieudat.tongtien = phieudat.tongtien - phieudat.tongtien * (Number(cut / 100));
+            // await phieudat.save();
             let kh = await db.khachhangs.findOne({
               where: {
                 id: phieudat.id_KH
@@ -1735,16 +1735,21 @@ let handleSuaPhieudat = (data) => {
               },
               // raw : false
             });
-
+            let d = new Date(phieudat.check_in)
+            let d2 =  new Date()
+            let sngay = Math.ceil((d.getTime() - d2.getTime()) / (24 * 60 * 60 * 1000))
+            // console.log("check >>>: ", temp)
             emailService.sendEmail(
               kh.email,
               "Xác nhận HỦY đặt phòng tại Homestay The Kupid",
               `
                 <p>Xin chào ${kh.hotenKH}, Home đã nhận thông tin hủy đặt phòng của bạn tại The Kupid Homestay </p>
                 <p>Cảm ơn bạn đã quan tâm đến The Kupid. </p>
-                ${phieudat.tongtien * (Number(cut / 100)) > 0 ? `<h3>Bạn được hoàn: ${phieudat.tongtien * (Number(cut / 100))} ,
+                <p>Vì bạn đã hủy phòng trước ${sngay} ngày so với ngày nhận phòng</p>
+                ${Number(cut) > 0 ? `<h3>Bạn được hoàn: ${phieudat.tongtien * (Number(cut / 100))} ,
                  tiền sẽ được hệ thống chuyển về tài khoản khi bạn đặt</h3>` : ''}
-                `)
+               <p>Nếu có thắc mắc vui lòng số điện thoại hoặc email Homestay</p>
+                 `)
 
 
           }
@@ -1940,7 +1945,7 @@ let handleNhanphong = (data) => {
         // !data.truyền từ FE qua
         !data.ngaynhan ||
         !data.id_pd
-        
+
       ) {
         resolve({
           errCode: 110,
@@ -1948,8 +1953,8 @@ let handleNhanphong = (data) => {
         });
       } else {
         await db.nhanphongs.create({
-         ngaynhan: data.ngaynhan,
-         id_pd: data.id_pd
+          ngaynhan: data.ngaynhan,
+          id_pd: data.id_pd
         });
         resolve({
           errCode: 0,
@@ -1969,7 +1974,7 @@ let handleTraphong = (data) => {
         // !data.truyền từ FE qua
         !data.ngaytra ||
         !data.id_pd
-        
+
       ) {
         resolve({
           errCode: 110,
@@ -1977,15 +1982,15 @@ let handleTraphong = (data) => {
         });
       } else {
         let nhanphong = await db.nhanphongs.findOne({
-          where: {id_pd: data.id_pd},
+          where: { id_pd: data.id_pd },
           raw: false,
         })
-        if(nhanphong){
-          
-            nhanphong.ngaytra= data.ngaytra;
-            // id_pd: data.id_pd
-            await nhanphong.save();
-        }else{
+        if (nhanphong) {
+
+          nhanphong.ngaytra = data.ngaytra;
+          // id_pd: data.id_pd
+          await nhanphong.save();
+        } else {
           resolve({
             errCode: 1,
             errMessage: "Lỗi không tìm thấy phiếu đặt tương ứng",
@@ -2002,7 +2007,7 @@ let handleTraphong = (data) => {
   })
 }
 
-let   handleLayttnhanphong = (key) => {
+let handleLayttnhanphong = (key) => {
   return new Promise(async (resolve, reject) => {
     try {
       let nhanphong = "";
@@ -2012,7 +2017,7 @@ let   handleLayttnhanphong = (key) => {
         });
       }
       if (key && key !== "ALL") {
-       
+
         nhanphong = await db.nhanphongs.findAll({
           where: { id_pd: key },
         });
@@ -2029,27 +2034,27 @@ let handleLayttCTSDDV = (key) => {
       let ctsddv = "";
       if (key != "ALL" && key) {
         ctsddv = await db.chitietSDDVs.findAll({
-          where:{id_pd: key},
+          where: { id_pd: key },
         });
       }
       if (key && key === "ALL") {
         ctsddv = await db.chitietSDDVs.findAll({
           // where:{id_pd: key},
           attributes: [
-           'id',
-           'id_PD',
-           'id_DV',
-           'solansudung',
-           'soluong',
-           'thanhtien',
+            'id',
+            'id_PD',
+            'id_DV',
+            'solansudung',
+            'soluong',
+            'thanhtien',
             [Sequelize.fn('sum', Sequelize.col('thanhtien')), 'total_amount'],
           ],
           group: ['id_pd'],
           raw: true
         });
-      //   ctsddv = await db.chitietSDDVs.findAll({
-      //     where: { id_PD: key },
-      //   });
+        //   ctsddv = await db.chitietSDDVs.findAll({
+        //     where: { id_PD: key },
+        //   });
       }
       resolve(ctsddv);
     } catch (e) {
@@ -2068,7 +2073,7 @@ let handleTaohoadon = (data) => {
         // !data.id_nv ||
         !data.tongtien ||
         !data.id_kh
-        
+
       ) {
         resolve({
           errCode: 110,
@@ -2076,11 +2081,11 @@ let handleTaohoadon = (data) => {
         });
       } else {
         await db.hoadons.create({
-         ngaylapHD: new Date(),
-         id_PD: data.id_pd,
-        //  id_NV: data.id_nv,
-         id_KH: data.id_kh,
-         tongtien: data.tongtien
+          ngaylapHD: new Date(),
+          id_PD: data.id_pd,
+          //  id_NV: data.id_nv,
+          id_KH: data.id_kh,
+          tongtien: data.tongtien
         });
         resolve({
           errCode: 0,
@@ -2094,7 +2099,7 @@ let handleTaohoadon = (data) => {
 }
 
 
-let   handleLayHoadon = (key) => {
+let handleLayHoadon = (key) => {
   return new Promise(async (resolve, reject) => {
     try {
       let hd = "";
@@ -2104,7 +2109,7 @@ let   handleLayHoadon = (key) => {
         });
       }
       if (key && key !== "ALL") {
-       
+
         hd = await db.hoadons.findAll({
           where: { id: key },
         });
@@ -2117,12 +2122,12 @@ let   handleLayHoadon = (key) => {
 };
 
 module.exports = {
-  handleLayHoadon:handleLayHoadon,
+  handleLayHoadon: handleLayHoadon,
   handleTaohoadon: handleTaohoadon,
   handleLayttCTSDDV: handleLayttCTSDDV,
   handleNhanphong: handleNhanphong,
-  handleTraphong:handleTraphong,
-  handleLayttnhanphong:handleLayttnhanphong,
+  handleTraphong: handleTraphong,
+  handleLayttnhanphong: handleLayttnhanphong,
 
   handlePhong: handlePhong,
   handlePhong_idLP: handlePhong_idLP,
@@ -2191,7 +2196,7 @@ module.exports = {
   handleLayPhieudat: handleLayPhieudat,
   handleLayPhieudat_idKH: handleLayPhieudat_idKH,
   handleThongke_ngay: handleThongke_ngay,
-  handleThongke_thang:handleThongke_thang,
+  handleThongke_thang: handleThongke_thang,
   handleLayPhieudat_idPhong: handleLayPhieudat_idPhong,
   handleSuaPhieudat: handleSuaPhieudat,
 
@@ -2199,9 +2204,9 @@ module.exports = {
 
   handleTimkiem: handleTimkiem,
 
-  handleLayChitietSDDV:handleLayChitietSDDV,
-  handleThemChitietSDDV:handleThemChitietSDDV,
-  handleSuaChitietSDDV:handleSuaChitietSDDV,
-  handleXoaChitietSDDV:handleXoaChitietSDDV,
+  handleLayChitietSDDV: handleLayChitietSDDV,
+  handleThemChitietSDDV: handleThemChitietSDDV,
+  handleSuaChitietSDDV: handleSuaChitietSDDV,
+  handleXoaChitietSDDV: handleXoaChitietSDDV,
 };
 
